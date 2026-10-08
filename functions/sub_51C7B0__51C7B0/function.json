@@ -1,19 +1,32 @@
 {
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
   "callees_count": 1,
   "callers_count": 1,
-  "comment_regular": "",
+  "chunks": [
+    [
+      "0x51C7B0",
+      "0x51C85E"
+    ]
+  ],
+  "chunks_sha256": "e01cd560816b3628e1098cb840326a113b646cb51ee8fbddc26cb02a86bd176a",
+  "comment_regular": "Verified blood component lifecycle: TESCreature +0x11C is TESModel bloodSpray, +0x134 is TESTexture bloodDecal; actor-base-data this is +0x24. Constructor constructs, InitializeDefaults initializes, destructor destroys these components. No Fallout member offsets imported.\nProbable homolog: Fallout TESCreature::InitializeData 0x8240A528 shares defaults for turning speed, foot weight, scale, skills, reach, flags 0x40/0x200, health 50. Different layouts; Oblivion component initialization verified independently.",
   "comment_repeatable": "",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_51C7B0",
+  "display_name": "TESCreature_InitializeDefaults",
   "end_ea": "0x51C85E",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_51C7B0",
+  "name": "TESCreature_InitializeDefaults",
   "segment": ".text",
   "sha256": "e01cd560816b3628e1098cb840326a113b646cb51ee8fbddc26cb02a86bd176a",
   "size": 174,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x51C7B0",
-  "type": "int __thiscall(int this)",
+  "total_chunk_size": 174,
+  "type": "void __thiscall(TESCreature *self)",
   "xrefs_from_count": 48,
   "xrefs_to_count": 2
 }

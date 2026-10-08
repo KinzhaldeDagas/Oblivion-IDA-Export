@@ -1,14 +1,17 @@
-double __usercall ExtraContainerChanges_RunScripts@<st0>(float *this@<ecx>, double result@<st0>, double a3@<st1>)
+double __usercall ExtraContainerChanges_RunScripts@<st0>(
+        ExtraContainerChanges_Data *this@<ecx>,
+        double result@<st0>,
+        double a3@<st1>)
 {
-  TESObjectREFR *v3; // ecx
+  TESObjectREFR *owner; // ecx
   TESContainer *Container; // eax
   bool v5; // zf
   TESContainer_Entry *p_list; // eax
-  int *p_count; // esi
+  TESContainer_Data *data; // esi
   _DWORD *v8; // eax
   Script *v9; // ecx
   int v10; // ebx
-  int *v11; // eax
+  int *EntryForForm; // eax
   int *v12; // edi
   int v13; // eax
   int i; // ebp
@@ -17,7 +20,7 @@ double __usercall ExtraContainerChanges_RunScripts@<st0>(float *this@<ecx>, doub
   TESForm *v17; // esi
   char **ExtraScriptEventList; // eax
   _DWORD *v19; // eax
-  int *v20; // eax
+  EntryData *v20; // eax
   _DWORD *v21; // eax
   int v22; // ebp
   ExtraDataList *v23; // esi
@@ -28,21 +31,21 @@ double __usercall ExtraContainerChanges_RunScripts@<st0>(float *this@<ecx>, doub
   char **v28; // eax
   _DWORD *v29; // eax
   ExtraDataList *v30; // esi
-  ExtraDataList **v31; // edi
-  ExtraDataList **v32; // eax
+  _DWORD *p_data; // edi
+  _DWORD *v32; // eax
   char *v33; // eax
   char **v34; // eax
   TESChildCELL *v35; // eax
   TESForm *v36; // edi
   char **v37; // eax
-  int *v38; // eax
-  int v39; // eax
+  EntryData **v38; // eax
+  EntryData *v39; // eax
   void *v40; // eax
   int v41; // ebx
-  ExtraDataList **j; // esi
+  tListVoid *j; // esi
   ExtraDataList *v43; // edi
-  ExtraDataList **v44; // eax
-  ExtraDataList **v45; // ebp
+  tListVoid *v44; // eax
+  tListVoid *extendData; // ebp
   ExtraDataList *v46; // esi
   char *v47; // eax
   char **v48; // eax
@@ -51,356 +54,351 @@ double __usercall ExtraContainerChanges_RunScripts@<st0>(float *this@<ecx>, doub
   char **v51; // eax
   _DWORD *v52; // eax
   ExtraDataList *v53; // esi
-  ExtraDataList **v54; // edi
-  ExtraDataList **v55; // eax
+  _DWORD *v54; // edi
+  _DWORD *v55; // eax
   char *v56; // eax
   char **v57; // eax
   TESChildCELL *v58; // eax
   TESForm *v59; // edi
   char **v60; // eax
-  ExtraDataList **k; // ebp
+  tListVoid *k; // ebp
   ExtraDataList *v62; // edi
   TESChildCELL *v63; // eax
   TESForm *v64; // esi
   char **v65; // eax
-  int v66; // [esp+8h] [ebp-3Ch]
-  int v67; // [esp+Ch] [ebp-38h]
-  int v68; // [esp+10h] [ebp-34h]
-  int v69; // [esp+14h] [ebp-30h]
-  int v70; // [esp+18h] [ebp-2Ch]
-  char v71; // [esp+1Fh] [ebp-25h]
-  Script *v72; // [esp+20h] [ebp-24h]
-  Script *v73; // [esp+20h] [ebp-24h]
-  int *v74; // [esp+24h] [ebp-20h]
-  ExtraDataList ***v75; // [esp+24h] [ebp-20h]
-  TESContainer_Entry *v76; // [esp+28h] [ebp-1Ch]
-  int *v78; // [esp+2Ch] [ebp-18h]
-  int v79; // [esp+30h] [ebp-14h]
-  int v80; // [esp+30h] [ebp-14h]
+  char v66; // [esp+1Fh] [ebp-25h]
+  Script *v67; // [esp+20h] [ebp-24h]
+  Script *v68; // [esp+20h] [ebp-24h]
+  EntryData *entry; // [esp+24h] [ebp-20h]
+  EntryData *entrya; // [esp+24h] [ebp-20h]
+  TESContainer_Entry *v71; // [esp+28h] [ebp-1Ch]
+  ExtraContainerChanges_Data *objList; // [esp+2Ch] [ebp-18h]
+  int v74; // [esp+30h] [ebp-14h]
+  int v75; // [esp+30h] [ebp-14h]
 
-  v3 = *((TESObjectREFR **)this + 1);
-  if ( v3 )
-    Container = TESObjectREFR_GetContainer(v3);
+  owner = this->owner; /*0x48e08b*/
+  if ( owner ) /*0x48e090*/
+    Container = TESObjectREFR_GetContainer(owner); /*0x48e092*/
   else
-    Container = 0;
-  v5 = &Container->list == 0;
-  p_list = &Container->list;
-  v76 = p_list;
+    Container = 0; /*0x48e099*/
+  v5 = &Container->list == 0; /*0x48e09b*/
+  p_list = &Container->list; /*0x48e09b*/
+  v71 = p_list; /*0x48e09e*/
   if ( !v5 )
   {
     while ( p_list->next || p_list->data )
     {
-      p_count = &p_list->data->count;
-      v8 = OblivionDynamicCast(
+      data = p_list->data; /*0x48e0c3*/
+      v8 = OblivionDynamicCast( /*0x48e0d7*/
              p_list->data->type,
              0,
              (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
              &TESScriptableForm `RTTI Type Descriptor',
              0);
       v9 = v8 ? (Script *)v8[1] : 0;
-      v10 = abs32(*p_count);
-      v72 = v9;
+      v10 = abs32(data->count); /*0x48e0f1*/
+      v67 = v9; /*0x48e0f5*/
       if ( v9 )
       {
         if ( v10 > 0 )
         {
-          ContainerExtraData_GetEntryForForm((_DWORD **)this, p_count[1], 1, 0);
-          v12 = v11;
-          v74 = v11;
-          if ( v11 && (sub_484F20(v11), v13) )
+          EntryForForm = (int *)ContainerExtraData_GetEntryForForm(this, data->type, 1, 0); /*0x48e114*/
+          v12 = EntryForForm; /*0x48e119*/
+          entry = (EntryData *)EntryForForm; /*0x48e11d*/
+          if ( EntryForForm && (sub_484F20(EntryForForm), v13) )
           {
             for ( i = *v12; i; i = *(_DWORD *)(i + 4) )
             {
-              v15 = *(ExtraDataList **)i;
-              if ( !*(_DWORD *)i )
-                break;
-              v16 = (TESChildCELL *)FormHeapAlloc(0x58u);
+              v15 = *(ExtraDataList **)i; /*0x48e140*/
+              if ( !*(_DWORD *)i ) /*0x48e140*/
+                break; /*0x48e145*/
+              v16 = (TESChildCELL *)FormHeapAlloc(0x58u); /*0x48e14d*/
               v17 = v16 ? (TESForm *)TESObjectREFR_constr(v16) : 0;
-              TESForm_MakeTemporary(v17);
-              ExtraScriptEventList = (char **)ExtraDataList_GetExtraScriptEventList(v15);
-              result = Script_Run(v72, result, a3, (TESObjectREFR *)v17, ExtraScriptEventList, 0, 0);
-              if ( v17 )
-                v17->vtbl->Destroy(v17, 1);
+              TESForm_MakeTemporary(v17); /*0x48e17c*/
+              ExtraScriptEventList = (char **)ExtraDataList_GetExtraScriptEventList(v15); /*0x48e187*/
+              result = Script_Run(v67, result, a3, (TESObjectREFR *)v17, ExtraScriptEventList, 0, 0); /*0x48e192*/
+              if ( v17 ) /*0x48e199*/
+                v17->vtbl->Destroy(v17, 1); /*0x48e1a4*/
             }
           }
           else
           {
-            v71 = 0;
-            if ( !v12 )
+            v66 = 0; /*0x48e1b4*/
+            if ( !v12 ) /*0x48e1b9*/
             {
-              v71 = 1;
-              v19 = (_DWORD *)FormHeapAlloc(0xCu);
-              if ( v19 )
-                v20 = ContainerEntryExtraData_constr(v19, p_count[1], 0);
+              v66 = 1; /*0x48e1bd*/
+              v19 = (_DWORD *)FormHeapAlloc(0xCu); /*0x48e1c2*/
+              if ( v19 ) /*0x48e1d4*/
+                v20 = (EntryData *)ContainerEntryExtraData_constr(v19, (int)data->type, 0); /*0x48e1dd*/
               else
-                v20 = 0;
-              v12 = v20;
-              v74 = v20;
+                v20 = 0; /*0x48e1e4*/
+              v12 = (int *)v20; /*0x48e1ee*/
+              entry = v20; /*0x48e1f0*/
             }
-            if ( *v12 )
+            if ( *v12 ) /*0x48e1f4*/
             {
-              v22 = *v12;
-              do
+              v22 = *v12; /*0x48e21d*/
+              do /*0x48e2bf*/
               {
-                v23 = *(ExtraDataList **)v22;
-                if ( !*(_DWORD *)v22 )
-                  break;
-                if ( !ExtraDataList_GetExtraScript(*(ExtraDataList **)v22) )
+                v23 = *(ExtraDataList **)v22; /*0x48e220*/
+                if ( !*(_DWORD *)v22 ) /*0x48e220*/
+                  break; /*0x48e225*/
+                if ( !ExtraDataList_GetExtraScript(*(ExtraDataList **)v22) ) /*0x48e22d*/
                 {
-                  ExtraDataList_AddScript(v23, (int)v72);
-                  ExtraScript = (char *)ExtraDataList_GetExtraScript(v23);
-                  EventList = Script_CreateEventList(ExtraScript);
-                  ExtraDataList_SetScriptEventList(v23, (int)EventList);
-                  v26 = (TESChildCELL *)FormHeapAlloc(0x58u);
-                  if ( v26 )
-                    v27 = (TESForm *)TESObjectREFR_constr(v26);
+                  ExtraDataList_AddScript(v23, (BSExtraDataVtbl *)v67); /*0x48e241*/
+                  ExtraScript = (char *)ExtraDataList_GetExtraScript(v23); /*0x48e248*/
+                  EventList = Script_CreateEventList(ExtraScript); /*0x48e24f*/
+                  ExtraDataList_SetScriptEventList(v23, (int)EventList); /*0x48e257*/
+                  v26 = (TESChildCELL *)FormHeapAlloc(0x58u); /*0x48e25e*/
+                  if ( v26 ) /*0x48e274*/
+                    v27 = (TESForm *)TESObjectREFR_constr(v26); /*0x48e27d*/
                   else
-                    v27 = 0;
-                  TESForm_MakeTemporary(v27);
-                  v28 = (char **)ExtraDataList_GetExtraScriptEventList(v23);
-                  result = Script_Run(v72, result, a3, (TESObjectREFR *)v27, v28, 0, 0);
-                  if ( v27 )
-                    v27->vtbl->Destroy(v27, 1);
-                  --v10;
+                    v27 = 0; /*0x48e281*/
+                  TESForm_MakeTemporary(v27); /*0x48e28d*/
+                  v28 = (char **)ExtraDataList_GetExtraScriptEventList(v23); /*0x48e298*/
+                  result = Script_Run(v67, result, a3, (TESObjectREFR *)v27, v28, 0, 0); /*0x48e2a3*/
+                  if ( v27 ) /*0x48e2aa*/
+                    v27->vtbl->Destroy(v27, 1); /*0x48e2b5*/
+                  --v10; /*0x48e2b7*/
                 }
-                v22 = *(_DWORD *)(v22 + 4);
+                v22 = *(_DWORD *)(v22 + 4); /*0x48e2ba*/
               }
-              while ( v22 );
+              while ( v22 ); /*0x48e2bf*/
             }
             else
             {
-              v21 = (_DWORD *)FormHeapAlloc(8u);
-              if ( v21 )
+              v21 = (_DWORD *)FormHeapAlloc(8u); /*0x48e1fc*/
+              if ( v21 ) /*0x48e206*/
               {
-                *v21 = 0;
-                v21[1] = 0;
-                *v12 = (int)v21;
+                *v21 = 0; /*0x48e208*/
+                v21[1] = 0; /*0x48e20a*/
+                *v12 = (int)v21; /*0x48e20d*/
               }
               else
               {
-                *v12 = 0;
+                *v12 = 0; /*0x48e216*/
               }
             }
-            if ( v10 )
+            if ( v10 ) /*0x48e2c7*/
             {
-              v79 = v10;
-              do
+              v74 = v10; /*0x48e2cd*/
+              do /*0x48e3ce*/
               {
-                v29 = (_DWORD *)FormHeapAlloc(0x14u);
-                if ( v29 )
-                  v30 = (ExtraDataList *)ExtraDataList_constr(v29);
+                v29 = (_DWORD *)FormHeapAlloc(0x14u); /*0x48e2d3*/
+                if ( v29 ) /*0x48e2e9*/
+                  v30 = (ExtraDataList *)ExtraDataList_constr(v29); /*0x48e2f2*/
                 else
-                  v30 = 0;
-                v31 = (ExtraDataList **)*v74;
-                if ( v30 )
+                  v30 = 0; /*0x48e2f6*/
+                p_data = &entry->extendData->node.data; /*0x48e2fc*/
+                if ( v30 ) /*0x48e307*/
                 {
-                  if ( *v31 )
+                  if ( *p_data ) /*0x48e309*/
                   {
-                    v32 = (ExtraDataList **)FormHeapAlloc(8u);
-                    if ( v32 )
+                    v32 = (_DWORD *)FormHeapAlloc(8u); /*0x48e310*/
+                    if ( v32 ) /*0x48e31a*/
                     {
-                      *v32 = *v31;
-                      v32[1] = 0;
+                      *v32 = *p_data; /*0x48e31e*/
+                      v32[1] = 0; /*0x48e320*/
                     }
                     else
                     {
-                      v32 = 0;
+                      v32 = 0; /*0x48e329*/
                     }
-                    v32[1] = v31[1];
-                    v31[1] = (ExtraDataList *)v32;
+                    v32[1] = p_data[1]; /*0x48e32e*/
+                    p_data[1] = v32; /*0x48e331*/
                   }
-                  *v31 = v30;
+                  *p_data = v30; /*0x48e334*/
                 }
-                ExtraDataList_SetExtraCount(v30, 1);
-                if ( v30 )
+                ExtraDataList_SetExtraCount(v30, 1); /*0x48e33a*/
+                if ( v30 ) /*0x48e341*/
                 {
-                  if ( !ExtraDataList_GetExtraScript(v30) )
+                  if ( !ExtraDataList_GetExtraScript(v30) ) /*0x48e349*/
                   {
-                    ExtraDataList_AddScript(v30, (int)v72);
-                    v33 = (char *)ExtraDataList_GetExtraScript(v30);
-                    v34 = Script_CreateEventList(v33);
-                    ExtraDataList_SetScriptEventList(v30, (int)v34);
-                    v35 = (TESChildCELL *)FormHeapAlloc(0x58u);
-                    if ( v35 )
-                      v36 = (TESForm *)TESObjectREFR_constr(v35);
+                    ExtraDataList_AddScript(v30, (BSExtraDataVtbl *)v67); /*0x48e359*/
+                    v33 = (char *)ExtraDataList_GetExtraScript(v30); /*0x48e360*/
+                    v34 = Script_CreateEventList(v33); /*0x48e367*/
+                    ExtraDataList_SetScriptEventList(v30, (int)v34); /*0x48e36f*/
+                    v35 = (TESChildCELL *)FormHeapAlloc(0x58u); /*0x48e376*/
+                    if ( v35 ) /*0x48e38c*/
+                      v36 = (TESForm *)TESObjectREFR_constr(v35); /*0x48e395*/
                     else
-                      v36 = 0;
-                    TESForm_MakeTemporary(v36);
-                    v37 = (char **)ExtraDataList_GetExtraScriptEventList(v30);
-                    result = Script_Run(v72, result, a3, (TESObjectREFR *)v36, v37, 0, 0);
-                    if ( v36 )
-                      v36->vtbl->Destroy(v36, 1);
+                      v36 = 0; /*0x48e399*/
+                    TESForm_MakeTemporary(v36); /*0x48e3a1*/
+                    v37 = (char **)ExtraDataList_GetExtraScriptEventList(v30); /*0x48e3ac*/
+                    result = Script_Run(v67, result, a3, (TESObjectREFR *)v36, v37, 0, 0); /*0x48e3b5*/
+                    if ( v36 ) /*0x48e3bc*/
+                      v36->vtbl->Destroy(v36, 1); /*0x48e3c7*/
                   }
                 }
-                --v79;
+                --v74; /*0x48e3c9*/
               }
-              while ( v79 );
+              while ( v74 ); /*0x48e3ce*/
             }
-            if ( v71 )
-              ContainerExtraData_AddEntry(this, v74, 1, v66, v67, v68, v69, v70);
+            if ( v66 ) /*0x48e3d9*/
+              ContainerExtraData_AddEntry(this, entry, 1); /*0x48e3e6*/
           }
         }
       }
-      v76 = v76->next;
-      if ( !v76 )
-        break;
-      p_list = v76;
+      v71 = v71->next; /*0x48e3f4*/
+      if ( !v71 ) /*0x48e3f8*/
+        break; /*0x48e3f8*/
+      p_list = v71; /*0x48e0b0*/
     }
   }
-  v38 = *(int **)this;
-  v78 = *(int **)this;
-  if ( v78 )
+  v38 = &this->objList->node.data; /*0x48e402*/
+  objList = (ExtraContainerChanges_Data *)this->objList; /*0x48e406*/
+  if ( objList )
   {
     while ( 1 )
     {
-      v39 = *v38;
-      v75 = (ExtraDataList ***)v39;
-      if ( !v39 )
-        break;
-      v40 = OblivionDynamicCast(
-              *(void **)(v39 + 8),
+      v39 = *v38; /*0x48e416*/
+      entrya = v39; /*0x48e41a*/
+      if ( !v39 ) /*0x48e41e*/
+        break; /*0x48e41e*/
+      v40 = OblivionDynamicCast( /*0x48e436*/
+              v39->type,
               0,
               (struct _s_RTTICompleteObjectLocator *)&TESForm `RTTI Type Descriptor',
               &TESScriptableForm `RTTI Type Descriptor',
               0);
-      if ( v40 )
-        v73 = *((Script **)v40 + 1);
+      if ( v40 ) /*0x48e440*/
+        v68 = *((Script **)v40 + 1); /*0x48e445*/
       else
-        v73 = 0;
-      v41 = abs32((int)v75[1]);
-      if ( v73 && v41 > 0 )
+        v68 = 0; /*0x48e44b*/
+      v41 = abs32(entrya->countDelta); /*0x48e45f*/
+      if ( v68 && v41 > 0 )
       {
-        for ( j = *v75; j; j = (ExtraDataList **)j[1] )
+        for ( j = entrya->extendData; j; j = (tListVoid *)j->node.next )
         {
-          v43 = *j;
-          if ( !*j )
-            break;
-          if ( ExtraDataList_GetExtraScript(*j) )
+          v43 = (ExtraDataList *)j->node.data; /*0x48e480*/
+          if ( !j->node.data ) /*0x48e480*/
+            break; /*0x48e480*/
+          if ( ExtraDataList_GetExtraScript((ExtraDataList *)j->node.data) )
           {
-            if ( !ExtraDataList_GetExtraScript(v43) )
-              break;
-            for ( k = *v75; k; k = (ExtraDataList **)k[1] )
+            if ( !ExtraDataList_GetExtraScript(v43) ) /*0x48e49c*/
+              break; /*0x48e4a3*/
+            for ( k = entrya->extendData; k; k = (tListVoid *)k->node.next )
             {
-              v62 = *k;
-              if ( !*k )
-                break;
-              v63 = (TESChildCELL *)FormHeapAlloc(0x58u);
+              v62 = (ExtraDataList *)k->node.data; /*0x48e6b0*/
+              if ( !k->node.data ) /*0x48e6b0*/
+                break; /*0x48e6b5*/
+              v63 = (TESChildCELL *)FormHeapAlloc(0x58u); /*0x48e6b9*/
               v64 = v63 ? (TESForm *)TESObjectREFR_constr(v63) : 0;
-              TESForm_MakeTemporary(v64);
-              v65 = (char **)ExtraDataList_GetExtraScriptEventList(v62);
-              result = Script_Run(v73, result, a3, (TESObjectREFR *)v64, v65, 0, 0);
-              if ( v64 )
-                v64->vtbl->Destroy(v64, 1);
+              TESForm_MakeTemporary(v64); /*0x48e6e8*/
+              v65 = (char **)ExtraDataList_GetExtraScriptEventList(v62); /*0x48e6f3*/
+              result = Script_Run(v68, result, a3, (TESObjectREFR *)v64, v65, 0, 0); /*0x48e6fc*/
+              if ( v64 ) /*0x48e703*/
+                v64->vtbl->Destroy(v64, 1); /*0x48e70e*/
             }
-            goto LABEL_125;
+            goto LABEL_125; /*0x48e715*/
           }
         }
-        if ( *v75 )
+        if ( entrya->extendData ) /*0x48e4a9*/
         {
-          v45 = *v75;
-          do
+          extendData = entrya->extendData; /*0x48e4dd*/
+          do /*0x48e57f*/
           {
-            v46 = *v45;
-            if ( !*v45 )
-              break;
-            if ( !ExtraDataList_GetExtraScript(*v45) )
+            v46 = (ExtraDataList *)extendData->node.data; /*0x48e4e0*/
+            if ( !extendData->node.data ) /*0x48e4e0*/
+              break; /*0x48e4e5*/
+            if ( !ExtraDataList_GetExtraScript((ExtraDataList *)extendData->node.data) ) /*0x48e4ed*/
             {
-              ExtraDataList_AddScript(v46, (int)v73);
-              v47 = (char *)ExtraDataList_GetExtraScript(v46);
-              v48 = Script_CreateEventList(v47);
-              ExtraDataList_SetScriptEventList(v46, (int)v48);
-              v49 = (TESChildCELL *)FormHeapAlloc(0x58u);
-              if ( v49 )
-                v50 = (TESForm *)TESObjectREFR_constr(v49);
+              ExtraDataList_AddScript(v46, (BSExtraDataVtbl *)v68); /*0x48e501*/
+              v47 = (char *)ExtraDataList_GetExtraScript(v46); /*0x48e508*/
+              v48 = Script_CreateEventList(v47); /*0x48e50f*/
+              ExtraDataList_SetScriptEventList(v46, (int)v48); /*0x48e517*/
+              v49 = (TESChildCELL *)FormHeapAlloc(0x58u); /*0x48e51e*/
+              if ( v49 ) /*0x48e534*/
+                v50 = (TESForm *)TESObjectREFR_constr(v49); /*0x48e53d*/
               else
-                v50 = 0;
-              TESForm_MakeTemporary(v50);
-              v51 = (char **)ExtraDataList_GetExtraScriptEventList(v46);
-              result = Script_Run(v73, result, a3, (TESObjectREFR *)v50, v51, 0, 0);
-              if ( v50 )
-                v50->vtbl->Destroy(v50, 1);
-              --v41;
+                v50 = 0; /*0x48e541*/
+              TESForm_MakeTemporary(v50); /*0x48e54d*/
+              v51 = (char **)ExtraDataList_GetExtraScriptEventList(v46); /*0x48e558*/
+              result = Script_Run(v68, result, a3, (TESObjectREFR *)v50, v51, 0, 0); /*0x48e563*/
+              if ( v50 ) /*0x48e56a*/
+                v50->vtbl->Destroy(v50, 1); /*0x48e575*/
+              --v41; /*0x48e577*/
             }
-            v45 = (ExtraDataList **)v45[1];
+            extendData = (tListVoid *)extendData->node.next; /*0x48e57a*/
           }
-          while ( v45 );
+          while ( extendData ); /*0x48e57f*/
         }
         else
         {
-          v44 = (ExtraDataList **)FormHeapAlloc(8u);
-          if ( v44 )
+          v44 = (tListVoid *)FormHeapAlloc(8u); /*0x48e4b2*/
+          if ( v44 ) /*0x48e4bc*/
           {
-            *v44 = 0;
-            v44[1] = 0;
-            *v75 = v44;
+            v44->node.data = 0; /*0x48e4be*/
+            v44->node.next = 0; /*0x48e4c4*/
+            entrya->extendData = v44; /*0x48e4cb*/
           }
           else
           {
-            *v75 = 0;
+            entrya->extendData = 0; /*0x48e4d5*/
           }
         }
-        if ( v41 )
+        if ( v41 ) /*0x48e587*/
         {
-          v80 = v41;
-          do
+          v75 = v41; /*0x48e58d*/
+          do /*0x48e692*/
           {
-            v52 = (_DWORD *)FormHeapAlloc(0x14u);
-            if ( v52 )
-              v53 = (ExtraDataList *)ExtraDataList_constr(v52);
+            v52 = (_DWORD *)FormHeapAlloc(0x14u); /*0x48e593*/
+            if ( v52 ) /*0x48e5a9*/
+              v53 = (ExtraDataList *)ExtraDataList_constr(v52); /*0x48e5b2*/
             else
-              v53 = 0;
-            v54 = *v75;
-            if ( v53 )
+              v53 = 0; /*0x48e5b6*/
+            v54 = &entrya->extendData->node.data; /*0x48e5bc*/
+            if ( v53 ) /*0x48e5c7*/
             {
-              if ( *v54 )
+              if ( *v54 ) /*0x48e5c9*/
               {
-                v55 = (ExtraDataList **)FormHeapAlloc(8u);
-                if ( v55 )
+                v55 = (_DWORD *)FormHeapAlloc(8u); /*0x48e5d0*/
+                if ( v55 ) /*0x48e5da*/
                 {
-                  *v55 = *v54;
-                  v55[1] = 0;
+                  *v55 = *v54; /*0x48e5de*/
+                  v55[1] = 0; /*0x48e5e0*/
                 }
                 else
                 {
-                  v55 = 0;
+                  v55 = 0; /*0x48e5e9*/
                 }
-                v55[1] = v54[1];
-                v54[1] = (ExtraDataList *)v55;
+                v55[1] = v54[1]; /*0x48e5ee*/
+                v54[1] = v55; /*0x48e5f1*/
               }
-              *v54 = v53;
+              *v54 = v53; /*0x48e5f4*/
             }
-            ExtraDataList_SetExtraCount(v53, 1);
-            if ( v53 )
+            ExtraDataList_SetExtraCount(v53, 1); /*0x48e5fa*/
+            if ( v53 ) /*0x48e601*/
             {
-              if ( !ExtraDataList_GetExtraScript(v53) )
+              if ( !ExtraDataList_GetExtraScript(v53) ) /*0x48e609*/
               {
-                ExtraDataList_AddScript(v53, (int)v73);
-                v56 = (char *)ExtraDataList_GetExtraScript(v53);
-                v57 = Script_CreateEventList(v56);
-                ExtraDataList_SetScriptEventList(v53, (int)v57);
-                v58 = (TESChildCELL *)FormHeapAlloc(0x58u);
-                if ( v58 )
-                  v59 = (TESForm *)TESObjectREFR_constr(v58);
+                ExtraDataList_AddScript(v53, (BSExtraDataVtbl *)v68); /*0x48e61d*/
+                v56 = (char *)ExtraDataList_GetExtraScript(v53); /*0x48e624*/
+                v57 = Script_CreateEventList(v56); /*0x48e62b*/
+                ExtraDataList_SetScriptEventList(v53, (int)v57); /*0x48e633*/
+                v58 = (TESChildCELL *)FormHeapAlloc(0x58u); /*0x48e63a*/
+                if ( v58 ) /*0x48e650*/
+                  v59 = (TESForm *)TESObjectREFR_constr(v58); /*0x48e659*/
                 else
-                  v59 = 0;
-                TESForm_MakeTemporary(v59);
-                v60 = (char **)ExtraDataList_GetExtraScriptEventList(v53);
-                result = Script_Run(v73, result, a3, (TESObjectREFR *)v59, v60, 0, 0);
-                if ( v59 )
-                  v59->vtbl->Destroy(v59, 1);
+                  v59 = 0; /*0x48e65d*/
+                TESForm_MakeTemporary(v59); /*0x48e665*/
+                v60 = (char **)ExtraDataList_GetExtraScriptEventList(v53); /*0x48e670*/
+                result = Script_Run(v68, result, a3, (TESObjectREFR *)v59, v60, 0, 0); /*0x48e679*/
+                if ( v59 ) /*0x48e680*/
+                  v59->vtbl->Destroy(v59, 1); /*0x48e68b*/
               }
             }
-            --v80;
+            --v75; /*0x48e68d*/
           }
-          while ( v80 );
+          while ( v75 ); /*0x48e692*/
         }
       }
 LABEL_125:
-      v78 = (int *)v78[1];
-      if ( !v78 )
-        break;
-      v38 = v78;
+      objList = (ExtraContainerChanges_Data *)objList->owner; /*0x48e720*/
+      if ( !objList ) /*0x48e724*/
+        break; /*0x48e724*/
+      v38 = (EntryData **)objList; /*0x48e412*/
     }
   }
-  return result;
+  return result; /*0x48e72a*/
 }

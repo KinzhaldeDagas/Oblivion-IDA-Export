@@ -1,1 +1,1 @@
-atom_t
+typedef unsigned int atom_t;

@@ -1,4 +1,5 @@
-void __thiscall HighProcess::InitUnk1A8Val(HighProcess *this)
+// Clears HighProcess.conversationScanCooldown to 0.0, making the social-scan timer immediately eligible when other procedure gates permit.
+void __thiscall HighProcess::ClearConversationScanCooldown(HighProcess *this)
 {
-  this->unk1A8 = 0.0;
+  this->conversationScanCooldown = 0.0; /*0x6298b2*/
 }

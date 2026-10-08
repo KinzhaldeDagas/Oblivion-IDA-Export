@@ -29,7 +29,7 @@
 0x757569: mov     [ecx+4], eax
 0x75756C: mov     edx, [edi+38h]
 0x75756F: mov     [ecx+8], edx
-0x757572: call    sub_43F350
+0x757572: call    Vector3_NormalizeInPlace; Vector3_NormalizeInPlace. Returns original length in ST0; if length <= epsilon at 0xA372CC, zeroes xyz and returns 0. PlaceAtMe uses it to normalize the ray hit vector before scaling by hit distance.
 0x757577: fstp    st
 0x757579: pop     edi
 0x75757A: mov     eax, esi

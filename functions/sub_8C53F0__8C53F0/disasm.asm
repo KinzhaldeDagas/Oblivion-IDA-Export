@@ -17,7 +17,7 @@
 0x8C5416: push    eax
 0x8C5417: call    ecx
 0x8C5419: push    edi
-0x8C541A: call    FormHeapFree
+0x8C541A: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x8C541F: add     esp, 1Ch
 0x8C5422: pop     edi
 0x8C5423: mov     eax, esi

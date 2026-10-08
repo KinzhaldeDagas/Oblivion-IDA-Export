@@ -159,7 +159,6 @@
 0x8CCEBD: mov     [esp+1CCh+var_1BC], esi
 0x8CCEC1: jle     loc_8CCFA2
 0x8CCEC7: jmp     short loc_8CCED0
-0x8CCEC9: align 10h
 0x8CCED0: mov     ecx, [esp+1CCh+var_188]
 0x8CCED4: mov     eax, [esp+1CCh+var_1BC]
 0x8CCED8: mov     edx, [ecx+eax*4]

@@ -1,4 +1,4 @@
-0x63C730: sub     esp, 5Ch
+0x63C730: sub     esp, 5Ch; MorrowindMovements: process vtable +0x2CC movement-vector handoff shared by actor process movement; reads +0x2C0 flags before MobileObject::Move.
 0x63C733: push    ebx
 0x63C734: push    ebp
 0x63C735: push    esi
@@ -32,29 +32,29 @@
 0x63C7A5: mov     dword ptr [esp+6Ch+var_4C], edx
 0x63C7A9: mov     dword ptr [esp+6Ch+var_4C+4], eax
 0x63C7AD: jnz     short loc_63C7F6
-0x63C7AF: push    0; a2
-0x63C7B1: call    Player_GetAnimData
+0x63C7AF: push    0; firstPerson
+0x63C7B1: call    PlayerCharacter_GetAnimDataByPerspective; PlayerCharacter ActorAnimData selector. false returns ordinary process/default ActorAnimData; true returns firstPersonAnimData at PlayerCharacter+0x5CC. Distinct from 0x6600D0, which selects ActorSkinInfo at +0x104/+0x5C8.
 0x63C7B6: mov     ecx, ds:0B333C4h; this
 0x63C7BC: cmp     byte ptr [ecx+588h], 0
 0x63C7C3: mov     edi, eax
 0x63C7C5: jnz     short loc_63C804
-0x63C7C7: push    1; a2
-0x63C7C9: call    Player_GetAnimData
+0x63C7C7: push    1; firstPerson
+0x63C7C9: call    PlayerCharacter_GetAnimDataByPerspective; Player movement handoff calls Player_GetAnimData(player, 1) when third-person animation data may be needed.
 0x63C7CE: test    edi, edi
 0x63C7D0: mov     [esp+6Ch+arg_0], eax
 0x63C7D4: jz      short loc_63C802
-0x63C7D6: push    0
-0x63C7D8: mov     ecx, eax
-0x63C7DA: call    ActorAnimData_GetAnimGroupFromField8Value
-0x63C7DF: push    0
-0x63C7E1: mov     ecx, edi
+0x63C7D6: push    0; slot
+0x63C7D8: mov     ecx, eax; this
+0x63C7DA: call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.
+0x63C7DF: push    0; slot
+0x63C7E1: mov     ecx, edi; this
 0x63C7E3: mov     bp, ax
-0x63C7E6: call    ActorAnimData_GetAnimGroupFromField8Value
+0x63C7E6: call    ActorAnimData_GetAnimGroupFromField8Value; ActorAnimData key-field reader. Normalizes encoded slot values and returns the active animation key/group stored for that slot.
 0x63C7EB: cmp     bp, ax
 0x63C7EE: jnz     short loc_63C804
 0x63C7F0: mov     eax, [esp+6Ch+arg_0]
 0x63C7F4: jmp     short loc_63C802
-0x63C7F6: mov     edx, [esi]
+0x63C7F6: mov     edx, [esi]; Non-player movement handoff obtains ActorAnimData through actor vtable +0x164 before calling 0x4723A0.
 0x63C7F8: mov     eax, [edx+164h]
 0x63C7FE: mov     ecx, esi
 0x63C800: call    eax
@@ -98,7 +98,7 @@
 0x63C86C: push    esi
 0x63C86D: lea     eax, [esp+78h+var_4C]
 0x63C871: push    eax
-0x63C872: call    sub_4723A0
+0x63C872: call    ActorAnimData_GetMovementVector; Movement handoff calls ActorAnimData movement-vector extraction. MorrowindMovements hooks this call to apply a transient +0xBC/+0xC0 root-motion clamp scale only during 0x4723A0, then restores before playback/save state can observe it.
 0x63C877: mov     edx, [ebx]
 0x63C879: mov     edx, [edx+18Ch]
 0x63C87F: lea     eax, [esp+6Ch+arg_0]
@@ -106,8 +106,8 @@
 0x63C884: mov     ecx, ebx
 0x63C886: call    edx
 0x63C888: mov     edi, [eax]
-0x63C88A: lea     ecx, [esp+6Ch+arg_0]; this
-0x63C88E: call    sub_7016A0
+0x63C88A: lea     ecx, [esp+6Ch+arg_0]; slot
+0x63C88E: call    NiPointerSlot_Release
 0x63C893: test    edi, edi
 0x63C895: jz      short loc_63C8C7
 0x63C897: lea     ecx, [edi+1F0h]
@@ -247,17 +247,17 @@
 0x63CA67: fld     [esp+6Ch+a3]
 0x63CA6B: push    ecx
 0x63CA6C: mov     [esp+70h+arg_8], ecx
-0x63CA70: fstp    [esp+70h+var_70]; float
-0x63CA73: lea     ecx, [esp+70h+var_24]
+0x63CA70: fstp    [esp+70h+angleZ]; angleZ
+0x63CA73: lea     ecx, [esp+70h+var_24]; this
 0x63CA77: mov     [esp+70h+a2], eax
-0x63CA7B: call    NiMatrix33_InitRotationTransform
+0x63CA7B: call    NiMatrix33_InitRotationZ; Verified matrix coefficients make this a Z-axis rotation: Z stays fixed; only the X/Y submatrix contains sin/cos.
 0x63CA80: lea     eax, [esp+6Ch+var_24]
 0x63CA84: push    eax
 0x63CA85: lea     ecx, [esp+70h+var_4C]
 0x63CA89: push    ecx
 0x63CA8A: lea     edx, [esp+74h+a2]
 0x63CA8E: push    edx
-0x63CA8F: call    sub_710250
+0x63CA8F: call    NiPoint3_MultiplyMatrix3
 0x63CA94: mov     ecx, [eax]
 0x63CA96: mov     dword ptr [esp+78h+var_4C], ecx
 0x63CA9A: mov     edx, [eax+4]
@@ -318,12 +318,12 @@
 0x63CB3D: fstp    [esp+78h+var_78]
 0x63CB40: call    edx
 0x63CB42: mov     ecx, esi; this
-0x63CB44: call    TESObjectREFR_GetParentCell
+0x63CB44: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x63CB49: mov     edi, eax
 0x63CB4B: test    edi, edi
 0x63CB4D: jz      loc_63CDAD
 0x63CB53: mov     ecx, edi; this
-0x63CB55: call    TESObjectCELL_IsInterior
+0x63CB55: call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.
 0x63CB5A: test    al, al
 0x63CB5C: jnz     loc_63CBEB
 0x63CB62: mov     eax, [esi]
@@ -374,7 +374,7 @@
 0x63CBEB: push    2
 0x63CBED: push    0
 0x63CBEF: mov     ecx, edi
-0x63CBF1: call    sub_441800
+0x63CBF1: call    sub_441800; ODismemberment authority: loaded cell effect child lookup by quadrant/index; hit particles use index 3 after sub_4C9BE0(ref).
 0x63CBF6: mov     ebp, eax
 0x63CBF8: test    ebp, ebp
 0x63CBFA: jz      loc_63CDAD
@@ -413,7 +413,7 @@
 0x63CC6E: fld     [esp+6Ch+var_2C]
 0x63CC72: fsub    [esp+6Ch+var_50]
 0x63CC76: fstp    [esp+6Ch+a3]
-0x63CC7A: call    sub_404C90
+0x63CC7A: call    NiPoint3_Length; Returns sqrt(x*x + y*y + z*z) for the three-float NiPoint3 value. Fallout's related NiPoint3 helpers corroborate the engine type; behavior verified here.
 0x63CC7F: fld     [esp+6Ch+var_28]
 0x63CC83: fcompp
 0x63CC85: fnstsw  ax
@@ -434,7 +434,7 @@
 0x63CCB0: mov     [eax+8], ecx
 0x63CCB3: push    edx; int
 0x63CCB4: mov     ecx, esi
-0x63CCB6: call    sub_5E2E20
+0x63CCB6: call    Actor_ChoosePathGridSteeringPosition; Verified actor package movement helper. Finds a reachable PathGrid point for the requested destination; if it has outgoing connections, selects the first linked node and chooses a randomized intermediate position along that edge. Handles empty/unavailable PathGrids by falling back to terrain height or the actor's current position. Multiple HighProcess package-action callers establish the steering-position role.
 0x63CCBB: lea     eax, [esp+6Ch+var_58]
 0x63CCBF: push    eax
 0x63CCC0: lea     ecx, [esp+70h+a2]
@@ -468,7 +468,7 @@
 0x63CD0F: lea     ecx, [esp+88h+var_34]
 0x63CD13: push    ecx; int
 0x63CD14: mov     ecx, esi
-0x63CD16: call    sub_5E2E20
+0x63CD16: call    Actor_ChoosePathGridSteeringPosition; Verified actor package movement helper. Finds a reachable PathGrid point for the requested destination; if it has outgoing connections, selects the first linked node and chooses a randomized intermediate position along that edge. Handles empty/unavailable PathGrids by falling back to terrain height or the actor's current position. Multiple HighProcess package-action callers establish the steering-position role.
 0x63CD1B: mov     edx, [eax]
 0x63CD1D: mov     [esp+6Ch+a2], edx
 0x63CD21: mov     ecx, [eax+4]
@@ -482,7 +482,7 @@
 0x63CD3D: test    al, al
 0x63CD3F: jz      loc_63CBD0
 0x63CD45: mov     ecx, ds:0B333C4h; this
-0x63CD4B: call    TESObjectREFR_GetParentCell
+0x63CD4B: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x63CD50: cmp     eax, edi
 0x63CD52: jnz     loc_63CBD0
 0x63CD58: mov     ecx, ds:0B333C4h
@@ -504,7 +504,7 @@
 0x63CD84: lea     ecx, [esp+88h+var_34]
 0x63CD88: push    ecx; int
 0x63CD89: mov     ecx, esi
-0x63CD8B: call    sub_5E2E20
+0x63CD8B: call    Actor_ChoosePathGridSteeringPosition; Verified actor package movement helper. Finds a reachable PathGrid point for the requested destination; if it has outgoing connections, selects the first linked node and chooses a randomized intermediate position along that edge. Handles empty/unavailable PathGrids by falling back to terrain height or the actor's current position. Multiple HighProcess package-action callers establish the steering-position role.
 0x63CD90: mov     edx, [eax]
 0x63CD92: mov     [esp+6Ch+a2], edx
 0x63CD96: mov     ecx, [eax+4]

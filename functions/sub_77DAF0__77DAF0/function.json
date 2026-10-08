@@ -1,19 +1,32 @@
 {
-  "callees_count": 4,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 0,
+  "chunks": [
+    [
+      "0x77DAF0",
+      "0x77DB1F"
+    ]
+  ],
+  "chunks_sha256": "61f9d0b618067532a6a652a160ed12930e70ea8d8474b2fd540c4ac53d826b62",
   "comment_regular": "",
-  "comment_repeatable": "",
+  "comment_repeatable": "\nDX11 authority audit 2026-10-01: Shared target of static A8AF5C+14 and unshared A8AF88+14 vtables. Reads geometryData+38; detaches buffer from group via 782930, destroys buffer via 778110, FormHeapFree, clears geometryData+38. No local lock acquisition. Verified Fallout 827D2858 family; Fallout data buffer offset+34 and virtual deleting destructor differ.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_77DAF0",
+  "display_name": "NiStaticGeometryGroup_RemoveGeometryData",
   "end_ea": "0x77DB1F",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_77DAF0",
+  "name": "NiStaticGeometryGroup_RemoveGeometryData",
   "segment": ".text",
   "sha256": "61f9d0b618067532a6a652a160ed12930e70ea8d8474b2fd540c4ac53d826b62",
   "size": 47,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x77DAF0",
-  "type": "void __thiscall(NiGeometryGroup *this, NiGeometryData *a2)",
+  "total_chunk_size": 47,
+  "type": "void __thiscall(NiGeometryGroup *this, NiGeometryData *data)",
   "xrefs_from_count": 20,
   "xrefs_to_count": 2
 }

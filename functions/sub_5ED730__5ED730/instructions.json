@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x5ED730",
-    "line": "sub     esp, 8",
+    "line": "sub     esp, 8; Oblivion social eligibility predicate used only by the two random-conversation scans. Requires a process; in interiors requires |Z(this)-Z(other)| <= 90; rejects process current-package flag 0x1000, dead actors, process mode 9, sub_5E6FA0 state, sleep states other than None/Sitting, and package types accepted by sub_567770; final process metric at vslot +0x15C must be <= 0.",
     "mnemonic": "sub",
     "size": 3
   },
@@ -73,7 +73,7 @@
   },
   {
     "ea": "0x5ED749",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -97,7 +97,7 @@
   },
   {
     "ea": "0x5ED754",
-    "line": "call    TESObjectREFR_GetParentCell",
+    "line": "call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.",
     "mnemonic": "call",
     "size": 5
   },
@@ -109,7 +109,7 @@
   },
   {
     "ea": "0x5ED75B",
-    "line": "call    TESObjectCELL_IsInterior",
+    "line": "call    TESObjectCELL_IsInterior; 3DTheft decode: TESObjectCELL_IsInterior returns flags0 bit 0, matching the plugin's CellIsInterior test.",
     "mnemonic": "call",
     "size": 5
   },
@@ -157,7 +157,7 @@
   },
   {
     "ea": "0x5ED773",
-    "line": "mov     ecx, [esp+10h+arg_0]",
+    "line": "mov     ecx, [esp+10h+other]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -199,13 +199,13 @@
   },
   {
     "ea": "0x5ED78C",
-    "line": "fstp    [esp+10h+arg_0]",
+    "line": "fstp    [esp+10h+other]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x5ED790",
-    "line": "fld     [esp+10h+arg_0]",
+    "line": "fld     [esp+10h+other]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -217,13 +217,13 @@
   },
   {
     "ea": "0x5ED796",
-    "line": "fstp    [esp+10h+arg_0]",
+    "line": "fstp    [esp+10h+other]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x5ED79A",
-    "line": "fld     [esp+10h+arg_0]",
+    "line": "fld     [esp+10h+other]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -499,13 +499,13 @@
   },
   {
     "ea": "0x5ED81D",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5ED81F",
-    "line": "call    sub_5E0380",
+    "line": "call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
     "mnemonic": "call",
     "size": 5
   },
@@ -523,25 +523,25 @@
   },
   {
     "ea": "0x5ED828",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5ED82A",
-    "line": "call    sub_5E0380",
+    "line": "call    Actor__GetCurrentPackage; Returns Actor.process->GetCurrentPackage when a process exists. Random-conversation setup uses it to share the newly created DialoguePackage with the partner actor.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5ED82F",
-    "line": "mov     ecx, eax",
+    "line": "mov     ecx, eax; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5ED831",
-    "line": "call    sub_567770",
+    "line": "call    TESPackage__IsTemporaryOverrideType; Classifies the temporary/internal override package types that callers treat as superseding an underlying scheduled package. True for Combat, CombatLow, Activate, Alarm, Flee, Trespass, Dialogue, Spectator, ReactToDead, Mount/Dismount Horse, Do Nothing, Vampire Feed, Surface, Clear Mount Position, and Movement Blocked. Ambient social scans reject actors whose current package is in this set.",
     "mnemonic": "call",
     "size": 5
   },

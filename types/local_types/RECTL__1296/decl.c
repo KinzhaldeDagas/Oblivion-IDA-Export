@@ -1,1 +1,1 @@
-RECTL
+typedef _RECTL RECTL;

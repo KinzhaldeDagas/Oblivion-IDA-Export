@@ -1,4 +1,4 @@
-0x4ECB70: push    0FFFFFFFFh
+0x4ECB70: push    0FFFFFFFFh; Verified async completion: obtains the loaded NIF node from the TerrainLODQuadLoadTask, stores it in quad.terrainLODNode (+0x2C), sets state LoadedDetached (2), and releases quadData's task reference.
 0x4ECB72: push    offset SEH_70B000
 0x4ECB77: mov     eax, large fs:0
 0x4ECB7D: push    eax
@@ -41,7 +41,7 @@
 0x4ECBDB: add     ebx, 4
 0x4ECBDE: push    ebx; lpAddend
 0x4ECBDF: call    dword ptr ds:0A28078h
-0x4ECBE5: mov     esi, dword ptr [esp+20h+var_10]
+0x4ECBE5: mov     esi, [esp+20h+var_10]
 0x4ECBE9: test    esi, esi
 0x4ECBEB: mov     [esp+20h+var_4], 0FFFFFFFFh
 0x4ECBF3: jz      short loc_4ECC11
@@ -57,7 +57,7 @@
 0x4ECC0B: push    1
 0x4ECC0D: mov     ecx, esi
 0x4ECC0F: call    eax
-0x4ECC11: mov     dword ptr [edi+8], 2
+0x4ECC11: mov     dword ptr [edi+8], 2; Verified successful-load transition: TerrainLODQuadLoadTask_ApplyLoadedMesh stores the loaded NiAVObject at quad +0x2C and sets state to LoadedDetached (2).
 0x4ECC18: mov     esi, [edi+4]
 0x4ECC1B: test    esi, esi
 0x4ECC1D: jz      short loc_4ECC42
@@ -82,3 +82,12 @@
 0x4ECC50: pop     ebx
 0x4ECC51: add     esp, 10h
 0x4ECC54: retn
+0x9CA9B0: lea     ecx, [ebp-10h]; slot
+0x9CA9B3: jmp     NiPointerSlot_Release
+0x9CA9B8: mov     edx, [esp+arg_4]
+0x9CA9BC: lea     eax, [edx-10h]
+0x9CA9BF: mov     ecx, [edx-14h]
+0x9CA9C2: xor     ecx, eax
+0x9CA9C4: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA9C9: mov     eax, offset stru_AF3038
+0x9CA9CE: jmp     ___CxxFrameHandler3

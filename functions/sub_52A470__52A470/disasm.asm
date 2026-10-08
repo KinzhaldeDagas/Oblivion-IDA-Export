@@ -6,7 +6,7 @@
 0x52A478: mov     esi, ecx
 0x52A47A: push    edi
 0x52A47B: mov     [esp+14h+var_4], esi
-0x52A47F: call    nullsub_returnvVoid_1arg
+0x52A47F: call    nullsub_returnvVoid_1arg; nullsub_returnvVoid_1arg; used by Low/MiddleLow current package getter slots and other default no-op vfuncs.
 0x52A484: xor     ebx, ebx
 0x52A486: test    edi, 10000000h
 0x52A48C: jz      short loc_52A4E5

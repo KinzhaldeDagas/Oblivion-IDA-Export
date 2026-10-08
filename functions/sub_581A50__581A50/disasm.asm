@@ -30,7 +30,7 @@
 0x581AA7: mov     esi, ecx
 0x581AA9: call    sub_585940
 0x581AAE: push    esi
-0x581AAF: call    FormHeapFree
+0x581AAF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x581AB4: add     esp, 4
 0x581AB7: mov     ds:0B3A6FCh, ebx
 0x581ABD: call    sub_572D90
@@ -118,7 +118,7 @@
 0x581B8C: mov     ecx, esi
 0x581B8E: call    sub_538B60
 0x581B93: push    esi
-0x581B94: call    FormHeapFree
+0x581B94: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x581B99: add     esp, 4
 0x581B9C: mov     ecx, ebp
 0x581B9E: call    sub_57D200
@@ -128,19 +128,18 @@
 0x581BB1: cmp     cx, bx
 0x581BB4: jbe     short loc_581BFB
 0x581BB6: jmp     short loc_581BC0
-0x581BB8: align 10h
 0x581BC0: mov     edx, ds:0B13BC8h
 0x581BC6: mov     esi, [edx+edi*4]
 0x581BC9: cmp     esi, ebx
 0x581BCB: jz      short loc_581BF1
 0x581BCD: mov     eax, [esi+8]
 0x581BD0: push    eax
-0x581BD1: call    FormHeapFree
+0x581BD1: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x581BD6: push    esi
 0x581BD7: mov     [esi+8], ebx
 0x581BDA: mov     [esi+0Eh], bx
 0x581BDE: mov     [esi+0Ch], bx
-0x581BE2: call    FormHeapFree
+0x581BE2: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x581BE7: mov     cx, ds:0B13BCEh
 0x581BEE: add     esp, 8
 0x581BF1: movzx   eax, cx
@@ -216,3 +215,18 @@
 0x581CAC: pop     ebx
 0x581CAD: add     esp, 10h
 0x581CB0: retn
+0x9BEC50: mov     ecx, [ebp-10h]; slot
+0x9BEC53: jmp     NiPointerSlot_Release
+0x9BEC58: mov     ecx, [ebp-10h]
+0x9BEC5B: add     ecx, 4; slot
+0x9BEC5E: jmp     NiPointerSlot_Release
+0x9BEC63: mov     ecx, [ebp-10h]
+0x9BEC66: add     ecx, 78h ; 'x'; slot
+0x9BEC69: jmp     NiPointerSlot_Release
+0x9BEC6E: mov     edx, [esp+arg_4]
+0x9BEC72: lea     eax, [edx-14h]
+0x9BEC75: mov     ecx, [edx-18h]
+0x9BEC78: xor     ecx, eax
+0x9BEC7A: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9BEC7F: mov     eax, offset stru_AE82F8
+0x9BEC84: jmp     ___CxxFrameHandler3

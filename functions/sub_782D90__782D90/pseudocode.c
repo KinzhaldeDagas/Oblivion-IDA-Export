@@ -1,4 +1,14 @@
-bool __thiscall sub_782D90(_DWORD **this, int a2, int a3, int a4, int a5)
+// Thin Direct3D9 render-state wrapper for IDirect3DDevice9::SetPixelShaderConstantI (device vtable slot +0x1BC).
+bool __thiscall NiDX9RenderState__SetPixelShaderConstantI(
+        void *this,
+        unsigned int startRegister,
+        const int *constantData,
+        unsigned int vector4Count,
+        int unused)
 {
-  return (*(int (__stdcall **)(_DWORD, int, int, int))(**(this + 0x3FE) + 0x1BC))(*(this + 0x3FE), a2, a3, a4) >= 0;
+  return (*(int (__stdcall **)(_DWORD, unsigned int, const int *, unsigned int))(**((_DWORD **)this + 0x3FE) + 0x1BC))( /*0x782db9*/
+           *((_DWORD *)this + 0x3FE),
+           startRegister,
+           constantData,
+           vector4Count) >= 0;
 }

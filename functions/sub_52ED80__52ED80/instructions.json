@@ -13,7 +13,7 @@
   },
   {
     "ea": "0x52ED82",
-    "line": "mov     edi, [esp+8+arg_0]",
+    "line": "mov     edi, [esp+8+index]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -55,37 +55,37 @@
   },
   {
     "ea": "0x52ED93",
-    "line": "call    sub_452910",
+    "line": "call    NiTLargeArray_Resize32",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x52ED98",
-    "line": "mov     ecx, [esp+8+arg_4]",
+    "line": "mov     ecx, [esp+8+value]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x52ED9C",
-    "line": "push    ecx",
+    "line": "push    ecx; value",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52ED9D",
-    "line": "push    edi",
+    "line": "push    edi; index",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x52ED9E",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; self",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x52EDA0",
-    "line": "call    sub_446C50",
+    "line": "call    NiTLargeArray32_SetSlot",
     "mnemonic": "call",
     "size": 5
   },

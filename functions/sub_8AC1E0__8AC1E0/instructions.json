@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x8AC1E0",
-    "line": "push    ebp",
+    "line": "push    ebp; TES4 authoritative: resets/initializes low-level hkpCharacterProxy fields from cinfo. cinfo+0x64 is a slope angle in radians; proxy+0xA4 stores cos(cinfo+0x64), used by 0x8AE100 support acceptance.",
     "mnemonic": "push",
     "size": 1
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x8AC264",
-    "line": "fstp    dword ptr [esi+0A4h]",
+    "line": "fstp    dword ptr [esi+0A4h]; proxy+0xA4 = cos(cinfo+0x64 max slope angle). Support status 1/2 test in 0x8AE100 uses this squared against the support-motion/up relation.",
     "mnemonic": "fstp",
     "size": 6
   },
@@ -517,7 +517,7 @@
   },
   {
     "ea": "0x8AC2FF",
-    "line": "call    sub_8ABAC0",
+    "line": "call    sub_8ABAC0; Low-level position writer: stores target at object+0xA0 and updates Havok transform when shape data exists.",
     "mnemonic": "call",
     "size": 5
   },
@@ -835,7 +835,7 @@
   },
   {
     "ea": "0x8AC3A7",
-    "line": "call    sub_8BC750",
+    "line": "call    sub_8BC750; Insert helper for collision metadata key/value map. If key absent, appends 0x10-byte entry {key, unknown, valueLow, valueHigh}.",
     "mnemonic": "call",
     "size": 5
   },

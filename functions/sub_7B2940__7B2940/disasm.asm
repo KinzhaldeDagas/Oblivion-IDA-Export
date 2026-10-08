@@ -20,7 +20,7 @@
 0x7B297A: mov     [esp+1Ch+var_4], 0
 0x7B2982: jz      short loc_7B29A7
 0x7B2984: mov     ecx, esi; this
-0x7B2986: call    ??0BSShaderLightingProperty@@QAE@XZ; BSShaderLightingProperty::BSShaderLightingProperty(void)
+0x7B2986: call    ??0BSShaderLightingProperty@@QAE@XZ; [Verified] DECAL_DATA is 0x4C bytes: NiSourceTexture* +0, rotation matrix +8, target reference FormID +0x3C, fade progress +0x40, and NiProperty* +0x48. Fields +4, +0x2C, +0x38 and +0x44 remain Unknown. The property owns a NiTPointerList<DECAL_DATA*> at +0x80; effects add/remove entries and render-pass builders batch from count +0x8C.
 0x7B298B: mov     dword ptr [esi], offset ??_7DistantLODShaderProperty@@6B@; const DistantLODShaderProperty::`vftable'
 0x7B2991: mov     dword ptr [esi+0A0h], 0
 0x7B299B: mov     dword ptr [esi+9Ch], 0
@@ -40,3 +40,15 @@
 0x7B29CD: pop     ebx
 0x7B29CE: add     esp, 10h
 0x7B29D1: retn    4
+0x9CA7E0: mov     eax, [ebp-10h]
+0x9CA7E3: push    eax
+0x9CA7E4: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9CA7E9: pop     ecx
+0x9CA7EA: retn
+0x9CA7EB: mov     edx, [esp+arg_4]
+0x9CA7EF: lea     eax, [edx-0Ch]
+0x9CA7F2: mov     ecx, [edx-10h]
+0x9CA7F5: xor     ecx, eax
+0x9CA7F7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CA7FC: mov     eax, offset stru_AF2E8C
+0x9CA801: jmp     ___CxxFrameHandler3

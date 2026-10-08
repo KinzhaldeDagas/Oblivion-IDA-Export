@@ -11,7 +11,7 @@
 0x401ABA: push    ebx
 0x401ABB: mov     ebx, [esp+8+Size]
 0x401ABF: cmp     ebx, 8
-0x401AC2: jnb     short loc_401AD0
+0x401AC2: jnb     short loc_401AD0; Initialized MemoryHeap allocations smaller than 8 bytes, including SCDA length zero, are promoted to 8 bytes before allocation.
 0x401AC4: mov     [esp+8+Size], 8
 0x401ACC: mov     ebx, [esp+8+Size]
 0x401AD0: mov     ecx, [esi+4]
@@ -33,7 +33,7 @@
 0x401B05: ja      short loc_401B34
 0x401B07: mov     ecx, ebx
 0x401B09: shr     ecx, 2
-0x401B0C: mov     ecx, g_HeapPoolsBySize[ecx*4]
+0x401B0C: mov     ecx, ds:0B33080h[ecx*4]
 0x401B13: test    ecx, ecx
 0x401B15: jz      short loc_401B34
 0x401B17: call    MemoryPool_Allocate
@@ -75,7 +75,7 @@
 0x401B7E: add     ecx, ebx
 0x401B80: push    ecx
 0x401B81: mov     ecx, esi
-0x401B83: call    sub_401230
+0x401B83: call    MemoryHeap_SizeToBinIndex; Converts an allocation size to a segregated free-list bin index; valid only for sizes through 0x1000.
 0x401B88: cmp     eax, 10h
 0x401B8B: jge     short loc_401BB2
 0x401B8D: mov     edx, [esi+44h]
@@ -131,7 +131,6 @@
 0x401C12: test    edi, edi
 0x401C14: jz      short loc_401C41
 0x401C16: jmp     short loc_401C20
-0x401C18: align 10h
 0x401C20: mov     ebx, [edi+4]
 0x401C23: and     ebx, 0FFFFFFFh
 0x401C29: mov     eax, ebx
@@ -165,7 +164,7 @@
 0x401C75: push    edi
 0x401C76: push    ebp
 0x401C77: mov     ecx, esi
-0x401C79: call    sub_401690
+0x401C79: call    MemoryHeap_RemoveFreeEntry; Unlinks a free block from its doubly linked size bin, clears the free flag and links, and updates bin/global free-entry counts.
 0x401C7E: mov     eax, ebx
 0x401C80: mov     ebx, [esp+10h+Size]
 0x401C84: sub     eax, ebx
@@ -187,10 +186,10 @@
 0x401CB3: add     dword ptr [esi+1Ch], 1
 0x401CB7: push    ebp
 0x401CB8: mov     ecx, esi
-0x401CBA: call    sub_4015F0
+0x401CBA: call    MemoryHeap_InsertFreeEntry; Marks a block free, appends it to the size-selected doubly linked free list, updates free-list statistics, and records the bin's active count.
 0x401CBF: push    ebp
 0x401CC0: mov     ecx, esi
-0x401CC2: call    sub_401A30
+0x401CC2: call    MemoryHeap_CoalesceFreeEntry; Coalesces a just-freed entry with adjacent free predecessors/successors, then releases any now-free tail region.
 0x401CC7: mov     ecx, [edi+4]
 0x401CCA: and     ecx, 0F0000000h
 0x401CD0: or      ecx, ebx

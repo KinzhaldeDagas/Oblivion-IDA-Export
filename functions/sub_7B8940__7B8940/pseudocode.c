@@ -1,15 +1,21 @@
-char __cdecl sub_7B8940(NiAVObject *a1, unsigned int a2, int a3, int a4)
+//
+// [2026-10-06] Return is the recursive helper return, ultimately shader UpdateInternalVars AL at 0x7B80CD. Stock billboard builder 0x562FA1 ignores it. Do not treat zero alone as absence of an installed shader/property; inspect actual resource pointers. v139 plugin incorrectly rejected zero before resource inspection; v140 corrects that guard.
+char __cdecl BSShaderManager_AssignShadersRecursive(
+        NiAVObject *root,
+        unsigned int shaderId,
+        char normalMapBypass,
+        char arg3)
 {
   const char *v4; // eax
   char v5; // bl
 
-  if ( !a1 )
-    return 0;
-  NiAVObject_InitializePropertyState(a1);
-  v4 = 0;
-  if ( dword_B42EB4 )
-    v4 = (const char *)dword_B42EB4(a1);
-  v5 = sub_7B7FC0((NiNode *)a1, a2, a3, a4, v4);
-  NiAVObject_InitializePropertyState(a1);
-  return v5;
+  if ( !root ) /*0x7b8947*/
+    return 0; /*0x7b898a*/
+  NiAVObject_InitializePropertyState(root); /*0x7b894b*/
+  v4 = 0; /*0x7b8956*/
+  if ( *(_DWORD *)&OB_RendererGlobalState_010201A0[0x1B] ) /*0x7b8950*/
+    v4 = (const char *)(*(int (__cdecl **)(NiAVObject *))&OB_RendererGlobalState_010201A0[0x1B])(root); /*0x7b895d*/
+  v5 = BSShaderManager_AssignShaderToObjectRecursive(root, shaderId, normalMapBypass, arg3, v4); /*0x7b897e*/
+  NiAVObject_InitializePropertyState(root); /*0x7b8980*/
+  return v5; /*0x7b8988*/
 }

@@ -1,19 +1,36 @@
 {
-  "callees_count": 11,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 5,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 3,
-  "display_name": "sub_4385B0",
+  "chunks": [
+    [
+      "0x4385B0",
+      "0x438665"
+    ],
+    [
+      "0x9AC670",
+      "0x9AC69E"
+    ]
+  ],
+  "chunks_sha256": "326d41e6a729b1c8c0a239429397ad9d4cec76a91d84453d6ba7762ca4af4258",
+  "comment_regular": "Verified queued-record factory: validates the model path and Ni2DBuffer, allocates a 0x40-byte QueuedDistantLOD task around a 0x20-byte DistantLODQueuedInstanceData record, attaches the form texture-hash cache, and queues the task. Each record contains position, three rotation angles, normalized scale, and a retained cell Ni2DBuffer.",
+  "comment_repeatable": "Verified queued-record factory: validates the model path and Ni2DBuffer, allocates a 0x40-byte QueuedDistantLOD task around a 0x20-byte DistantLODQueuedInstanceData record, attaches the form texture-hash cache, and queues the task. Each record contains position, three rotation angles, normalized scale, and a retained cell Ni2DBuffer.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 4,
+  "display_name": "QueuedDistantLOD_CreateAndQueue",
   "end_ea": "0x438665",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4385B0",
+  "name": "QueuedDistantLOD_CreateAndQueue",
   "segment": ".text",
   "sha256": "3ec84c14532fb1e2cf4f970b22f2268c80a3847f782baee272fc866bf0810665",
   "size": 181,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4385B0",
-  "type": "void __stdcall(const char *, int, int)",
-  "xrefs_from_count": 71,
+  "total_chunk_size": 227,
+  "type": "void __stdcall(const char *modelPath, DistantLODQueuedInstanceData *instanceData, TESTextureList *textureHashCache)",
+  "xrefs_from_count": 87,
   "xrefs_to_count": 1
 }

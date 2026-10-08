@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x553B30",
-    "line": "cmp     dword ptr ds:0B39B80h, 0",
+    "line": "cmp     dword ptr ds:0B39B80h, 0; Fan-0 control projection wrapper. matrixChannel 0 projects FaceGen matrix 0; matrixChannel 1 projects FaceGen matrix 2, not matrix 1.",
     "mnemonic": "cmp",
     "size": 7
   },
@@ -13,37 +13,37 @@
   },
   {
     "ea": "0x553B39",
-    "line": "call    sub_553550",
+    "line": "call    FaceGenManager_EnsureInitialized; Lazily allocates and constructs the process FaceGen manager singleton (0xDBC bytes). Callers use g_faceGenManager; the authoritative control/basis data comes from FaceGen\\\\si.ctl.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x553B3E",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, [esp+parameters]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x553B42",
-    "line": "mov     ecx, [esp+arg_8]",
+    "line": "mov     ecx, [esp+sexChannel]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x553B46",
-    "line": "mov     edx, [esp+arg_4]",
+    "line": "mov     edx, [esp+controlIndex]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x553B4A",
-    "line": "push    eax",
+    "line": "push    eax; parameters",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x553B4B",
-    "line": "push    ecx",
+    "line": "push    ecx; matrixChannel",
     "mnemonic": "push",
     "size": 1
   },
@@ -55,25 +55,25 @@
   },
   {
     "ea": "0x553B52",
-    "line": "push    edx",
+    "line": "push    edx; controlIndex",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x553B53",
-    "line": "push    0",
+    "line": "push    0; fanIndex",
     "mnemonic": "push",
     "size": 2
   },
   {
     "ea": "0x553B55",
-    "line": "add     ecx, 0C8h ; 'È'",
+    "line": "add     ecx, 0C8h ; 'È'; this",
     "mnemonic": "add",
     "size": 6
   },
   {
     "ea": "0x553B5B",
-    "line": "call    sub_6EDD30",
+    "line": "call    FaceGenFanControls_GetControlValue; Fan-0 control projection. matrixChannel 0 selects parameters.matrix[0]; matrixChannel 1 selects parameters.matrix[2].",
     "mnemonic": "call",
     "size": 5
   },

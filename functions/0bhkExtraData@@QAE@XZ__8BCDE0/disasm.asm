@@ -32,3 +32,32 @@
 0x8BCE52: pop     esi
 0x8BCE53: add     esp, 10h
 0x8BCE56: retn
+0x8BCA00: mov     eax, [ecx+4]
+0x8BCA03: test    eax, eax
+0x8BCA05: mov     dword ptr [ecx], offset ??_7?$NiTLargeArray@V?$NiPointer@VNiTimeController@@@@@@6B@; const NiTLargeArray<NiPointer<NiTimeController>>::`vftable'
+0x8BCA0B: jz      short locret_8BCA2C
+0x8BCA0D: mov     ecx, [eax-4]
+0x8BCA10: push    esi
+0x8BCA11: lea     esi, [eax-4]
+0x8BCA14: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
+0x8BCA19: push    ecx; int
+0x8BCA1A: push    4; unsigned int
+0x8BCA1C: push    eax; void *
+0x8BCA1D: call    $LN21
+0x8BCA22: push    esi
+0x8BCA23: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x8BCA28: add     esp, 4
+0x8BCA2B: pop     esi
+0x8BCA2C: retn
+0x9D71F0: mov     ecx, [ebp-10h]
+0x9D71F3: jmp     NiExtraData_dtor
+0x9D71F8: mov     ecx, [ebp-10h]
+0x9D71FB: add     ecx, 0Ch
+0x9D71FE: jmp     loc_8BCA00
+0x9D7203: mov     edx, [esp+arg_4]
+0x9D7207: lea     eax, [edx-8]
+0x9D720A: mov     ecx, [edx-0Ch]
+0x9D720D: xor     ecx, eax
+0x9D720F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D7214: mov     eax, offset stru_AFEE80
+0x9D7219: jmp     ___CxxFrameHandler3

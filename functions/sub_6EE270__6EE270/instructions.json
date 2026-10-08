@@ -1,7 +1,7 @@
 [
   {
     "ea": "0x6EE270",
-    "line": "push    0FFFFFFFFh",
+    "line": "push    0FFFFFFFFh; CTL FanControls loader/precompute at manager+0xC8. First block: 20 FaceGenFanProjectionRecord records at +0x25C, indexed [fan 0..4][control 0..1][channel 0..1], strides 0x80/0x40/0x20. Each contains basis 1 x dimensions[2*channel], reciprocalSquaredLength (+0x18), and projectionOffset (+0x1C). Offset meaning verified in runtime getter. Later pair data/projection/inverse precomputation remains partially decoded. Initialized byte set after completion.",
     "mnemonic": "push",
     "size": 2
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x6EE2A1",
-    "line": "mov     ebx, [esp+0A8h+arg_0]",
+    "line": "mov     ebx, [esp+0A8h+file]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -145,7 +145,7 @@
   },
   {
     "ea": "0x6EE2D0",
-    "line": "mov     ecx, [esp+0A8h+arg_4]",
+    "line": "mov     ecx, [esp+0A8h+basisDimensions]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x6EE2DD",
-    "line": "fstp    [esp+0ACh+var_AC]; int",
+    "line": "fstp    [esp+0ACh+scale]; int",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -205,7 +205,7 @@
   },
   {
     "ea": "0x6EE2F1",
-    "line": "call    sub_527160",
+    "line": "call    FaceGenFloatVector_ResizeFill; Vector resize: retain existing prefix, erase surplus elements when shrinking, fill only newly inserted elements when growing. Equal size does not overwrite coefficients. Matrix dimension products must already be valid; no recovery from rows*columns overflow.",
     "mnemonic": "call",
     "size": 5
   },
@@ -259,7 +259,7 @@
   },
   {
     "ea": "0x6EE30B",
-    "line": "mov     ecx, [esp+0A8h+arg_4]",
+    "line": "mov     ecx, [esp+0A8h+basisDimensions]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -373,7 +373,7 @@
   },
   {
     "ea": "0x6EE33B",
-    "line": "call    edx",
+    "line": "call    edx; Reads one 4-byte projectionOffset into record+0x1C. Matched to runtime GetControlValue addition at 0x6EDDF3.",
     "mnemonic": "call",
     "size": 2
   },
@@ -391,13 +391,13 @@
   },
   {
     "ea": "0x6EE345",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6EE347",
-    "line": "call    sub_5511D0",
+    "line": "call    FaceGenMatrix_SumSquares; Verified Oblivion: row-major sum of coefficient squares over rows*columns. Each square and accumulator are stored as float; result returned through x87. Storage check only establishes nonempty vector, not index < storage length. Requires consistent matrix dimensions/storage. Used by Combine and sub_6EE270.",
     "mnemonic": "call",
     "size": 5
   },
@@ -409,7 +409,7 @@
   },
   {
     "ea": "0x6EE34E",
-    "line": "fdivrp  st(1), st",
+    "line": "fdivrp  st(1), st; Computes 1/sumSquares without a zero or finite check in this path; degenerate file vectors can produce nonfinite cached reciprocal. Asset reachability/gameplay impact not established.",
     "mnemonic": "fdivrp",
     "size": 2
   },
@@ -619,7 +619,7 @@
   },
   {
     "ea": "0x6EE3D5",
-    "line": "mov     eax, [esp+0A8h+arg_4]",
+    "line": "mov     eax, [esp+0A8h+basisDimensions]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -643,7 +643,7 @@
   },
   {
     "ea": "0x6EE3E2",
-    "line": "fstp    [esp+0ACh+var_AC]; int",
+    "line": "fstp    [esp+0ACh+scale]; int",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -679,7 +679,7 @@
   },
   {
     "ea": "0x6EE3F6",
-    "line": "call    sub_527160",
+    "line": "call    FaceGenFloatVector_ResizeFill; Vector resize: retain existing prefix, erase surplus elements when shrinking, fill only newly inserted elements when growing. Equal size does not overwrite coefficients. Matrix dimension products must already be valid; no recovery from rows*columns overflow.",
     "mnemonic": "call",
     "size": 5
   },
@@ -733,7 +733,7 @@
   },
   {
     "ea": "0x6EE410",
-    "line": "mov     ecx, [esp+0A8h+arg_4]",
+    "line": "mov     ecx, [esp+0A8h+basisDimensions]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -805,13 +805,13 @@
   },
   {
     "ea": "0x6EE431",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6EE433",
-    "line": "call    sub_5511D0",
+    "line": "call    FaceGenMatrix_SumSquares; Verified Oblivion: row-major sum of coefficient squares over rows*columns. Each square and accumulator are stored as float; result returned through x87. Storage check only establishes nonempty vector, not index < storage length. Requires consistent matrix dimensions/storage. Used by Combine and sub_6EE270.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1009,7 +1009,7 @@
   },
   {
     "ea": "0x6EE4A6",
-    "line": "mov     ecx, [esp+0A8h+arg_4]",
+    "line": "mov     ecx, [esp+0A8h+basisDimensions]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1087,7 +1087,7 @@
   },
   {
     "ea": "0x6EE4E0",
-    "line": "mov     ecx, [esp+0A8h+arg_4]",
+    "line": "mov     ecx, [esp+0A8h+basisDimensions]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1111,7 +1111,7 @@
   },
   {
     "ea": "0x6EE4ED",
-    "line": "fstp    [esp+0ACh+var_AC]; int",
+    "line": "fstp    [esp+0ACh+scale]; int",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1141,7 +1141,7 @@
   },
   {
     "ea": "0x6EE4FE",
-    "line": "call    sub_527160",
+    "line": "call    FaceGenFloatVector_ResizeFill; Vector resize: retain existing prefix, erase surplus elements when shrinking, fill only newly inserted elements when growing. Equal size does not overwrite coefficients. Matrix dimension products must already be valid; no recovery from rows*columns overflow.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1327,7 +1327,7 @@
   },
   {
     "ea": "0x6EE551",
-    "line": "fstp    [esp+0ACh+var_AC]; int",
+    "line": "fstp    [esp+0ACh+scale]; int",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1339,7 +1339,7 @@
   },
   {
     "ea": "0x6EE555",
-    "line": "call    sub_527160",
+    "line": "call    FaceGenFloatVector_ResizeFill; Vector resize: retain existing prefix, erase surplus elements when shrinking, fill only newly inserted elements when growing. Equal size does not overwrite coefficients. Matrix dimension products must already be valid; no recovery from rows*columns overflow.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1477,7 +1477,7 @@
   },
   {
     "ea": "0x6EE590",
-    "line": "mov     ecx, [esp+0A8h+arg_4]",
+    "line": "mov     ecx, [esp+0A8h+basisDimensions]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -1525,7 +1525,7 @@
   },
   {
     "ea": "0x6EE5A8",
-    "line": "fstp    [esp+0ACh+var_AC]; int",
+    "line": "fstp    [esp+0ACh+scale]; int",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -1543,7 +1543,7 @@
   },
   {
     "ea": "0x6EE5AF",
-    "line": "call    sub_527160",
+    "line": "call    FaceGenFloatVector_ResizeFill; Vector resize: retain existing prefix, erase surplus elements when shrinking, fill only newly inserted elements when growing. Equal size does not overwrite coefficients. Matrix dimension products must already be valid; no recovery from rows*columns overflow.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1771,13 +1771,13 @@
   },
   {
     "ea": "0x6EE633",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6EE635",
-    "line": "call    sub_5511D0",
+    "line": "call    FaceGenMatrix_SumSquares; Verified Oblivion: row-major sum of coefficient squares over rows*columns. Each square and accumulator are stored as float; result returned through x87. Storage check only establishes nonempty vector, not index < storage length. Requires consistent matrix dimensions/storage. Used by Combine and sub_6EE270.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1849,7 +1849,7 @@
   },
   {
     "ea": "0x6EE664",
-    "line": "push    85h ; '…'; int",
+    "line": "push    85h ; '…'; sourceLine",
     "mnemonic": "push",
     "size": 5
   },
@@ -1861,7 +1861,7 @@
   },
   {
     "ea": "0x6EE66E",
-    "line": "call    sub_6ED6D0",
+    "line": "call    FaceGen_ReportAssertionViolation; FaceGen assertion reporter: PrintError(\"FR2 ASSERT violation in %s line %i. Code may crash.\", sourceFile, sourceLine); returns normally. NOT noreturn and NOT a validation barrier.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1885,31 +1885,31 @@
   },
   {
     "ea": "0x6EE67B",
-    "line": "lea     edx, [esp+0ACh+var_74]",
+    "line": "lea     edx, [esp+0ACh+outDifference]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6EE67F",
-    "line": "fstp    [esp+0ACh+var_AC]; float",
+    "line": "fstp    [esp+0ACh+scale]; divisor",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x6EE682",
-    "line": "push    edx; int",
+    "line": "push    edx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6EE683",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6EE685",
-    "line": "call    sub_6EE130",
+    "line": "call    FaceGenMatrix_DivideScalar; Returns out = this * (1/divisor) through FaceGenMatrix_Scale. No zero/finite divisor guard here. FanControls precompute supplies vector length after its own assertion.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1921,13 +1921,13 @@
   },
   {
     "ea": "0x6EE68D",
-    "line": "push    eax",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6EE68E",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -1939,13 +1939,13 @@
   },
   {
     "ea": "0x6EE69B",
-    "line": "call    sub_5520E0",
+    "line": "call    FaceGenMatrix_Assign; Deep matrix assignment. Copies rows/columns, resizes coefficient storage, then copies rows*columns floats.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6EE6A0",
-    "line": "mov     eax, [esp+0A8h+var_68]",
+    "line": "mov     eax, [esp+0A8h+outDifference.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -1975,7 +1975,7 @@
   },
   {
     "ea": "0x6EE6B4",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -1987,49 +1987,49 @@
   },
   {
     "ea": "0x6EE6BC",
-    "line": "lea     eax, [esp+0A8h+var_3C]",
+    "line": "lea     eax, [esp+0A8h+out]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6EE6C0",
-    "line": "push    eax",
+    "line": "push    eax; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6EE6C1",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6EE6C3",
-    "line": "call    sub_552730",
+    "line": "call    FaceGenMatrix_Transpose; Matrix transpose: out has source.columns x source.rows and receives out[col,row] = source[row,col].",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6EE6C8",
-    "line": "push    eax",
+    "line": "push    eax; rhs",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6EE6C9",
-    "line": "lea     ecx, [esp+0ACh+var_74]",
+    "line": "lea     ecx, [esp+0ACh+outDifference]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6EE6CD",
-    "line": "push    ecx",
+    "line": "push    ecx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6EE6CE",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -2041,7 +2041,7 @@
   },
   {
     "ea": "0x6EE6DB",
-    "line": "call    sub_5523C0",
+    "line": "call    FaceGenMatrix_Multiply; Conventional matrix product: out = this * rhs. Asserts this.columns == rhs.rows.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2107,7 +2107,7 @@
   },
   {
     "ea": "0x6EE6FB",
-    "line": "mov     eax, [esp+0A8h+var_68]",
+    "line": "mov     eax, [esp+0A8h+outDifference.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2149,7 +2149,7 @@
   },
   {
     "ea": "0x6EE70C",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2167,7 +2167,7 @@
   },
   {
     "ea": "0x6EE716",
-    "line": "mov     eax, [esp+0A8h+var_30]",
+    "line": "mov     eax, [esp+0A8h+out.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2179,19 +2179,19 @@
   },
   {
     "ea": "0x6EE71C",
-    "line": "mov     [esp+0A8h+var_68], ecx",
+    "line": "mov     [esp+0A8h+outDifference.begin], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6EE720",
-    "line": "mov     [esp+0A8h+var_64], ecx",
+    "line": "mov     [esp+0A8h+outDifference.end], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6EE724",
-    "line": "mov     [esp+0A8h+var_60], ecx",
+    "line": "mov     [esp+0A8h+outDifference.capacityEnd], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2215,7 +2215,7 @@
   },
   {
     "ea": "0x6EE736",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2239,55 +2239,55 @@
   },
   {
     "ea": "0x6EE743",
-    "line": "lea     eax, [esp+0ACh+var_3C]",
+    "line": "lea     eax, [esp+0ACh+out]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6EE747",
-    "line": "fstp    [esp+0ACh+var_AC]; float",
+    "line": "fstp    [esp+0ACh+scale]; scale",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x6EE74A",
-    "line": "push    eax; int",
+    "line": "push    eax; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6EE74B",
-    "line": "mov     ecx, esi",
+    "line": "mov     ecx, esi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6EE74D",
-    "line": "call    sub_552310",
+    "line": "call    FaceGenMatrix_Scale; Matrix scalar multiply: out = this * scale. Dimensions and storage are initialized from the source matrix.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6EE752",
-    "line": "push    eax",
+    "line": "push    eax; right",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6EE753",
-    "line": "lea     ecx, [esp+0ACh+var_74]",
+    "line": "lea     ecx, [esp+0ACh+outDifference]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x6EE757",
-    "line": "push    ecx",
+    "line": "push    ecx; outDifference",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6EE758",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -2299,19 +2299,19 @@
   },
   {
     "ea": "0x6EE765",
-    "line": "call    sub_552630",
+    "line": "call    FaceGenMatrix_Subtract; Dimension-checked element-wise matrix subtraction: outDifference = this - right.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6EE76A",
-    "line": "push    eax",
+    "line": "push    eax; source",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6EE76B",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -2323,13 +2323,13 @@
   },
   {
     "ea": "0x6EE775",
-    "line": "call    sub_5520E0",
+    "line": "call    FaceGenMatrix_Assign; Deep matrix assignment. Copies rows/columns, resizes coefficient storage, then copies rows*columns floats.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6EE77A",
-    "line": "mov     eax, [esp+0A8h+var_68]",
+    "line": "mov     eax, [esp+0A8h+outDifference.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2359,7 +2359,7 @@
   },
   {
     "ea": "0x6EE785",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2371,7 +2371,7 @@
   },
   {
     "ea": "0x6EE78D",
-    "line": "mov     eax, [esp+0A8h+var_30]",
+    "line": "mov     eax, [esp+0A8h+out.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2383,19 +2383,19 @@
   },
   {
     "ea": "0x6EE793",
-    "line": "mov     [esp+0A8h+var_68], esi",
+    "line": "mov     [esp+0A8h+outDifference.begin], esi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6EE797",
-    "line": "mov     [esp+0A8h+var_64], esi",
+    "line": "mov     [esp+0A8h+outDifference.end], esi",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6EE79B",
-    "line": "mov     [esp+0A8h+var_60], esi",
+    "line": "mov     [esp+0A8h+outDifference.capacityEnd], esi",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2419,7 +2419,7 @@
   },
   {
     "ea": "0x6EE7AD",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2431,13 +2431,13 @@
   },
   {
     "ea": "0x6EE7B5",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6EE7B7",
-    "line": "call    sub_5511D0",
+    "line": "call    FaceGenMatrix_SumSquares; Verified Oblivion: row-major sum of coefficient squares over rows*columns. Each square and accumulator are stored as float; result returned through x87. Storage check only establishes nonempty vector, not index < storage length. Requires consistent matrix dimensions/storage. Used by Combine and sub_6EE270.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2509,7 +2509,7 @@
   },
   {
     "ea": "0x6EE7E6",
-    "line": "push    8Dh; int",
+    "line": "push    8Dh; sourceLine",
     "mnemonic": "push",
     "size": 5
   },
@@ -2521,7 +2521,7 @@
   },
   {
     "ea": "0x6EE7F0",
-    "line": "call    sub_6ED6D0",
+    "line": "call    FaceGen_ReportAssertionViolation; FaceGen assertion reporter: PrintError(\"FR2 ASSERT violation in %s line %i. Code may crash.\", sourceFile, sourceLine); returns normally. NOT noreturn and NOT a validation barrier.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2551,7 +2551,7 @@
   },
   {
     "ea": "0x6EE7FF",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
@@ -2575,13 +2575,13 @@
   },
   {
     "ea": "0x6EE80B",
-    "line": "fstp    [esp+0ACh+var_AC]; float",
+    "line": "fstp    [esp+0ACh+scale]; scale",
     "mnemonic": "fstp",
     "size": 3
   },
   {
     "ea": "0x6EE80E",
-    "line": "call    sub_551D40",
+    "line": "call    FaceGenMatrix_ScaleInPlace; Verified Oblivion: multiply every stored float in [begin,end) by scale, independently of rows/columns; return this. ECX=this, one stack float, ret 4. EBX is saved and overwritten, not a semantic argument; prior userpurge signature was a decompiler artifact.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2779,31 +2779,31 @@
   },
   {
     "ea": "0x6EE8A7",
-    "line": "push    ecx",
+    "line": "push    ecx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x6EE8A8",
-    "line": "mov     ecx, ebp",
+    "line": "mov     ecx, ebp; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x6EE8AA",
-    "line": "call    sub_552730",
+    "line": "call    FaceGenMatrix_Transpose; Matrix transpose: out has source.columns x source.rows and receives out[col,row] = source[row,col].",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x6EE8AF",
-    "line": "mov     ecx, [esp+0A8h+var_88]",
+    "line": "mov     ecx, [esp+0A8h+var_88]; this",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6EE8B3",
-    "line": "push    eax",
+    "line": "push    eax; rhs",
     "mnemonic": "push",
     "size": 1
   },
@@ -2815,7 +2815,7 @@
   },
   {
     "ea": "0x6EE8B8",
-    "line": "push    edx",
+    "line": "push    edx; out",
     "mnemonic": "push",
     "size": 1
   },
@@ -2827,7 +2827,7 @@
   },
   {
     "ea": "0x6EE8C4",
-    "line": "call    sub_5523C0",
+    "line": "call    FaceGenMatrix_Multiply; Conventional matrix product: out = this * rhs. Asserts this.columns == rhs.rows.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2905,7 +2905,7 @@
   },
   {
     "ea": "0x6EE8E8",
-    "line": "mov     eax, [esp+0A8h+var_48]",
+    "line": "mov     eax, [esp+0A8h+var_54.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -2941,7 +2941,7 @@
   },
   {
     "ea": "0x6EE8F5",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -2959,7 +2959,7 @@
   },
   {
     "ea": "0x6EE8FF",
-    "line": "mov     eax, [esp+0A8h+var_18]",
+    "line": "mov     eax, [esp+0A8h+var_24.begin]",
     "mnemonic": "mov",
     "size": 7
   },
@@ -2971,19 +2971,19 @@
   },
   {
     "ea": "0x6EE908",
-    "line": "mov     [esp+0A8h+var_48], ecx",
+    "line": "mov     [esp+0A8h+var_54.begin], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6EE90C",
-    "line": "mov     [esp+0A8h+var_44], ecx",
+    "line": "mov     [esp+0A8h+var_54.end], ecx",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6EE910",
-    "line": "mov     [esp+0A8h+var_40], ecx",
+    "line": "mov     [esp+0A8h+var_54.capacityEnd], ecx",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3007,7 +3007,7 @@
   },
   {
     "ea": "0x6EE922",
-    "line": "call    FormHeapFree",
+    "line": "call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.",
     "mnemonic": "call",
     "size": 5
   },
@@ -3187,13 +3187,13 @@
   },
   {
     "ea": "0x6EE98C",
-    "line": "fstp    [esp+0A8h+var_74]",
+    "line": "fstp    [esp+0A8h+outDifference.rows]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x6EE990",
-    "line": "mov     edx, [esp+0A8h+var_74]",
+    "line": "mov     edx, [esp+0A8h+outDifference.rows]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3217,7 +3217,7 @@
   },
   {
     "ea": "0x6EE99B",
-    "line": "fstp    [esp+0A8h+var_70]",
+    "line": "fstp    [esp+0A8h+outDifference.columns]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -3241,7 +3241,7 @@
   },
   {
     "ea": "0x6EE9A6",
-    "line": "fstp    [esp+0A8h+var_6C]",
+    "line": "fstp    [esp+0A8h+outDifference.allocator08]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -3259,7 +3259,7 @@
   },
   {
     "ea": "0x6EE9AE",
-    "line": "mov     edx, [esp+0A8h+var_70]",
+    "line": "mov     edx, [esp+0A8h+outDifference.columns]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3271,13 +3271,13 @@
   },
   {
     "ea": "0x6EE9B5",
-    "line": "mov     edx, [esp+0A8h+var_6C]",
+    "line": "mov     edx, [esp+0A8h+outDifference.allocator08]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x6EE9B9",
-    "line": "fstp    [esp+0A8h+var_68]",
+    "line": "fstp    [esp+0A8h+outDifference.begin]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -3289,7 +3289,7 @@
   },
   {
     "ea": "0x6EE9C0",
-    "line": "mov     edx, [esp+0A8h+var_68]",
+    "line": "mov     edx, [esp+0A8h+outDifference.begin]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -3406,5 +3406,107 @@
     "line": "jmp     short loc_6EE9E7",
     "mnemonic": "jmp",
     "size": 2
+  },
+  {
+    "ea": "0x9C84C0",
+    "line": "lea     ecx, [ebp-74h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C84C3",
+    "line": "jmp     FaceGenMatrix_Destruct; Destroys a FaceGenMatrix by freeing the coefficient allocation at +0x0C, then clears begin/end/capacity-end.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C84C8",
+    "line": "lea     ecx, [ebp-3Ch]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C84CB",
+    "line": "jmp     FaceGenMatrix_Destruct; Destroys a FaceGenMatrix by freeing the coefficient allocation at +0x0C, then clears begin/end/capacity-end.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C84D0",
+    "line": "lea     ecx, [ebp-3Ch]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C84D3",
+    "line": "jmp     FaceGenMatrix_Destruct; Destroys a FaceGenMatrix by freeing the coefficient allocation at +0x0C, then clears begin/end/capacity-end.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C84D8",
+    "line": "lea     ecx, [ebp-74h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C84DB",
+    "line": "jmp     FaceGenMatrix_Destruct; Destroys a FaceGenMatrix by freeing the coefficient allocation at +0x0C, then clears begin/end/capacity-end.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C84E0",
+    "line": "lea     ecx, [ebp-24h]; this",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C84E3",
+    "line": "jmp     FaceGenMatrix_Destruct; Destroys a FaceGenMatrix by freeing the coefficient allocation at +0x0C, then clears begin/end/capacity-end.",
+    "mnemonic": "jmp",
+    "size": 5
+  },
+  {
+    "ea": "0x9C84E8",
+    "line": "mov     edx, [esp+basisDimensions]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C84EC",
+    "line": "lea     eax, [edx-98h]",
+    "mnemonic": "lea",
+    "size": 6
+  },
+  {
+    "ea": "0x9C84F2",
+    "line": "mov     ecx, [edx-9Ch]",
+    "mnemonic": "mov",
+    "size": 6
+  },
+  {
+    "ea": "0x9C84F8",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C84FA",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C84FF",
+    "line": "mov     eax, offset stru_AF0784",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C8504",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

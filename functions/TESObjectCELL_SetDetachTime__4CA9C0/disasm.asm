@@ -4,13 +4,13 @@
 0x4CA9C9: push    edi
 0x4CA9CA: call    sub_45A500
 0x4CA9CF: test    al, al
-0x4CA9D1: mov     edi, [esp+8+arg_0]
+0x4CA9D1: mov     edi, [esp+8+detachTime]
 0x4CA9D5: jz      short loc_4CA9DB
 0x4CA9D7: test    edi, edi
 0x4CA9D9: jnz     short loc_4CA9E8
-0x4CA9DB: push    edi
-0x4CA9DC: lea     ecx, [esi+28h]
-0x4CA9DF: call    ExtraDataList?_SetDetachTime
+0x4CA9DB: push    edi; detachTime
+0x4CA9DC: lea     ecx, [esi+28h]; this
+0x4CA9DF: call    ExtraDataList_SetDetachTime; Sets ExtraDetachTime; a zero value removes type 0x10, otherwise updates or creates it.
 0x4CA9E4: test    edi, edi
 0x4CA9E6: jz      short loc_4CA9FB
 0x4CA9E8: mov     eax, [esi]

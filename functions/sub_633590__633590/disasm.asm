@@ -27,7 +27,7 @@
 0x6335DE: mov     ebp, eax
 0x6335E0: push    0
 0x6335E2: mov     ecx, ebp
-0x6335E4: call    sub_6135F0
+0x6335E4: call    CombatController_GetCurrentTarget
 0x6335E9: push    eax
 0x6335EA: mov     ecx, esi
 0x6335EC: call    TesObjectREF_GetDistance
@@ -44,12 +44,12 @@
 0x633604: add     esp, 1Ch
 0x633607: retn    0Ch
 0x63360A: mov     eax, [ebp+120h]
-0x633610: mov     [esp+2Ch+var_18], eax
+0x633610: mov     [esp+2Ch+pointXYZ], eax
 0x633614: mov     ecx, [ebp+124h]
 0x63361A: mov     [esp+2Ch+var_14], ecx
 0x63361E: mov     edx, [ebp+128h]
-0x633624: push    offset Vector3_InitValue?
-0x633629: lea     ecx, [esp+30h+var_18]
+0x633624: push    offset g_zeroNiPoint3
+0x633629: lea     ecx, [esp+30h+pointXYZ]
 0x63362D: mov     [esp+30h+var_10], edx
 0x633631: call    sub_8AA350
 0x633636: test    al, al
@@ -62,7 +62,7 @@
 0x633647: call    sub_64ADA0
 0x63364C: mov     ecx, ebp
 0x63364E: push    eax; char
-0x63364F: call    sub_6135F0
+0x63364F: call    CombatController_GetCurrentTarget
 0x633654: fld     [esp+30h+arg_4]
 0x633658: push    eax; int
 0x633659: push    ecx
@@ -72,7 +72,7 @@
 0x633662: push    eax; int
 0x633663: call    sub_628790
 0x633668: mov     ecx, [eax]
-0x63366A: mov     [esp+40h+var_18], ecx
+0x63366A: mov     [esp+40h+pointXYZ], ecx
 0x63366E: mov     edx, [eax+4]
 0x633671: mov     [esp+40h+var_14], edx
 0x633675: mov     ecx, [eax+8]
@@ -87,10 +87,10 @@
 0x63368E: mov     [ecx+8], eax
 0x633691: mov     ecx, ebp
 0x633693: call    sub_6127E0
-0x633698: lea     ecx, [esp+2Ch+var_18]
-0x63369C: push    ecx
-0x63369D: mov     ecx, esi
-0x63369F: call    sub_4D7E30
+0x633698: lea     ecx, [esp+2Ch+pointXYZ]
+0x63369C: push    ecx; pointXYZ
+0x63369D: mov     ecx, esi; this
+0x63369F: call    TESObjectREFR__GetDistanceToPoint; Returns the Euclidean 3D distance from TESObjectREFR position fields at +0x2C/+0x30/+0x34 to pointXYZ. The second social scan uses this result against its effective conversation radius.
 0x6336A4: fcomp   qword ptr ds:0A3AA50h
 0x6336AA: fnstsw  ax
 0x6336AC: test    ah, 41h
@@ -121,14 +121,14 @@
 0x6336FA: add     esp, 1Ch
 0x6336FD: retn    0Ch
 0x633700: mov     ecx, esi; this
-0x633702: call    TESObjectREFR_GetParentCell
+0x633702: call    Shared_GetDwordAtOffset40; Linker-folded two-instruction accessor shared by unrelated classes: returns the dword at this+0x40. The field meaning is determined by each call context; on TESClass it is specialization, while on TESObjectREFR it may be parentCell.
 0x633707: mov     ecx, esi; this
 0x633709: mov     ebp, eax
 0x63370B: call    TESObjectREFR_GetWorldSpace
 0x633710: cmp     byte ptr [edi+0D0h], 0
 0x633717: mov     ebx, eax
 0x633719: jz      short loc_633751
-0x63371B: mov     ecx, [esp+2Ch+var_18]
+0x63371B: mov     ecx, [esp+2Ch+pointXYZ]
 0x63371F: mov     edx, [edi]
 0x633721: mov     edx, [edx+3DCh]
 0x633727: push    ebx
@@ -162,10 +162,10 @@
 0x633769: mov     eax, [edi]
 0x63376B: mov     edx, [eax+414h]
 0x633771: push    ecx
-0x633772: fstp    [esp+30h+var_30]
+0x633772: fstp    dword ptr [esp+30h+var_30]
 0x633775: push    ebx
 0x633776: push    ebp
-0x633777: lea     ecx, [esp+38h+var_18]
+0x633777: lea     ecx, [esp+38h+pointXYZ]
 0x63377B: push    ecx
 0x63377C: push    esi
 0x63377D: mov     ecx, edi

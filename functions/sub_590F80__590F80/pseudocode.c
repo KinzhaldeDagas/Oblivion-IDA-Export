@@ -1,19 +1,19 @@
-void __thiscall sub_590F80(Tile *this, float a2, char *a3, int a4)
+void __thiscall sub_590F80(Tile *this, Tile *parent, char *name, Tile *sibling)
 {
   int v5; // edi
 
-  sub_58DA00((int)this, a2, a3, a4);
-  Tile_SetFloat(this, (_DWORD *)0xFCC, flt_A40098);
-  Tile_SetFloat(this, (_DWORD *)0xFCD, flt_A40098);
-  Tile_SetFloat(this, (_DWORD *)0xFCE, flt_A40098);
-  Tile_SetFloat(this, (_DWORD *)0xFA7, flt_A40098);
-  *((float *)this + 0x10) = 1.0;
-  v5 = *((_DWORD *)this + 0x11);
-  if ( v5 )
+  Tile::Init(this, parent, name, sibling); /*0x590f95*/
+  Tile_SetFloat(this, 0xFCCu, flt_A40098); /*0x590fab*/
+  Tile_SetFloat(this, 0xFCDu, flt_A40098); /*0x590fc1*/
+  Tile_SetFloat(this, 0xFCEu, flt_A40098); /*0x590fd7*/
+  Tile_SetFloat(this, 0xFA7u, flt_A40098); /*0x590fed*/
+  *((float *)this + 0x10) = 1.0; /*0x590ff4*/
+  v5 = *((_DWORD *)this + 0x11); /*0x590ff7*/
+  if ( v5 ) /*0x590ffc*/
   {
-    if ( !InterlockedDecrement((volatile LONG *)(v5 + 4)) )
-      (**(void (__thiscall ***)(int, int))v5)(v5, 1);
-    *((_DWORD *)this + 0x11) = 0;
+    if ( !InterlockedDecrement((volatile LONG *)(v5 + 4)) ) /*0x591002*/
+      (**(void (__thiscall ***)(int, int))v5)(v5, 1); /*0x591018*/
+    *((_DWORD *)this + 0x11) = 0; /*0x59101a*/
   }
-  *((_BYTE *)this + 0x48) = 0;
+  *((_BYTE *)this + 0x48) = 0; /*0x591022*/
 }

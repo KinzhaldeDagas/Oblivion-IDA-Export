@@ -29,7 +29,7 @@
 0x5076AA: push    edx; a3
 0x5076AB: push    eax; a2
 0x5076AC: push    ecx; a1
-0x5076AD: call    Script_ExtractArgs
+0x5076AD: call    Script_ExtractArgs; TES4 authoritative: Script_ExtractArgs consumes compiled command arguments using ParamInfo records. ParamInfo is 0x0C bytes: +0 type string, +4 type id, +8 optional flag.
 0x5076B2: add     esp, 24h
 0x5076B5: test    al, al
 0x5076B7: jz      short loc_50767D
@@ -48,13 +48,13 @@
 0x5076DA: test    dl, 1
 0x5076DD: jnz     short loc_50772D
 0x5076DF: cmp     [esp+0Ch+var_4], 0
-0x5076E4: push    1
-0x5076E6: mov     ecx, esi
+0x5076E4: push    1; mask
+0x5076E6: mov     ecx, esi; this
 0x5076E8: jnz     short loc_507723
-0x5076EA: call    sub_4D8270
-0x5076EF: push    2
-0x5076F1: mov     ecx, esi
-0x5076F3: call    sub_4D8270
+0x5076EA: call    TESObjectREFR_SetActionFlagBits; Set reference action-state bits and synchronize special bit 0x04 with loaded/runtime open-state handling. ONAM itself represents action flag 0x08; PostLinkModifiedForm tests that bit before selecting set/clear paths.
+0x5076EF: push    2; mask
+0x5076F1: mov     ecx, esi; this
+0x5076F3: call    TESObjectREFR_SetActionFlagBits; Set reference action-state bits and synchronize special bit 0x04 with loaded/runtime open-state handling. ONAM itself represents action flag 0x08; PostLinkModifiedForm tests that bit before selecting set/clear paths.
 0x5076F8: mov     eax, dword ptr [esp+0Ch+var_8]
 0x5076FC: push    1
 0x5076FE: push    0
@@ -62,12 +62,12 @@
 0x507702: push    eax
 0x507703: mov     ecx, esi
 0x507705: call    ActivateRef
-0x50770A: push    2
-0x50770C: mov     ecx, esi
-0x50770E: call    sub_4D82E0
-0x507713: push    1
-0x507715: mov     ecx, esi
-0x507717: call    sub_4D82E0
+0x50770A: push    2; mask
+0x50770C: mov     ecx, esi; this
+0x50770E: call    TESObjectREFR_ClearActionFlagBits
+0x507713: push    1; mask
+0x507715: mov     ecx, esi; this
+0x507717: call    TESObjectREFR_ClearActionFlagBits
 0x50771C: mov     al, 1
 0x50771E: pop     esi
 0x50771F: add     esp, 8

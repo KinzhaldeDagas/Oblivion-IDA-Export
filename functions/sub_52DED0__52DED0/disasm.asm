@@ -1,4 +1,4 @@
-0x52DED0: push    0FFFFFFFFh
+0x52DED0: push    0FFFFFFFFh; Create the paired BSFaceGenNiNodeBiped and BSFaceGenNiNodeSkinned nodes with shared animation data, build a FaceGenRenderState, populate head geometry, and optionally apply the resulting appearance to both nodes.
 0x52DED2: push    offset SEH_52DED0
 0x52DED7: mov     eax, large fs:0
 0x52DEDD: push    eax
@@ -13,8 +13,8 @@
 0x52DEF0: lea     eax, [esp+0ECh+var_C]
 0x52DEF7: mov     large fs:0, eax
 0x52DEFD: mov     [esp+0ECh+var_D4], ecx
-0x52DF01: mov     esi, [esp+0ECh+arg_0]
-0x52DF08: mov     edi, [esp+0ECh+arg_4]
+0x52DF01: mov     esi, [esp+0ECh+outBipedNode]
+0x52DF08: mov     edi, [esp+0ECh+outSkinnedNode]
 0x52DF0F: xor     ebp, ebp
 0x52DF11: mov     [esi], ebp
 0x52DF13: push    1E0h; Size
@@ -92,35 +92,35 @@
 0x52E00C: mov     edx, [eax+0B8h]
 0x52E012: push    0
 0x52E014: call    edx
-0x52E016: lea     ecx, [esp+0ECh+var_D0]
-0x52E01A: call    FaceGenHeadParameters_Ctor
-0x52E01F: mov     ebp, [esp+0ECh+arg_8]
-0x52E026: mov     ecx, [esp+0ECh+var_D4]
-0x52E02A: lea     eax, [esp+0ECh+var_D0]
-0x52E02E: push    eax
-0x52E02F: push    ebp
+0x52E016: lea     ecx, [esp+0ECh+parameters]; this
+0x52E01A: call    FaceGenRenderState_Construct; Constructs a 0xC4 FaceGenRenderState. The first 0x60 bytes are FaceGenHeadParameters; appearance assets and four 0x10-byte pointer arrays follow.
+0x52E01F: mov     ebp, [esp+0ECh+npc]
+0x52E026: mov     ecx, [esp+0ECh+var_D4]; this
+0x52E02A: lea     eax, [esp+0ECh+parameters]
+0x52E02E: push    eax; outState
+0x52E02F: push    ebp; npc
 0x52E030: mov     [esp+0F4h+var_4], 3
-0x52E03B: call    TESRace_GetFaceGenHeadParameters
-0x52E040: mov     ecx, [esp+0ECh+arg_10]
-0x52E047: push    ecx
-0x52E048: lea     edx, [esp+0F0h+var_D0]
-0x52E04C: push    edx
-0x52E04D: push    edi
-0x52E04E: push    esi
-0x52E04F: call    sub_555A80
+0x52E03B: call    TESRace_BuildFaceGenRenderState; Builds the complete FaceGenRenderState from this race and an optional TESNPC. Resolves absolute coefficients, appearance selections, the nine head-part resources, texture overrides, race tint data, and fallback eyes.
+0x52E040: mov     ecx, dword ptr [esp+0ECh+preferBipedGeometry]
+0x52E047: push    ecx; preferBipedGeometry
+0x52E048: lea     edx, [esp+0F0h+parameters]
+0x52E04C: push    edx; state
+0x52E04D: push    edi; skinnedNode
+0x52E04E: push    esi; bipedNode
+0x52E04F: call    BSFaceGen_BuildHeadGeometryNodes; Build nine head-part slots through the common BSFaceGenModel_CreateMorphedGeometry path: Face, sex-specific Ears, Mouth, TeethLower, TeethUpper, Tongue, EyeLeft, and EyeRight. Native EGM changes positions for every part but no full normal regeneration occurs before attachment.
 0x52E054: add     esp, 10h
-0x52E057: cmp     [esp+0ECh+arg_C], 0
+0x52E057: cmp     [esp+0ECh+applyAppearance], 0
 0x52E05F: jz      short loc_52E07E
 0x52E061: mov     ecx, [esi]
-0x52E063: lea     eax, [esp+0ECh+var_D0]
-0x52E067: push    eax
-0x52E068: push    ecx
-0x52E069: call    BSFaceGen_DoSomethingWithFaceGenNode
+0x52E063: lea     eax, [esp+0ECh+parameters]
+0x52E067: push    eax; state
+0x52E068: push    ecx; faceNode
+0x52E069: call    BSFaceGen_ApplyHeadParametersToNode; Applies a complete FaceGenRenderState to a BSFaceGenNiNode: projects age, binds nine head-part resources, handles sex-specific parts, eyes and hair, then rebuilds property state and updates the node.
 0x52E06E: mov     eax, [edi]
-0x52E070: lea     edx, [esp+0F4h+var_D0]
-0x52E074: push    edx
-0x52E075: push    eax
-0x52E076: call    BSFaceGen_DoSomethingWithFaceGenNode
+0x52E070: lea     edx, [esp+0F4h+parameters]
+0x52E074: push    edx; state
+0x52E075: push    eax; faceNode
+0x52E076: call    BSFaceGen_ApplyHeadParametersToNode; Applies a complete FaceGenRenderState to a BSFaceGenNiNode: projects age, binds nine head-part resources, handles sex-specific parts, eyes and hair, then rebuilds property state and updates the node.
 0x52E07B: add     esp, 10h
 0x52E07E: test    ebp, ebp
 0x52E080: jz      short loc_52E09A
@@ -130,9 +130,9 @@
 0x52E08A: mov     byte ptr [esi+111h], 1
 0x52E091: mov     edi, [edi]
 0x52E093: mov     byte ptr [edi+111h], 1
-0x52E09A: lea     ecx, [esp+0ECh+var_D0]
+0x52E09A: lea     ecx, [esp+0ECh+parameters]; this
 0x52E09E: mov     [esp+0ECh+var_4], ebx
-0x52E0A5: call    FaceGenHeadParameters_Dtor
+0x52E0A5: call    FaceGenRenderState_Destruct; Destroys FaceGenRenderState: releases texture-override smart pointers, destroys the four pointer arrays, then destroys the four embedded FaceGen coefficient matrices.
 0x52E0AA: mov     al, 1
 0x52E0AC: mov     ecx, [esp+0ECh+var_C]
 0x52E0B3: mov     large fs:0, ecx
@@ -143,3 +143,27 @@
 0x52E0BE: pop     ebx
 0x52E0BF: add     esp, 0D8h
 0x52E0C5: retn    14h
+0x9B88A0: mov     eax, [ebp-0D8h]
+0x9B88A6: push    eax
+0x9B88A7: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B88AC: pop     ecx
+0x9B88AD: retn
+0x9B88AE: mov     eax, [ebp-0D8h]
+0x9B88B4: push    eax
+0x9B88B5: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B88BA: pop     ecx
+0x9B88BB: retn
+0x9B88BC: mov     eax, [ebp-0D8h]
+0x9B88C2: push    eax
+0x9B88C3: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9B88C8: pop     ecx
+0x9B88C9: retn
+0x9B88CA: lea     ecx, [ebp-0D0h]; this
+0x9B88D0: jmp     FaceGenRenderState_Destruct; Destroys FaceGenRenderState: releases texture-override smart pointers, destroys the four pointer arrays, then destroys the four embedded FaceGen coefficient matrices.
+0x9B88D5: mov     edx, [esp+outSkinnedNode]
+0x9B88D9: lea     eax, [edx-0DCh]
+0x9B88DF: mov     ecx, [edx-0E0h]
+0x9B88E5: xor     ecx, eax
+0x9B88E7: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9B88EC: mov     eax, offset stru_AE2DBC
+0x9B88F1: jmp     ___CxxFrameHandler3

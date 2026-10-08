@@ -3,7 +3,7 @@
 0x749BC2: mov     edi, [esp+8+arg_0]
 0x749BC6: push    edi
 0x749BC7: mov     esi, ecx
-0x749BC9: call    sub_717900
+0x749BC9: call    j_NiGeometry_LinkObject
 0x749BCE: mov     ecx, edi
 0x749BD0: call    sub_7124D0
 0x749BD5: test    eax, eax

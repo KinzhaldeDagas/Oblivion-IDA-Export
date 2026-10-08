@@ -1,4 +1,4 @@
-0x6C6B30: sub     esp, 18h
+0x6C6B30: sub     esp, 18h; Maps one sequence time into a partner sequence by matching case-insensitive m: text keys. Computes source local time without committing it, brackets the previous/next source morph keys with cycle wrap, finds identical full key strings in the partner, linearly interpolates between partner key times, then wraps the result to the partner start/end range. Used only by the native morph/transition update path.
 0x6C6B33: fld     [esp+18h+arg_4]
 0x6C6B37: push    ebx
 0x6C6B38: push    ebp
@@ -12,7 +12,7 @@
 0x6C6B45: mov     ecx, edi
 0x6C6B47: fstp    [esp+30h+var_30]; float
 0x6C6B4A: mov     [esp+30h+var_10], esi
-0x6C6B4E: call    sub_6C5FC0
+0x6C6B4E: call    NiControllerSequence_AdvanceTime; NiControllerSequence time advance. Computes scaled time from input, last input +0x34, accumulated/scaled time +0x38, and frequency +0x28; wraps cycle type 0 or clamps other cycle types to start/end +0x2C/+0x30. When commit is true, stores +0x34, +0x38, and resulting local time +0x3C; otherwise returns the computed local time without mutation.
 0x6C6B53: fstp    [esp+28h+arg_4]
 0x6C6B57: mov     eax, [edi+20h]
 0x6C6B5A: fld     [esp+28h+arg_4]
@@ -116,9 +116,9 @@
 0x6C6C78: mov     ecx, [esp+28h+var_14]
 0x6C6C7C: mov     eax, [ecx+4]
 0x6C6C7F: mov     ecx, [esi+4]
-0x6C6C82: push    eax; Str2
-0x6C6C83: push    ecx; Str1
-0x6C6C84: call    __strcmp
+0x6C6C82: push    eax; right
+0x6C6C83: push    ecx; left
+0x6C6C84: call    CRT_StricmpLocaleDispatch
 0x6C6C89: add     esp, 8
 0x6C6C8C: test    eax, eax
 0x6C6C8E: jnz     short loc_6C6C99
@@ -128,9 +128,9 @@
 0x6C6C9E: jnz     short loc_6C6CBD
 0x6C6CA0: mov     eax, [ebx+4]
 0x6C6CA3: mov     ecx, [esi+4]
-0x6C6CA6: push    eax; Str2
-0x6C6CA7: push    ecx; Str1
-0x6C6CA8: call    __strcmp
+0x6C6CA6: push    eax; right
+0x6C6CA7: push    ecx; left
+0x6C6CA8: call    CRT_StricmpLocaleDispatch
 0x6C6CAD: add     esp, 8
 0x6C6CB0: test    eax, eax
 0x6C6CB2: jnz     short loc_6C6CBD

@@ -1,19 +1,32 @@
 {
-  "callees_count": 9,
-  "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_680AA0",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
+  "callers_count": 4,
+  "chunks": [
+    [
+      "0x680AA0",
+      "0x680B35"
+    ]
+  ],
+  "chunks_sha256": "b312fc3445844d8eb736e36cb5835f1829443fe03acc0562a4c61619a32724e5",
+  "comment_regular": "Verified cost calculation: obtains the reference's position in the specified spatial form and adds Euclidean distance from the supplied position. When includeTransitionPenalty is true it also adds TravelPath_ComputeDoorTransitionPenalty. Sentinel/invalid-position fallback is the global float constant; broader heuristic policy is Unknown.",
+  "comment_repeatable": "Verified cost calculation: obtains the reference's position in the specified spatial form and adds Euclidean distance from the supplied position. When includeTransitionPenalty is true it also adds TravelPath_ComputeDoorTransitionPenalty. Sentinel/invalid-position fallback is the global float constant; broader heuristic policy is Unknown.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 3,
+  "display_name": "TravelPath_ComputeTransitionDistanceCost",
   "end_ea": "0x680B35",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_680AA0",
+  "name": "TravelPath_ComputeTransitionDistanceCost",
   "segment": ".text",
   "sha256": "b312fc3445844d8eb736e36cb5835f1829443fe03acc0562a4c61619a32724e5",
   "size": 149,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x680AA0",
-  "type": "double __cdecl(int, float *, TESObjectREFR **, TESObjectREFR *, char)",
-  "xrefs_from_count": 56,
+  "total_chunk_size": 149,
+  "type": "double __cdecl(TESForm *space, const NiPoint3 *position, TESObjectREFR **candidateNode, TESObjectREFR *sourceRef, char includeTransitionPenalty)",
+  "xrefs_from_count": 59,
   "xrefs_to_count": 4
 }

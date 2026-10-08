@@ -1,1 +1,1 @@
-hkWorldOperationQueue
+struct hkWorldOperationQueue;

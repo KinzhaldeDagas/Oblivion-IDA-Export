@@ -1,1 +1,1 @@
-SIZE
+typedef tagSIZE SIZE;

@@ -1,7 +1,7 @@
 0x9F2820: push    offset aYouHaveNotFoun; "You have not found this location yet."
 0x9F2825: push    offset aSmapmarkernotf; "sMapMarkerNotFound"
-0x9F282A: mov     ecx, offset dword_B38C90
-0x9F282F: call    GameSetting_ConstrAndReg
+0x9F282A: mov     ecx, offset stru_B38C90; self
+0x9F282F: call    GameSetting_ConstrAndReg; Verified GameSetting_ConstrAndReg stores setting value/default at object +0 and name key at +4, rejects duplicate names through g_GameSettingsByName, and inserts the key-to-setting mapping. String blood-particle Extra registrations therefore enter the generic named setting collection.
 0x9F2834: push    offset sub_A22040; void (__cdecl *)()
 0x9F2839: call    _atexit
 0x9F283E: pop     ecx

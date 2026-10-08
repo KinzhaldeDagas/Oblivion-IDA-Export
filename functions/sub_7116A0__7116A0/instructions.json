@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x7116BD",
-    "line": "fstp    [esp+0A0h+var_48]",
+    "line": "fstp    [esp+0A0h+var_48.data]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -67,19 +67,19 @@
   },
   {
     "ea": "0x7116C3",
-    "line": "fst     [esp+0A0h+var_44]",
+    "line": "fst     [esp+0A0h+var_48.data+4]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x7116C7",
-    "line": "fst     [esp+0A0h+var_40]",
+    "line": "fst     [esp+0A0h+var_48.data+8]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x7116CB",
-    "line": "fst     [esp+0A0h+var_3C]",
+    "line": "fst     [esp+0A0h+var_48.data+0Ch]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x7116D3",
-    "line": "fst     [esp+0A0h+var_38]",
+    "line": "fst     [esp+0A0h+var_48.data+10h]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -103,7 +103,7 @@
   },
   {
     "ea": "0x7116DB",
-    "line": "fst     [esp+0A0h+var_34]",
+    "line": "fst     [esp+0A0h+var_48.data+14h]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -115,7 +115,7 @@
   },
   {
     "ea": "0x7116E1",
-    "line": "fstp    [esp+0A0h+var_30]",
+    "line": "fstp    [esp+0A0h+var_48.data+18h]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -133,13 +133,13 @@
   },
   {
     "ea": "0x7116E9",
-    "line": "fstp    [esp+0A0h+var_2C]",
+    "line": "fstp    [esp+0A0h+var_48.data+1Ch]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x7116ED",
-    "line": "fstp    [esp+0A0h+var_28]",
+    "line": "fstp    [esp+0A0h+var_48.data+20h]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -175,7 +175,7 @@
   },
   {
     "ea": "0x711706",
-    "line": "fst     [esp+0A0h+var_6C]",
+    "line": "fst     [esp+0A0h+right.data]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x71170C",
-    "line": "fst     [esp+0A0h+var_68]",
+    "line": "fst     [esp+0A0h+right.data+4]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -211,7 +211,7 @@
   },
   {
     "ea": "0x711718",
-    "line": "fstp    [esp+0A0h+var_64]",
+    "line": "fstp    [esp+0A0h+right.data+8]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -223,7 +223,7 @@
   },
   {
     "ea": "0x71171E",
-    "line": "fst     [esp+0A0h+var_60]",
+    "line": "fst     [esp+0A0h+right.data+0Ch]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -235,31 +235,31 @@
   },
   {
     "ea": "0x711724",
-    "line": "fstp    [esp+0A0h+var_5C]",
+    "line": "fstp    [esp+0A0h+right.data+10h]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x711728",
-    "line": "fst     [esp+0A0h+var_58]",
+    "line": "fst     [esp+0A0h+right.data+14h]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x71172C",
-    "line": "fstp    [esp+0A0h+var_50]",
+    "line": "fstp    [esp+0A0h+right.data+1Ch]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x711730",
-    "line": "fstp    [esp+0A0h+var_54]",
+    "line": "fstp    [esp+0A0h+right.data+18h]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x711734",
-    "line": "fstp    [esp+0A0h+var_4C]",
+    "line": "fstp    [esp+0A0h+right.data+20h]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -295,19 +295,19 @@
   },
   {
     "ea": "0x71174D",
-    "line": "lea     eax, [esp+0A0h+var_6C]",
+    "line": "lea     eax, [esp+0A0h+right]",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x711751",
-    "line": "fst     [esp+0A0h+var_90]",
+    "line": "fst     [esp+0A0h+var_90.data]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x711755",
-    "line": "push    eax",
+    "line": "push    eax; right",
     "mnemonic": "push",
     "size": 1
   },
@@ -319,19 +319,19 @@
   },
   {
     "ea": "0x71175A",
-    "line": "lea     ecx, [esp+0A4h+var_24]",
+    "line": "lea     ecx, [esp+0A4h+out]",
     "mnemonic": "lea",
     "size": 7
   },
   {
     "ea": "0x711761",
-    "line": "fst     [esp+0A4h+var_8C]",
+    "line": "fst     [esp+0A4h+var_90.data+4]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x711765",
-    "line": "push    ecx",
+    "line": "push    ecx; out",
     "mnemonic": "push",
     "size": 1
   },
@@ -343,13 +343,13 @@
   },
   {
     "ea": "0x711768",
-    "line": "lea     ecx, [esp+0A8h+var_90]",
+    "line": "lea     ecx, [esp+0A8h+var_90]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x71176C",
-    "line": "fst     [esp+0A8h+var_88]",
+    "line": "fst     [esp+0A8h+var_90.data+8]",
     "mnemonic": "fst",
     "size": 4
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x711774",
-    "line": "fstp    [esp+0A8h+var_84]",
+    "line": "fstp    [esp+0A8h+var_90.data+0Ch]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -379,25 +379,25 @@
   },
   {
     "ea": "0x71177A",
-    "line": "fstp    [esp+0A8h+var_80]",
+    "line": "fstp    [esp+0A8h+var_90.data+10h]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x71177E",
-    "line": "fst     [esp+0A8h+var_7C]",
+    "line": "fst     [esp+0A8h+var_90.data+14h]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x711782",
-    "line": "fst     [esp+0A8h+var_78]",
+    "line": "fst     [esp+0A8h+var_90.data+18h]",
     "mnemonic": "fst",
     "size": 4
   },
   {
     "ea": "0x711786",
-    "line": "fstp    [esp+0A8h+var_74]",
+    "line": "fstp    [esp+0A8h+var_90.data+1Ch]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -409,19 +409,19 @@
   },
   {
     "ea": "0x71178C",
-    "line": "fstp    [esp+0A8h+var_70]",
+    "line": "fstp    [esp+0A8h+var_90.data+20h]",
     "mnemonic": "fstp",
     "size": 4
   },
   {
     "ea": "0x711790",
-    "line": "call    NiMAtrix33_Multiply",
+    "line": "call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x711795",
-    "line": "push    eax",
+    "line": "push    eax; right",
     "mnemonic": "push",
     "size": 1
   },
@@ -433,19 +433,19 @@
   },
   {
     "ea": "0x71179A",
-    "line": "push    edx",
+    "line": "push    edx; out",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x71179B",
-    "line": "lea     ecx, [esp+0A8h+var_48]",
+    "line": "lea     ecx, [esp+0A8h+var_48]; this",
     "mnemonic": "lea",
     "size": 4
   },
   {
     "ea": "0x71179F",
-    "line": "call    NiMAtrix33_Multiply",
+    "line": "call    NiMAtrix33_Multiply; Verified row-major multiplication output is `this * right`; QueuedDistantLOD_ApplyTransform therefore composes BaseRotation, X, Y, then Z matrices in that order.",
     "mnemonic": "call",
     "size": 5
   },

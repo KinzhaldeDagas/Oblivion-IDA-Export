@@ -3,12 +3,12 @@
 0x7495E4: push    ebp
 0x7495E5: push    esi
 0x7495E6: push    edi
-0x7495E7: mov     edi, [esp+1Ch+arg_0]
-0x7495EB: push    edi
+0x7495E7: mov     edi, [esp+1Ch+cloningProcess]
+0x7495EB: push    edi; cloningProcess
 0x7495EC: mov     ebp, ecx
-0x7495EE: call    sub_723050
+0x7495EE: call    NiGeometry_ProcessClone; Common NiGeometry clone post-process. Resolves the destination through the clone map, handles geometry-data cloning/sharing, and rebuilds shader/property state only when the source geometry has a shader; a source-null shader leaves the clone shader/property state null.
 0x7495F3: mov     ecx, [edi]
-0x7495F5: lea     eax, [esp+1Ch+arg_0]
+0x7495F5: lea     eax, [esp+1Ch+cloningProcess]
 0x7495F9: push    eax
 0x7495FA: push    ebp
 0x7495FB: call    NiTMap_GetAt
@@ -27,32 +27,32 @@
 0x749628: jb      short loc_749617
 0x74962A: xor     eax, eax
 0x74962C: test    eax, eax
-0x74962E: mov     [esp+1Ch+var_C], eax
+0x74962E: mov     [esp+1Ch+position], eax
 0x749632: jz      short loc_74967F
-0x749634: mov     ebx, [esp+1Ch+arg_0]
+0x749634: mov     ebx, [esp+1Ch+cloningProcess]
 0x749638: add     ebx, 0D4h ; 'Ô'
 0x74963E: mov     edi, edi
-0x749640: lea     ecx, [esp+1Ch+var_8]
-0x749644: push    ecx
-0x749645: lea     edx, [esp+20h+var_4]
-0x749649: push    edx
-0x74964A: lea     eax, [esp+24h+var_C]
-0x74964E: push    eax
-0x74964F: mov     ecx, esi
-0x749651: call    sub_452600
-0x749656: mov     edx, [esp+1Ch+var_8]
-0x74965A: lea     ecx, [esp+1Ch+arg_0]
+0x749640: lea     ecx, [esp+1Ch+valueOut]
+0x749644: push    ecx; valueOut
+0x749645: lea     edx, [esp+20h+keyOut]
+0x749649: push    edx; keyOut
+0x74964A: lea     eax, [esp+24h+position]
+0x74964E: push    eax; position
+0x74964F: mov     ecx, esi; self
+0x749651: call    NiTMap_U32Pointer_GetNextEntry
+0x749656: mov     edx, [esp+1Ch+valueOut]
+0x74965A: lea     ecx, [esp+1Ch+cloningProcess]
 0x74965E: push    ecx
 0x74965F: mov     ecx, [edi]
 0x749661: push    edx
 0x749662: call    NiTMap_GetAt
-0x749667: mov     eax, [esp+1Ch+arg_0]
-0x74966B: mov     ecx, [esp+1Ch+var_4]
+0x749667: mov     eax, [esp+1Ch+cloningProcess]
+0x74966B: mov     ecx, [esp+1Ch+keyOut]
 0x74966F: push    eax
 0x749670: push    ecx
 0x749671: mov     ecx, ebx
 0x749673: call    sub_412D30
-0x749678: cmp     [esp+1Ch+var_C], 0
+0x749678: cmp     [esp+1Ch+position], 0
 0x74967D: jnz     short loc_749640
 0x74967F: mov     esi, [ebp+0C8h]
 0x749685: test    esi, esi

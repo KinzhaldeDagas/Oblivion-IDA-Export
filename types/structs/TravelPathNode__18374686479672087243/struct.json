@@ -1,0 +1,54 @@
+{
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
+  "decl": "TravelPathNode",
+  "definition": "struct TravelPathNode\n{\nvoid *payload; ///< Verified tagged payload: type 0 stores a non-owned TESObjectREFR*; type 1 stores an owned heap NiPoint3*. Other kinds are not established.\nunsigned __int8 type; ///< Verified observed kind values: 0 = reference node; 1 = owned position node; initializer uses 0xFF until the kind is set. TravelPathNodeKind enum records these values.\nunsigned __int8 unknown05[3]; ///< Unknown padding bytes; inspected helpers do not read or write these three bytes.\n}\n",
+  "id": 18374686479672087243,
+  "is_union": false,
+  "kind": "struct",
+  "members": [
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified tagged payload: type 0 stores a non-owned TESObjectREFR*; type 1 stores an owned heap NiPoint3*. Other kinds are not established.",
+      "name": "payload",
+      "offset": 0,
+      "offset_hex": "0x0",
+      "size": 4,
+      "type": "void *"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Verified observed kind values: 0 = reference node; 1 = owned position node; initializer uses 0xFF until the kind is set. TravelPathNodeKind enum records these values.",
+      "name": "type",
+      "offset": 4,
+      "offset_hex": "0x4",
+      "size": 1,
+      "type": "unsigned __int8"
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "Unknown padding bytes; inspected helpers do not read or write these three bytes.",
+      "name": "unknown05",
+      "offset": 5,
+      "offset_hex": "0x5",
+      "size": 3,
+      "type": "unsigned __int8[3]"
+    }
+  ],
+  "name": "TravelPathNode",
+  "ordinal": 10129,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": false,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": false,
+    "is_struct": true,
+    "is_union": false,
+    "is_void": false
+  },
+  "size": 8
+}

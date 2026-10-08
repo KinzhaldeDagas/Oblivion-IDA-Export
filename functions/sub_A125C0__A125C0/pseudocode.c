@@ -1,4 +1,4 @@
-BSStringT *sub_A125C0()
+NiRTTI *sub_A125C0()
 {
-  return sub_70E220((BSStringT *)dword_BA7FD8, "bhkCapsuleShape", (int)dword_BA7F54);
+  return NiRTTI_Constructor(&stru_BA7FD8, "bhkCapsuleShape", &stru_BA7F54); /*0xa125d4*/
 }

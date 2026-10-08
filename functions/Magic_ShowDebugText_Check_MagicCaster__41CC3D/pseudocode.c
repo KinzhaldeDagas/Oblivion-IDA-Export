@@ -1,7 +1,7 @@
 // positive sp value has been detected, the output may be wrong!
 int __usercall Magic_ShowDebugText_::Check_MagicCaster@<eax>(
         int a1@<ebx>,
-        int a2@<ebp>,
+        char a2@<bpl>,
         _DWORD *a3@<edi>,
         int a4@<esi>,
         double a5@<st2>,
@@ -46,42 +46,25 @@ int __usercall Magic_ShowDebugText_::Check_MagicCaster@<eax>(
         int a44,
         int a45,
         int a46,
-        int a47,
-        int a48,
-        int a49,
-        int a50,
-        int a51,
-        int a52,
-        int a53,
-        int a54,
-        int a55,
-        int a56,
-        int a57,
-        int a58,
-        int a59,
-        int a60,
-        int a61,
-        int a62,
-        int a63)
+        int a47)
 {
-  int v63; // ebx
-  _DWORD *v64; // eax
+  int v47; // ebx
+  Atmosphere *v48; // eax
 
-  v63 = a4 + a1;
-  v64 = OblivionDynamicCast(
-          a3,
-          0,
-          (struct _s_RTTICompleteObjectLocator *)&TESObjectREFR `RTTI Type Descriptor',
-          &MagicCaster `RTTI Type Descriptor',
-          0);
-  if ( !v64 || (a3[2] & 0x800) != 0 )
-    return Magic_ShowDebugText_::NotMagicCaster(a8, a9, a10, a11, a12, v63);
+  v47 = a4 + a1; /*0x41cc4b*/
+  v48 = (Atmosphere *)OblivionDynamicCast( /*0x41cc52*/
+                        a3,
+                        0,
+                        (struct _s_RTTICompleteObjectLocator *)&TESObjectREFR `RTTI Type Descriptor',
+                        &MagicCaster `RTTI Type Descriptor',
+                        0);
+  if ( !v48 || (a3[2] & 0x800) != 0 ) /*0x41cc6f*/
+    return Magic_ShowDebugText_::NotMagicCaster(a2, a5, a6, a8, a9, a10, a11, a12, v47); /*0x41cc60*/
   else
-    return Magic_ShowDebugText_::MagicCaster(
-             v64,
-             v63,
+    return Magic_ShowDebugText_::MagicCaster( /*0x41cc70*/
+             v48,
+             v47,
              a2,
-             a3,
              a5,
              a6,
              a7,
@@ -90,8 +73,8 @@ int __usercall Magic_ShowDebugText_::Check_MagicCaster@<eax>(
              a10,
              a11,
              a12,
-             v63,
-             v64,
+             v47,
+             v48,
              a15,
              a16,
              a17,
@@ -124,21 +107,5 @@ int __usercall Magic_ShowDebugText_::Check_MagicCaster@<eax>(
              a44,
              a45,
              a46,
-             a47,
-             a48,
-             a49,
-             a50,
-             a51,
-             a52,
-             a53,
-             a54,
-             a55,
-             a56,
-             a57,
-             a58,
-             a59,
-             a60,
-             a61,
-             a62,
-             a63);
+             a47);
 }

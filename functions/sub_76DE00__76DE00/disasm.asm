@@ -1,12 +1,12 @@
-0x76DE00: mov     eax, [esp+arg_8]
+0x76DE00: mov     eax, [esp+pixelFormat]; Creates NiDX9AdditionalDepthStencilBufferData for a requested NiPixelFormat. Converts and validates the D3DFORMAT against the current adapter/backbuffer, creates a matching depth/stencil surface at the parent buffer dimensions, registers it for reset reconstruction, and attaches it to the Ni2DBuffer.
 0x76DE04: sub     esp, 20h
 0x76DE07: test    eax, eax
 0x76DE09: jnz     short loc_76DE0F
 0x76DE0B: add     esp, 20h
 0x76DE0E: retn
 0x76DE0F: push    ebx
-0x76DE10: push    eax
-0x76DE11: call    sub_76BEF0
+0x76DE10: push    eax; pixelFormat
+0x76DE11: call    NiDX9Renderer_ConvertPixelFormatToD3DFormat; Converts an Oblivion/Gamebryo NiPixelFormat into D3DFORMAT. Honors an explicit format at +0x0C; otherwise maps channel masks, bit depth, compressed DXT1/3/5, float, luminance, palette, and depth/stencil layouts. Returns D3DFMT_UNKNOWN for unsupported layouts.
 0x76DE16: mov     ebx, eax
 0x76DE18: add     esp, 4
 0x76DE1B: test    ebx, ebx
@@ -42,11 +42,11 @@
 0x76DE63: call    eax
 0x76DE65: test    eax, eax
 0x76DE67: jge     short loc_76DE86
-0x76DE69: push    eax
-0x76DE6A: call    sub_7736F0
+0x76DE69: push    eax; hresult
+0x76DE6A: call    D3D9_HResultToString; Maps common COM/D3D9 HRESULT values to diagnostic names, including DEVICELOST, DEVICENOTRESET, INVALIDCALL, OUTOFVIDEOMEMORY, and format/state failures.
 0x76DE6F: push    eax
 0x76DE70: push    offset aNidx9additio_0; "NiDX9AdditionalDepthStencilBufferData::"...
-0x76DE75: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x76DE75: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x76DE7A: add     esp, 0Ch
 0x76DE7D: pop     edi
 0x76DE7E: pop     esi
@@ -65,7 +65,7 @@
 0x76DE9D: jmp     short loc_76DEA1
 0x76DE9F: xor     esi, esi
 0x76DEA1: mov     ecx, ds:0B294ECh
-0x76DEA7: mov     edx, [esp+2Ch+arg_4]
+0x76DEA7: mov     edx, [esp+2Ch+parentBuffer]
 0x76DEAB: push    ebp
 0x76DEAC: push    0
 0x76DEAE: mov     [esi+18h], ecx
@@ -73,7 +73,7 @@
 0x76DEB4: mov     eax, [edx]
 0x76DEB6: mov     ecx, [eax+0Ch]
 0x76DEB9: mov     eax, [eax+8]
-0x76DEBC: mov     edx, [esp+34h+arg_0]
+0x76DEBC: mov     edx, [esp+34h+device]
 0x76DEC0: mov     edx, [edx]
 0x76DEC2: lea     edi, [esi+0Ch]
 0x76DEC5: push    edi
@@ -84,17 +84,17 @@
 0x76DECC: push    ecx
 0x76DECD: mov     ecx, [edx+74h]
 0x76DED0: push    eax
-0x76DED1: mov     eax, [esp+50h+arg_0]
+0x76DED1: mov     eax, [esp+50h+device]
 0x76DED5: push    eax
 0x76DED6: call    ecx
 0x76DED8: test    eax, eax
 0x76DEDA: pop     ebp
 0x76DEDB: jge     short loc_76DF04
-0x76DEDD: push    eax
-0x76DEDE: call    sub_7736F0
+0x76DEDD: push    eax; hresult
+0x76DEDE: call    D3D9_HResultToString; Maps common COM/D3D9 HRESULT values to diagnostic names, including DEVICELOST, DEVICENOTRESET, INVALIDCALL, OUTOFVIDEOMEMORY, and format/state failures.
 0x76DEE3: push    eax
 0x76DEE4: push    offset aNidx9additio_0; "NiDX9AdditionalDepthStencilBufferData::"...
-0x76DEE9: call    ?ClearComponentReferences@TESTexture@@UAEXXZ?
+0x76DEE9: call    Shared_NoOpVirtual_60D0A0; Shared one-instruction virtual no-op. Oblivion's base Actor vtable uses this at post-shot slot +0x2E8, so ordinary Actor dispatch performs no ammo-decrement transaction; PlayerCharacter overrides that slot at 0x662590. Other classes may share the same RET stub.
 0x76DEEE: add     esp, 0Ch
 0x76DEF1: mov     edx, [esi]
 0x76DEF3: mov     eax, [edx]
@@ -116,10 +116,10 @@
 0x76DF11: call    eax
 0x76DF13: test    eax, eax
 0x76DF15: jl      short loc_76DEF1
-0x76DF17: mov     ecx, [esp+2Ch+a1]
+0x76DF17: mov     ecx, [esp+2Ch+a1.Format]
 0x76DF1B: push    ecx; a1
 0x76DF1C: call    CreateSurfaceData
-0x76DF21: mov     edi, [esp+30h+arg_4]
+0x76DF21: mov     edi, [esp+30h+parentBuffer]
 0x76DF25: add     esp, 4
 0x76DF28: mov     [esi+10h], eax
 0x76DF2B: mov     [esi+14h], ebx

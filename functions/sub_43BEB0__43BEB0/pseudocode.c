@@ -13,69 +13,69 @@ void __thiscall sub_43BEB0(_DWORD *this)
   char v12; // [esp+24h] [ebp-10h]
   int v13; // [esp+30h] [ebp-4h]
 
-  if ( *this )
+  if ( *this ) /*0x43beda*/
   {
-    v10 = 0;
-    v11 = 0;
-    v12 = 0;
-    v9 = &LockFreeStringMap<Model *>::LockFreeStringMapIterator::`vftable';
-    v13 = 0;
-    do
+    v10 = 0; /*0x43bee2*/
+    v11 = 0; /*0x43bee6*/
+    v12 = 0; /*0x43beea*/
+    v9 = &LockFreeStringMap<Model *>::LockFreeStringMapIterator::`vftable'; /*0x43beee*/
+    v13 = 0; /*0x43bef6*/
+    do /*0x43bf58*/
     {
-      v2 = (_DWORD *)*this;
-      v7 = 0;
-      v8 = 0;
-      if ( sub_43AB80(v2, (int)&v9, &v8, &v7, 1) )
+      v2 = (_DWORD *)*this; /*0x43bf0c*/
+      v7 = 0; /*0x43bf13*/
+      v8 = 0; /*0x43bf17*/
+      if ( sub_43AB80(v2, (int)&v9, &v8, &v7, 1) ) /*0x43bf1b*/
       {
-        v3 = (unsigned int *)v7;
-        if ( v7 )
+        v3 = (unsigned int *)v7; /*0x43bf24*/
+        if ( v7 ) /*0x43bf2a*/
         {
-          if ( !*(_WORD *)(v7 + 4) )
+          if ( !*(_WORD *)(v7 + 4) ) /*0x43bf2c*/
           {
-            (*(void (__thiscall **)(_DWORD, unsigned int))(*(_DWORD *)*this + 0x10))(*this, v8);
-            sub_4349B0(v3);
-            FormHeapFree((unsigned int)v3);
+            (*(void (__thiscall **)(_DWORD, unsigned int))(*(_DWORD *)*this + 0x10))(*this, v8); /*0x43bf41*/
+            sub_4349B0(v3); /*0x43bf45*/
+            FormHeapFree((unsigned int)v3); /*0x43bf4b*/
           }
         }
       }
     }
-    while ( (v12 & 2) == 0 );
-    v13 = 0xFFFFFFFF;
-    FormHeapFree(v11);
+    while ( (v12 & 2) == 0 ); /*0x43bf58*/
+    v13 = 0xFFFFFFFF; /*0x43bf5f*/
+    FormHeapFree(v11); /*0x43bf67*/
   }
-  if ( *(this + 1) )
+  if ( *(this + 1) ) /*0x43bf6f*/
   {
-    v10 = 0;
-    v11 = 0;
-    v12 = 0;
-    v9 = &LockFreeStringMap<KFModel *>::LockFreeStringMapIterator::`vftable';
-    v13 = 1;
-    do
+    v10 = 0; /*0x43bf78*/
+    v11 = 0; /*0x43bf7c*/
+    v12 = 0; /*0x43bf80*/
+    v9 = &LockFreeStringMap<KFModel *>::LockFreeStringMapIterator::`vftable'; /*0x43bf84*/
+    v13 = 1; /*0x43bf8c*/
+    do /*0x43c008*/
     {
-      v4 = (_DWORD *)*(this + 1);
-      v8 = 0;
-      v7 = 0;
-      if ( sub_43AB80(v4, (int)&v9, &v7, &v8, 1) )
+      v4 = (_DWORD *)*(this + 1); /*0x43bfa5*/
+      v8 = 0; /*0x43bfa8*/
+      v7 = 0; /*0x43bfac*/
+      if ( sub_43AB80(v4, (int)&v9, &v7, &v8, 1) ) /*0x43bfb0*/
       {
-        v5 = v8;
-        if ( v8 )
+        v5 = v8; /*0x43bfb9*/
+        if ( v8 ) /*0x43bfbf*/
         {
-          if ( !*(_DWORD *)(v8 + 0xC) )
+          if ( !*(_DWORD *)(v8 + 0xC) ) /*0x43bfc1*/
           {
-            v6 = *(TESAnimGroup **)(v8 + 8);
-            if ( !v6
+            v6 = *(TESAnimGroup **)(v8 + 8); /*0x43bfc6*/
+            if ( !v6 /*0x43bfe2*/
               || TESAnimGroup_GetAnimationGroup(v6) < 0x16
               || TESAnimGroup_GetAnimationGroup(*(TESAnimGroup **)(v5 + 8)) >= 0x1B )
             {
-              (*(void (__thiscall **)(_DWORD, int))(*(_DWORD *)*(this + 1) + 0x10))(*(this + 1), v7);
-              sub_436CB0((unsigned int *)v5);
-              FormHeapFree(v5);
+              (*(void (__thiscall **)(_DWORD, int))(*(_DWORD *)*(this + 1) + 0x10))(*(this + 1), v7); /*0x43bff1*/
+              sub_436CB0((unsigned int *)v5); /*0x43bff5*/
+              FormHeapFree(v5); /*0x43bffb*/
             }
           }
         }
       }
     }
-    while ( (v12 & 2) == 0 );
-    FormHeapFree(v11);
+    while ( (v12 & 2) == 0 ); /*0x43c008*/
+    FormHeapFree(v11); /*0x43c00f*/
   }
 }

@@ -1,4 +1,4 @@
-0x7D7490: push    0FFFFFFFFh
+0x7D7490: push    0FFFFFFFFh; Verified (Oblivion): BSShaderPPLightingProperty destructor releases and clears the reference-counted pointer at this+0xE0 (DWORD index 0x38), matching TextureEffectProperty_SetData and the viewer's "spTexEffectData" label. Fallout's CopyToMembers copies a NiPointer<BSShaderPPLightingProperty::TextureEffectData> at +0xE0; equivalent Oblivion clone retention is Probable but its mirror has not yet been located.
 0x7D7492: push    offset ??1BSShaderPPLightingProperty@@UAE@XZ_SEH
 0x7D7497: mov     eax, large fs:0
 0x7D749D: push    eax
@@ -91,46 +91,46 @@
 0x7D75B1: jz      short loc_7D75D0
 0x7D75B3: mov     edx, [eax-4]
 0x7D75B6: lea     edi, [eax-4]
-0x7D75B9: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x7D75B9: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x7D75BE: push    edx; int
 0x7D75BF: push    4; unsigned int
 0x7D75C1: push    eax; void *
 0x7D75C2: call    $LN21
 0x7D75C7: push    edi
-0x7D75C8: call    FormHeapFree
+0x7D75C8: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7D75CD: add     esp, 4
 0x7D75D0: mov     eax, [esi+0C0h]
 0x7D75D6: cmp     eax, ebp
 0x7D75D8: jz      short loc_7D75F7
 0x7D75DA: mov     ecx, [eax-4]
 0x7D75DD: lea     edi, [eax-4]
-0x7D75E0: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x7D75E0: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x7D75E5: push    ecx; int
 0x7D75E6: push    4; unsigned int
 0x7D75E8: push    eax; void *
 0x7D75E9: call    $LN21
 0x7D75EE: push    edi
-0x7D75EF: call    FormHeapFree
+0x7D75EF: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7D75F4: add     esp, 4
 0x7D75F7: mov     eax, [esi+0C4h]
 0x7D75FD: cmp     eax, ebp
 0x7D75FF: jz      short loc_7D761E
 0x7D7601: mov     edx, [eax-4]
 0x7D7604: lea     edi, [eax-4]
-0x7D7607: push    offset sub_7016A0; void (__thiscall *)(void *)
+0x7D7607: push    offset NiPointerSlot_Release; void (__thiscall *)(void *)
 0x7D760C: push    edx; int
 0x7D760D: push    4; unsigned int
 0x7D760F: push    eax; void *
 0x7D7610: call    $LN21
 0x7D7615: push    edi
-0x7D7616: call    FormHeapFree
+0x7D7616: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7D761B: add     esp, 4
 0x7D761E: mov     eax, [esi+0D0h]
 0x7D7624: push    eax
-0x7D7625: call    FormHeapFree
+0x7D7625: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7D762A: mov     eax, [esi+0C8h]
 0x7D7630: push    eax
-0x7D7631: call    FormHeapFree
+0x7D7631: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
 0x7D7636: add     esp, 8
 0x7D7639: mov     edi, [esi+0E0h]
 0x7D763F: cmp     edi, ebp
@@ -202,7 +202,7 @@
 0x7D76E9: call    eax
 0x7D76EB: mov     ecx, esi; this
 0x7D76ED: mov     [esp+28h+var_4], 0FFFFFFFFh
-0x7D76F5: call    ??1BSShaderLightingProperty@@UAE@XZ; BSShaderLightingProperty::~BSShaderLightingProperty(void)
+0x7D76F5: call    ??1BSShaderLightingProperty@@UAE@XZ; [Verified] On property destruction, this owner drains its +0x80 NiTPointerList<DECAL_DATA*>; each node stores links at +0/+4 and payload at +8. The destructor removes nodes, releases payload smart pointers through DECAL_DATA_ReleaseOwnedReferences, and frees each 0x4C payload. Normal effect teardown instead removes one node through BSShaderLightingProperty_RemoveDecalData before freeing the payload.
 0x7D76FA: mov     ecx, dword ptr [esp+28h+var_C]
 0x7D76FE: mov     large fs:0, ecx
 0x7D7705: pop     ecx
@@ -212,3 +212,18 @@
 0x7D7709: pop     ebx
 0x7D770A: add     esp, 14h
 0x7D770D: retn
+0x9CEDA0: mov     ecx, [ebp-10h]; this
+0x9CEDA3: jmp     ??1BSShaderLightingProperty@@UAE@XZ; [Verified] On property destruction, this owner drains its +0x80 NiTPointerList<DECAL_DATA*>; each node stores links at +0/+4 and payload at +8. The destructor removes nodes, releases payload smart pointers through DECAL_DATA_ReleaseOwnedReferences, and frees each 0x4C payload. Normal effect teardown instead removes one node through BSShaderLightingProperty_RemoveDecalData before freeing the payload.
+0x9CEDA8: mov     ecx, [ebp-10h]
+0x9CEDAB: add     ecx, 0D4h ; 'Ô'; slot
+0x9CEDB1: jmp     NiPointerSlot_Release
+0x9CEDB6: mov     ecx, [ebp-10h]
+0x9CEDB9: add     ecx, 0E0h ; 'à'; slot
+0x9CEDBF: jmp     NiPointerSlot_Release
+0x9CEDC4: mov     edx, [esp+arg_4]
+0x9CEDC8: lea     eax, [edx-18h]
+0x9CEDCB: mov     ecx, [edx-1Ch]
+0x9CEDCE: xor     ecx, eax
+0x9CEDD0: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9CEDD5: mov     eax, offset stru_AF7BCC
+0x9CEDDA: jmp     ___CxxFrameHandler3

@@ -79,7 +79,7 @@
 0x5EA456: call    TESActorBaseData_GetLevel
 0x5EA45B: lea     ecx, [esi+24h]; this
 0x5EA45E: push    eax; int
-0x5EA45F: call    TESLeveledList_CalcLeveledForm
+0x5EA45F: call    TESLeveledList_CalcLeveledForm; CustomAnimSupport decode: leveled-list resolver evidence with chance/level/random/container logic; not used as deterministic animation target list.
 0x5EA464: mov     ebp, [esp+40h+var_14]
 0x5EA468: lea     edi, [esp+40h+var_14]
 0x5EA46C: mov     [esp+40h+var_28], edi
@@ -198,3 +198,17 @@
 0x5EA5CF: pop     ebx
 0x5EA5D0: add     esp, 2Ch
 0x5EA5D3: retn
+0x9C26A0: lea     ecx, [ebp-1Ch]
+0x9C26A3: jmp     TESContainer_destr
+0x9C26A8: mov     eax, [ebp-20h]
+0x9C26AB: push    eax
+0x9C26AC: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C26B1: pop     ecx
+0x9C26B2: retn
+0x9C26B3: mov     edx, [esp+arg_4]
+0x9C26B7: lea     eax, [edx-30h]
+0x9C26BA: mov     ecx, [edx-34h]
+0x9C26BD: xor     ecx, eax
+0x9C26BF: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C26C4: mov     eax, offset stru_AEB524
+0x9C26C9: jmp     ___CxxFrameHandler3

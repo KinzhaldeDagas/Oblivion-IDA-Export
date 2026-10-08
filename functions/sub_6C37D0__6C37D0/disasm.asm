@@ -78,3 +78,17 @@
 0x6C38CB: pop     ebp
 0x6C38CC: add     esp, 10h
 0x6C38CF: retn    0Ch
+0x9C7200: mov     ecx, [ebp-10h]; this
+0x9C7203: jmp     ??1NiBlendBoolInterpolator@@UAE@XZ; NiBlendBoolInterpolator::~NiBlendBoolInterpolator(void)
+0x9C7208: mov     eax, [ebp+0Ch]
+0x9C720B: push    eax
+0x9C720C: call    FormHeapFree; Hot Reload OBSE decode: FormHeapFree(ptr) null-checks then frees through FormHeap. Safe for replacement script data cleanup.
+0x9C7211: pop     ecx
+0x9C7212: retn
+0x9C7213: mov     edx, [esp+arg_4]
+0x9C7217: lea     eax, [edx-10h]
+0x9C721A: mov     ecx, [edx-14h]
+0x9C721D: xor     ecx, eax
+0x9C721F: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9C7224: mov     eax, offset stru_AEF670
+0x9C7229: jmp     ___CxxFrameHandler3

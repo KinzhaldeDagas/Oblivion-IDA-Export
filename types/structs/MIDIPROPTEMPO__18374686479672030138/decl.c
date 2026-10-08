@@ -1,1 +1,1 @@
-MIDIPROPTEMPO
+typedef midiproptempo_tag MIDIPROPTEMPO;

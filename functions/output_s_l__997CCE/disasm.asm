@@ -419,3 +419,217 @@
 0x998258: jmp     loc_9985E5
 0x99825D: or      [ebp+1F8h+var_210], 40h
 0x998261: mov     [ebp+1F8h+SizeConverted], 0Ah
+0x998281: jnz     short loc_998291
+0x998283: cmp     dl, 67h ; 'g'
+0x998286: jnz     short loc_9982D0
+0x998288: mov     [ebp+1F8h+var_218], 1
+0x99828F: jmp     short loc_9982D0
+0x998291: cmp     [ebp+1F8h+var_218], eax
+0x998294: jle     short loc_998299
+0x998296: mov     [ebp+1F8h+var_218], eax
+0x998299: cmp     [ebp+1F8h+var_218], 0A3h ; '£'
+0x9982A0: jle     short loc_9982D0
+0x9982A2: mov     esi, [ebp+1F8h+var_218]
+0x9982A5: add     esi, 15Dh
+0x9982AB: push    esi
+0x9982AC: call    unknown_libname_72
+0x9982B1: test    eax, eax
+0x9982B3: mov     dl, [ebp+1F8h+var_211]
+0x9982B6: pop     ecx
+0x9982B7: mov     [ebp+1F8h+Memory], eax
+0x9982BA: push    8
+0x9982BC: jz      short loc_9982C8
+0x9982BE: mov     [ebp+1F8h+var_21C], eax
+0x9982C1: mov     [ebp+1F8h+var_264], esi
+0x9982C4: mov     ebx, eax
+0x9982C6: jmp     short loc_9982CF
+0x9982C8: mov     [ebp+1F8h+var_218], 0A3h ; '£'
+0x9982CF: pop     esi
+0x9982D0: add     edi, esi
+0x9982D2: mov     eax, [edi-8]
+0x9982D5: mov     [ebp+1F8h+var_278], eax
+0x9982D8: mov     eax, [edi-4]
+0x9982DB: mov     [ebp+1F8h+var_274], eax
+0x9982DE: lea     eax, [ebp+1F8h+Locale]
+0x9982E1: push    eax
+0x9982E2: push    [ebp+1F8h+var_26C]
+0x9982E5: movsx   eax, dl
+0x9982E8: push    [ebp+1F8h+var_218]
+0x9982EB: mov     [ebp+1F8h+var_224], edi
+0x9982EE: push    eax
+0x9982EF: push    [ebp+1F8h+var_264]
+0x9982F2: lea     eax, [ebp+1F8h+var_278]
+0x9982F5: push    ebx
+0x9982F6: push    eax
+0x9982F7: push    off_B312B8
+0x9982FD: call    __decode_pointer
+0x998302: pop     ecx
+0x998303: call    eax
+0x998305: mov     edi, [ebp+1F8h+var_210]
+0x998308: add     esp, 1Ch
+0x99830B: and     edi, 80h
+0x998311: jz      short loc_99832E
+0x998313: cmp     [ebp+1F8h+var_218], 0
+0x998317: jnz     short loc_99832E
+0x998319: lea     eax, [ebp+1F8h+Locale]
+0x99831C: push    eax
+0x99831D: push    ebx
+0x99831E: push    off_B312C4
+0x998324: call    __decode_pointer
+0x998329: pop     ecx
+0x99832A: call    eax
+0x99832C: pop     ecx
+0x99832D: pop     ecx
+0x99832E: cmp     [ebp+1F8h+var_211], 67h ; 'g'
+0x998332: jnz     short loc_99834D
+0x998334: test    edi, edi
+0x998336: jnz     short loc_99834D
+0x998338: lea     eax, [ebp+1F8h+Locale]
+0x99833B: push    eax
+0x99833C: push    ebx
+0x99833D: push    off_B312C0
+0x998343: call    __decode_pointer
+0x998348: pop     ecx
+0x998349: call    eax
+0x99834B: pop     ecx
+0x99834C: pop     ecx
+0x99834D: cmp     byte ptr [ebx], 2Dh ; '-'
+0x998350: jnz     short loc_99835D
+0x998352: or      [ebp+1F8h+var_210], 100h
+0x998359: inc     ebx
+0x99835A: mov     [ebp+1F8h+var_21C], ebx
+0x99835D: push    ebx
+0x99835E: jmp     loc_9981D7
+0x998363: mov     [ebp+1F8h+var_218], esi
+0x998366: mov     [ebp+1F8h+var_25C], ecx
+0x998369: jmp     short __output_s_l___$COMMON_HEX$25544
+0x99836B: sub     eax, 73h ; 's'
+0x99836E: jz      loc_9980E9
+0x998374: dec     eax
+0x998375: dec     eax
+0x998376: jz      loc_998261
+0x99837C: sub     eax, 3
+0x99837F: jnz     loc_9984E0
+0x998385: mov     [ebp+1F8h+var_25C], 27h ; '''
+0x9984AA: dec     ecx
+0x9984AB: cmp     word ptr [eax], 0
+0x9984AF: jz      short loc_9984B7
+0x9984B1: inc     eax
+0x9984B2: inc     eax
+0x9984B3: test    ecx, ecx
+0x9984B5: jnz     short loc_9984AA
+0x9984B7: sub     eax, [ebp+1F8h+var_21C]
+0x9984BA: sar     eax, 1
+0x9984BC: jmp     short loc_9984DD
+0x9984BE: test    edi, edi
+0x9984C0: jnz     short loc_9984CA
+0x9984C2: mov     eax, off_B31360
+0x9984C7: mov     [ebp+1F8h+var_21C], eax
+0x9984CA: mov     eax, [ebp+1F8h+var_21C]
+0x9984CD: jmp     short loc_9984D6
+0x9984CF: dec     ecx
+0x9984D0: cmp     byte ptr [eax], 0
+0x9984D3: jz      short loc_9984DA
+0x9984D5: inc     eax
+0x9984D6: test    ecx, ecx
+0x9984D8: jnz     short loc_9984CF
+0x9984DA: sub     eax, [ebp+1F8h+var_21C]
+0x9984DD: mov     [ebp+1F8h+SizeConverted], eax
+0x9984E0: cmp     [ebp+1F8h+var_260], 0
+0x9984E4: jnz     loc_9985E5
+0x9984EA: mov     eax, [ebp+1F8h+var_210]
+0x9984ED: test    al, 40h
+0x9984EF: jz      short loc_998516
+0x9984F1: test    ax, 100h
+0x9984F5: jz      short loc_9984FD
+0x9984F7: mov     [ebp+1F8h+var_230], 2Dh ; '-'
+0x9984FB: jmp     short loc_99850F
+0x9984FD: test    al, 1
+0x9984FF: jz      short loc_998507
+0x998501: mov     [ebp+1F8h+var_230], 2Bh ; '+'
+0x998505: jmp     short loc_99850F
+0x998507: test    al, 2
+0x998509: jz      short loc_998516
+0x99850B: mov     [ebp+1F8h+var_230], 20h ; ' '
+0x99850F: mov     [ebp+1F8h+var_234], 1
+0x998516: mov     ebx, [ebp+1F8h+var_238]
+0x998519: sub     ebx, [ebp+1F8h+SizeConverted]
+0x99851C: sub     ebx, [ebp+1F8h+var_234]
+0x99851F: test    byte ptr [ebp+1F8h+var_210], 0Ch
+0x998523: jnz     short loc_998536
+0x998525: push    [ebp+1F8h+File]; File
+0x998528: lea     eax, [ebp+1F8h+var_22C]
+0x99852B: push    ebx; int
+0x99852C: push    20h ; ' '; char
+0x99852E: call    _write_multi_char
+0x998533: add     esp, 0Ch
+0x998536: push    [ebp+1F8h+var_234]
+0x998539: mov     edi, [ebp+1F8h+File]
+0x99853C: lea     eax, [ebp+1F8h+var_22C]
+0x99853F: lea     ecx, [ebp+1F8h+var_230]
+0x998542: call    _write_string
+0x998547: test    byte ptr [ebp+1F8h+var_210], 8
+0x99854B: pop     ecx
+0x99854C: jz      short loc_998563
+0x99854E: test    byte ptr [ebp+1F8h+var_210], 4
+0x998552: jnz     short loc_998563
+0x998554: push    edi; File
+0x998555: push    ebx; int
+0x998556: push    30h ; '0'; char
+0x998558: lea     eax, [ebp+1F8h+var_22C]
+0x99855B: call    _write_multi_char
+0x998560: add     esp, 0Ch
+0x998563: cmp     [ebp+1F8h+var_23C], 0
+0x998567: mov     eax, [ebp+1F8h+SizeConverted]
+0x99856A: jz      short loc_9985BD
+0x99856C: test    eax, eax
+0x99856E: jle     short loc_9985BD
+0x998570: mov     esi, [ebp+1F8h+var_21C]
+0x998573: mov     [ebp+1F8h+var_264], eax
+0x998576: movzx   eax, word ptr [esi]
+0x998579: dec     [ebp+1F8h+var_264]
+0x99857C: push    eax; WCh
+0x99857D: push    6; SizeInBytes
+0x99857F: lea     eax, [ebp+1F8h+var_C]
+0x998585: push    eax; MbCh
+0x998586: lea     eax, [ebp+1F8h+var_270]
+0x998589: inc     esi
+0x99858A: push    eax; SizeConverted
+0x99858B: inc     esi
+0x99858C: call    _wctomb_s
+0x998591: add     esp, 10h
+0x998594: test    eax, eax
+0x998596: jnz     short loc_9985B7
+0x998598: cmp     [ebp+1F8h+var_270], eax
+0x99859B: jz      short loc_9985B7
+0x99859D: push    [ebp+1F8h+var_270]
+0x9985A0: lea     eax, [ebp+1F8h+var_22C]
+0x9985A3: lea     ecx, [ebp+1F8h+var_C]
+0x9985A9: call    _write_string
+0x9985AE: cmp     [ebp+1F8h+var_264], 0
+0x9985B2: pop     ecx
+0x9985B3: jnz     short loc_998576
+0x9985B5: jmp     short loc_9985CA
+0x9985B7: or      [ebp+1F8h+var_22C], 0FFFFFFFFh
+0x9985BB: jmp     short loc_9985CA
+0x9985BD: mov     ecx, [ebp+1F8h+var_21C]
+0x9985C0: push    eax
+0x9985C1: lea     eax, [ebp+1F8h+var_22C]
+0x9985C4: call    _write_string
+0x9985C9: pop     ecx
+0x9985CA: cmp     [ebp+1F8h+var_22C], 0
+0x9985CE: jl      short loc_9985E5
+0x9985D0: test    byte ptr [ebp+1F8h+var_210], 4
+0x9985D4: jz      short loc_9985E5
+0x9985D6: push    edi; File
+0x9985D7: push    ebx; int
+0x9985D8: push    20h ; ' '; char
+0x9985DA: lea     eax, [ebp+1F8h+var_22C]
+0x9985DD: call    _write_multi_char
+0x9985E2: add     esp, 0Ch
+0x9985E5: cmp     [ebp+1F8h+Memory], 0
+0x9985E9: jz      short __output_s_l___def_997E7D
+0x9985EB: push    [ebp+1F8h+Memory]; Memory
+0x9985EE: call    _free
+0x9985F3: and     [ebp+1F8h+Memory], 0
+0x9985F7: pop     ecx

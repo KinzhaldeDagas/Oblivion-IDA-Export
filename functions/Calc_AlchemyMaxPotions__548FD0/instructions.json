@@ -1,19 +1,19 @@
 [
   {
     "ea": "0x548FD0",
-    "line": "mov     eax, [esp+arg_0]",
+    "line": "mov     eax, [esp+skillValue]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x548FD4",
-    "line": "push    eax",
+    "line": "push    eax; skillValue",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x548FD5",
-    "line": "call    Calc_MasteryFromSkill",
+    "line": "call    Calc_MasteryFromSkill; Map a base skill value to Oblivion's five mastery tiers using iSkillApprenticeMin=25, iSkillJourneymanMin=50, iSkillExpertMin=75, and iSkillMasterMin=100.",
     "mnemonic": "call",
     "size": 5
   },

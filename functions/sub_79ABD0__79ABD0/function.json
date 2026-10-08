@@ -1,19 +1,32 @@
 {
-  "callees_count": 5,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 3,
   "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x79ABD0",
+      "0x79AC09"
+    ]
+  ],
+  "chunks_sha256": "cad7ef3357c7bdd9d9eb2ed37e71499c977dca76051af69e8faf60bcb50fc280",
+  "comment_regular": "Oblivion st_vector<SFrondVertex>::clear. Validates begin/end and erases the entire initialized range without releasing capacity.",
+  "comment_repeatable": "Oblivion st_vector<SFrondVertex>::clear. Validates begin/end and erases the entire initialized range without releasing capacity.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 0,
-  "display_name": "sub_79ABD0",
+  "display_name": "OB_stVector_SFrondVertex_Clear_010201A0",
   "end_ea": "0x79AC09",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_79ABD0",
+  "name": "OB_stVector_SFrondVertex_Clear_010201A0",
   "segment": ".text",
   "sha256": "cad7ef3357c7bdd9d9eb2ed37e71499c977dca76051af69e8faf60bcb50fc280",
   "size": 57,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x79ABD0",
-  "type": "_DWORD *__thiscall(char **this)",
+  "total_chunk_size": 57,
+  "type": "void __thiscall(OB_stVector16_010201A0 *this)",
   "xrefs_from_count": 30,
   "xrefs_to_count": 1
 }

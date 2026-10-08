@@ -1,4 +1,4 @@
-0x7D59E0: push    ecx
+0x7D59E0: push    ecx; Recursively traverse a receiver tree while preserving ShadowSceneLight active-plane mask +0x1B0; accepted geometry reaches AssociateReceiverGeometry.
 0x7D59E1: cmp     dword ptr ds:0B42F48h, 0
 0x7D59E8: push    ebp
 0x7D59E9: mov     ebp, ecx
@@ -14,9 +14,9 @@
 0x7D5A03: mov     eax, [ebp+100h]
 0x7D5A09: push    eax
 0x7D5A0A: push    edi
-0x7D5A0B: call    sub_7D2EA0
+0x7D5A0B: call    ShadowSceneLight_TestReceiverEligibility; Receiver eligibility: test geometry bound against active projector planes when +0x14C is present, otherwise source-to-bound surface range.
 0x7D5A10: test    al, al
-0x7D5A12: jz      loc_7D5B02
+0x7D5A12: jz      loc_7D5B02; Receiver traversal consumes the current native projector-plane/range state before shadow-map rendering.
 0x7D5A18: mov     edx, [edi]
 0x7D5A1A: mov     eax, [edx+8]
 0x7D5A1D: push    esi
@@ -30,7 +30,7 @@
 0x7D5A31: mov     ecx, esi
 0x7D5A33: xor     edi, edi
 0x7D5A35: call    eax
-0x7D5A37: cmp     eax, offset dword_B3FD70
+0x7D5A37: cmp     eax, offset stru_B3FD70
 0x7D5A3C: setz    al
 0x7D5A3F: neg     al
 0x7D5A41: sbb     eax, eax
@@ -49,7 +49,7 @@
 0x7D5A6B: jnz     loc_7D5B01
 0x7D5A71: push    esi
 0x7D5A72: mov     ecx, ebp
-0x7D5A74: call    ShadowSceneLight_UpdateLightingProperty
+0x7D5A74: call    ShadowSceneLight_UpdateLightingProperty; Recursively traverse a receiver tree while preserving ShadowSceneLight active-plane mask +0x1B0; accepted geometry reaches AssociateReceiverGeometry.
 0x7D5A79: mov     ecx, [esp+10h+var_4]
 0x7D5A7D: pop     esi
 0x7D5A7E: pop     edi
@@ -76,7 +76,7 @@
 0x7D5AB8: jnz     short loc_7D5AC2
 0x7D5ABA: push    ecx
 0x7D5ABB: mov     ecx, ebp
-0x7D5ABD: call    ShadowSceneLight_UpdateLightingProperty
+0x7D5ABD: call    ShadowSceneLight_UpdateLightingProperty; Recursively traverse a receiver tree while preserving ShadowSceneLight active-plane mask +0x1B0; accepted geometry reaches AssociateReceiverGeometry.
 0x7D5AC2: movzx   eax, word ptr [esi+0B6h]
 0x7D5AC9: add     edi, 1
 0x7D5ACC: cmp     eax, edi
@@ -99,9 +99,9 @@
 0x7D5AF2: mov     eax, [edx+10h]
 0x7D5AF5: mov     ecx, edi
 0x7D5AF7: call    eax
-0x7D5AF9: push    eax
-0x7D5AFA: mov     ecx, ebp
-0x7D5AFC: call    sub_7D5790
+0x7D5AF9: push    eax; geometry
+0x7D5AFA: mov     ecx, ebp; self
+0x7D5AFC: call    ShadowSceneLight_AssociateReceiverGeometry; Associate receiver geometry only after BSShaderProperty RTTI, NiPropertyState+0x18 property-kind-4 lookup, and shader subtype 1..10. Existing links reorder; new links are inserted into both light-local and property-side ownership.
 0x7D5B01: pop     esi
 0x7D5B02: mov     ecx, [esp+0Ch+var_4]
 0x7D5B06: pop     edi

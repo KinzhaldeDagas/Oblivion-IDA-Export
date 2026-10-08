@@ -1,1 +1,1 @@
-DATE
+typedef double DATE;

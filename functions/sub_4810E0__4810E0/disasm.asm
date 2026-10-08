@@ -16,12 +16,12 @@
 0x481105: jz      loc_4811A1
 0x48110B: push    4
 0x48110D: mov     ecx, esi
-0x48110F: call    NiNode_GetNiPropertyByID
+0x48110F: call    NiNode_GetNiPropertyByID;
 0x481114: test    eax, eax
 0x481116: jz      short loc_481151
 0x481118: push    4
 0x48111A: mov     ecx, esi
-0x48111C: call    NiNode_GetNiPropertyByID
+0x48111C: call    NiNode_GetNiPropertyByID;
 0x481121: mov     edx, [eax]
 0x481123: mov     ecx, eax
 0x481125: mov     eax, [edx+54h]
@@ -30,7 +30,7 @@
 0x48112D: jl      short loc_481151
 0x48112F: push    4
 0x481131: mov     ecx, esi
-0x481133: call    NiNode_GetNiPropertyByID
+0x481133: call    NiNode_GetNiPropertyByID;
 0x481138: mov     edx, [eax]
 0x48113A: mov     ecx, eax
 0x48113C: mov     eax, [edx+54h]
@@ -39,7 +39,7 @@
 0x481144: jg      short loc_481151
 0x481146: push    4
 0x481148: mov     ecx, esi
-0x48114A: call    NiNode_GetNiPropertyByID
+0x48114A: call    NiNode_GetNiPropertyByID;
 0x48114F: jmp     short loc_481153
 0x481151: xor     eax, eax
 0x481153: cmp     eax, [esp+10h+arg_4]

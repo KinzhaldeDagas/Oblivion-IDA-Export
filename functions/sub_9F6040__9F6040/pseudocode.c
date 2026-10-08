@@ -1,237 +1,238 @@
-int *sub_9F6040()
+// [Controller decode 2026-07-09] Initializes 29 control action label GameSetting pointers.
+GameSettingString *GameSetting_Init_ControlActionLabels()
 {
-  int *v0; // eax
-  int *v1; // eax
-  int *v2; // eax
-  int *v3; // eax
-  int *v4; // eax
-  int *v5; // eax
-  int *v6; // eax
-  int *v7; // eax
-  int *v8; // eax
-  int *v9; // eax
-  int *v10; // eax
-  int *v11; // eax
-  int *v12; // eax
-  int *v13; // eax
-  int *v14; // eax
-  int *v15; // eax
-  int *v16; // eax
-  int *v17; // eax
-  int *v18; // eax
-  int *v19; // eax
-  int *v20; // eax
-  int *v21; // eax
-  int *v22; // eax
-  int *v23; // eax
-  int *v24; // eax
-  int *v25; // eax
-  int *v26; // eax
-  int *v27; // eax
-  int *v28; // eax
-  int *v29; // eax
-  int *v30; // eax
-  int *v31; // eax
-  int *v32; // eax
-  int *v33; // eax
-  int *v34; // eax
-  int *v35; // eax
-  int *v36; // eax
-  int *v37; // eax
-  int *v38; // eax
-  int *v39; // eax
-  int *v40; // eax
-  int *v41; // eax
-  int *v42; // eax
-  int *v43; // eax
-  int *v44; // eax
-  int *v45; // eax
-  int *v46; // eax
-  int *v47; // eax
-  int *v48; // eax
-  int *v49; // eax
-  int *v50; // eax
-  int *v51; // eax
-  int *v52; // eax
-  int *v53; // eax
-  int *v54; // eax
-  int *v55; // eax
-  int *v56; // eax
-  int *result; // eax
+  GameSettingString *v0; // eax
+  GameSettingString *v1; // eax
+  GameSettingString *v2; // eax
+  GameSettingString *v3; // eax
+  GameSettingString *v4; // eax
+  GameSettingString *v5; // eax
+  GameSettingString *v6; // eax
+  GameSettingString *v7; // eax
+  GameSettingString *v8; // eax
+  GameSettingString *v9; // eax
+  GameSettingString *v10; // eax
+  GameSettingString *v11; // eax
+  GameSettingString *v12; // eax
+  GameSettingString *v13; // eax
+  GameSettingString *v14; // eax
+  GameSettingString *v15; // eax
+  GameSettingString *v16; // eax
+  GameSettingString *v17; // eax
+  GameSettingString *v18; // eax
+  GameSettingString *v19; // eax
+  GameSettingString *v20; // eax
+  GameSettingString *v21; // eax
+  GameSettingString *v22; // eax
+  GameSettingString *v23; // eax
+  GameSettingString *v24; // eax
+  GameSettingString *v25; // eax
+  GameSettingString *v26; // eax
+  GameSettingString *v27; // eax
+  GameSettingString *v28; // eax
+  GameSettingString *v29; // eax
+  GameSettingString *v30; // eax
+  GameSettingString *v31; // eax
+  GameSettingString *v32; // eax
+  GameSettingString *v33; // eax
+  GameSettingString *v34; // eax
+  GameSettingString *v35; // eax
+  GameSettingString *v36; // eax
+  GameSettingString *v37; // eax
+  GameSettingString *v38; // eax
+  GameSettingString *v39; // eax
+  GameSettingString *v40; // eax
+  GameSettingString *v41; // eax
+  GameSettingString *v42; // eax
+  GameSettingString *v43; // eax
+  GameSettingString *v44; // eax
+  GameSettingString *v45; // eax
+  GameSettingString *v46; // eax
+  GameSettingString *v47; // eax
+  GameSettingString *v48; // eax
+  GameSettingString *v49; // eax
+  GameSettingString *v50; // eax
+  GameSettingString *v51; // eax
+  GameSettingString *v52; // eax
+  GameSettingString *v53; // eax
+  GameSettingString *v54; // eax
+  GameSettingString *v55; // eax
+  GameSettingString *v56; // eax
+  GameSettingString *result; // eax
 
-  v0 = (int *)FormHeapAlloc(8u);
-  if ( v0 )
-    v1 = GameSetting_ConstrAndReg(v0, (int)"sUActnForward", (int)"Forward");
+  v0 = (GameSettingString *)FormHeapAlloc(8u); /*0x9f6064*/
+  if ( v0 ) /*0x9f607a*/
+    v1 = GameSetting_ConstrAndReg(v0, "sUActnForward", "Forward"); /*0x9f6088*/
   else
-    v1 = 0;
-  dword_B399D0[0] = (int)v1;
-  v2 = (int *)FormHeapAlloc(8u);
-  if ( v2 )
-    v3 = GameSetting_ConstrAndReg(v2, (int)"sUActnBack", (int)"Back");
+    v1 = 0; /*0x9f608f*/
+  g_controlActionLabelSetting_Forward[0] = (int)v1; /*0x9f609a*/
+  v2 = (GameSettingString *)FormHeapAlloc(8u); /*0x9f609f*/
+  if ( v2 ) /*0x9f60b5*/
+    v3 = GameSetting_ConstrAndReg(v2, "sUActnBack", "Back"); /*0x9f60c3*/
   else
-    v3 = 0;
-  dword_B399D4 = (int)v3;
-  v4 = (int *)FormHeapAlloc(8u);
-  if ( v4 )
-    v5 = GameSetting_ConstrAndReg(v4, (int)"sUActnSldleft", (int)"Slide Left");
+    v3 = 0; /*0x9f60ca*/
+  g_controlActionLabelSetting_Back = (int)v3; /*0x9f60d2*/
+  v4 = (GameSettingString *)FormHeapAlloc(8u); /*0x9f60d7*/
+  if ( v4 ) /*0x9f60ed*/
+    v5 = GameSetting_ConstrAndReg(v4, "sUActnSldleft", "Slide Left"); /*0x9f60fb*/
   else
-    v5 = 0;
-  dword_B399D8 = (int)v5;
-  v6 = (int *)FormHeapAlloc(8u);
-  if ( v6 )
-    v7 = GameSetting_ConstrAndReg(v6, (int)"sUActnSldright", (int)"Slide Right");
+    v5 = 0; /*0x9f6102*/
+  g_controlActionLabelSetting_SlideLeft = (int)v5; /*0x9f610a*/
+  v6 = (GameSettingString *)FormHeapAlloc(8u); /*0x9f610f*/
+  if ( v6 ) /*0x9f6125*/
+    v7 = GameSetting_ConstrAndReg(v6, "sUActnSldright", "Slide Right"); /*0x9f6133*/
   else
-    v7 = 0;
-  dword_B399DC = (int)v7;
-  v8 = (int *)FormHeapAlloc(8u);
-  if ( v8 )
-    v9 = GameSetting_ConstrAndReg(v8, (int)"sUActnUse", (int)"Attack");
+    v7 = 0; /*0x9f613a*/
+  g_controlActionLabelSetting_SlideRight = (int)v7; /*0x9f6142*/
+  v8 = (GameSettingString *)FormHeapAlloc(8u); /*0x9f6147*/
+  if ( v8 ) /*0x9f615d*/
+    v9 = GameSetting_ConstrAndReg(v8, "sUActnUse", "Attack"); /*0x9f616b*/
   else
-    v9 = 0;
-  dword_B399E0 = (int)v9;
-  v10 = (int *)FormHeapAlloc(8u);
-  if ( v10 )
-    v11 = GameSetting_ConstrAndReg(v10, (int)"sUActnActivate", (int)"Activate");
+    v9 = 0; /*0x9f6172*/
+  g_controlActionLabelSetting_Attack = (int)v9; /*0x9f617a*/
+  v10 = (GameSettingString *)FormHeapAlloc(8u); /*0x9f617f*/
+  if ( v10 ) /*0x9f6195*/
+    v11 = GameSetting_ConstrAndReg(v10, "sUActnActivate", "Activate"); /*0x9f61a3*/
   else
-    v11 = 0;
-  dword_B399E4 = (int)v11;
-  v12 = (int *)FormHeapAlloc(8u);
-  if ( v12 )
-    v13 = GameSetting_ConstrAndReg(v12, (int)"sUActnBlock", (int)"Block");
+    v11 = 0; /*0x9f61aa*/
+  g_controlActionLabelSetting_Activate = (int)v11; /*0x9f61b2*/
+  v12 = (GameSettingString *)FormHeapAlloc(8u); /*0x9f61b7*/
+  if ( v12 ) /*0x9f61cd*/
+    v13 = GameSetting_ConstrAndReg(v12, "sUActnBlock", "Block"); /*0x9f61db*/
   else
-    v13 = 0;
-  dword_B399E8 = (int)v13;
-  v14 = (int *)FormHeapAlloc(8u);
-  if ( v14 )
-    v15 = GameSetting_ConstrAndReg(v14, (int)"sUActnCast", (int)"Cast");
+    v13 = 0; /*0x9f61e2*/
+  g_controlActionLabelSetting_Block = (int)v13; /*0x9f61ea*/
+  v14 = (GameSettingString *)FormHeapAlloc(8u); /*0x9f61ef*/
+  if ( v14 ) /*0x9f6205*/
+    v15 = GameSetting_ConstrAndReg(v14, "sUActnCast", "Cast"); /*0x9f6213*/
   else
-    v15 = 0;
-  dword_B399EC = (int)v15;
-  v16 = (int *)FormHeapAlloc(8u);
-  if ( v16 )
-    v17 = GameSetting_ConstrAndReg(v16, (int)"sUActnRdyitem", (int)"Ready Weapon");
+    v15 = 0; /*0x9f621a*/
+  g_controlActionLabelSetting_Cast = (int)v15; /*0x9f6222*/
+  v16 = (GameSettingString *)FormHeapAlloc(8u); /*0x9f6227*/
+  if ( v16 ) /*0x9f623d*/
+    v17 = GameSetting_ConstrAndReg(v16, "sUActnRdyitem", "Ready Weapon"); /*0x9f624b*/
   else
-    v17 = 0;
-  dword_B399F0 = (int)v17;
-  v18 = (int *)FormHeapAlloc(8u);
-  if ( v18 )
-    v19 = GameSetting_ConstrAndReg(v18, (int)"sUActnCrouch", (int)"Sneak");
+    v17 = 0; /*0x9f6252*/
+  g_controlActionLabelSetting_ReadyWeapon = (int)v17; /*0x9f625a*/
+  v18 = (GameSettingString *)FormHeapAlloc(8u); /*0x9f625f*/
+  if ( v18 ) /*0x9f6275*/
+    v19 = GameSetting_ConstrAndReg(v18, "sUActnCrouch", "Sneak"); /*0x9f6283*/
   else
-    v19 = 0;
-  dword_B399F4 = (int)v19;
-  v20 = (int *)FormHeapAlloc(8u);
-  if ( v20 )
-    v21 = GameSetting_ConstrAndReg(v20, (int)"sUActnRun", (int)&off_A2FA0C);
+    v19 = 0; /*0x9f628a*/
+  g_controlActionLabelSetting_Sneak = (int)v19; /*0x9f6292*/
+  v20 = (GameSettingString *)FormHeapAlloc(8u); /*0x9f6297*/
+  if ( v20 ) /*0x9f62ad*/
+    v21 = GameSetting_ConstrAndReg(v20, "sUActnRun", (const char *)&off_A2FA0C); /*0x9f62bb*/
   else
-    v21 = 0;
-  dword_B399F8 = (int)v21;
-  v22 = (int *)FormHeapAlloc(8u);
-  if ( v22 )
-    v23 = GameSetting_ConstrAndReg(v22, (int)"sUActnTogglerun", (int)"Always Run");
+    v21 = 0; /*0x9f62c2*/
+  g_controlActionLabelSetting_Run = (int)v21; /*0x9f62ca*/
+  v22 = (GameSettingString *)FormHeapAlloc(8u); /*0x9f62cf*/
+  if ( v22 ) /*0x9f62e5*/
+    v23 = GameSetting_ConstrAndReg(v22, "sUActnTogglerun", "Always Run"); /*0x9f62f3*/
   else
-    v23 = 0;
-  dword_B399FC = (int)v23;
-  v24 = (int *)FormHeapAlloc(8u);
-  if ( v24 )
-    v25 = GameSetting_ConstrAndReg(v24, (int)"sUActnAutomove", (int)"Auto Move");
+    v23 = 0; /*0x9f62fa*/
+  g_controlActionLabelSetting_AlwaysRun = (int)v23; /*0x9f6302*/
+  v24 = (GameSettingString *)FormHeapAlloc(8u); /*0x9f6307*/
+  if ( v24 ) /*0x9f631d*/
+    v25 = GameSetting_ConstrAndReg(v24, "sUActnAutomove", "Auto Move"); /*0x9f632b*/
   else
-    v25 = 0;
-  dword_B39A00 = (int)v25;
-  v26 = (int *)FormHeapAlloc(8u);
-  if ( v26 )
-    v27 = GameSetting_ConstrAndReg(v26, (int)"sUActnJump", (int)"Jump");
+    v25 = 0; /*0x9f6332*/
+  g_controlActionLabelSetting_AutoMove = (int)v25; /*0x9f633a*/
+  v26 = (GameSettingString *)FormHeapAlloc(8u); /*0x9f633f*/
+  if ( v26 ) /*0x9f6355*/
+    v27 = GameSetting_ConstrAndReg(v26, "sUActnJump", "Jump"); /*0x9f6363*/
   else
-    v27 = 0;
-  dword_B39A04 = (int)v27;
-  v28 = (int *)FormHeapAlloc(8u);
-  if ( v28 )
-    v29 = GameSetting_ConstrAndReg(v28, (int)"sUActnTogglepov", (int)"Change View");
+    v27 = 0; /*0x9f636a*/
+  g_controlActionLabelSetting_Jump = (int)v27; /*0x9f6372*/
+  v28 = (GameSettingString *)FormHeapAlloc(8u); /*0x9f6377*/
+  if ( v28 ) /*0x9f638d*/
+    v29 = GameSetting_ConstrAndReg(v28, "sUActnTogglepov", "Change View"); /*0x9f639b*/
   else
-    v29 = 0;
-  dword_B39A08 = (int)v29;
-  v30 = (int *)FormHeapAlloc(8u);
-  if ( v30 )
-    v31 = GameSetting_ConstrAndReg(v30, (int)"sUActnMenumode", (int)"Journal");
+    v29 = 0; /*0x9f63a2*/
+  g_controlActionLabelSetting_ChangeView = (int)v29; /*0x9f63aa*/
+  v30 = (GameSettingString *)FormHeapAlloc(8u); /*0x9f63af*/
+  if ( v30 ) /*0x9f63c5*/
+    v31 = GameSetting_ConstrAndReg(v30, "sUActnMenumode", "Journal"); /*0x9f63d3*/
   else
-    v31 = 0;
-  dword_B39A0C = (int)v31;
-  v32 = (int *)FormHeapAlloc(8u);
-  if ( v32 )
-    v33 = GameSetting_ConstrAndReg(v32, (int)"sUActnRestmenu", (int)"Wait");
+    v31 = 0; /*0x9f63da*/
+  g_controlActionLabelSetting_Journal = (int)v31; /*0x9f63e2*/
+  v32 = (GameSettingString *)FormHeapAlloc(8u); /*0x9f63e7*/
+  if ( v32 ) /*0x9f63fd*/
+    v33 = GameSetting_ConstrAndReg(v32, "sUActnRestmenu", "Wait"); /*0x9f640b*/
   else
-    v33 = 0;
-  dword_B39A10 = (int)v33;
-  v34 = (int *)FormHeapAlloc(8u);
-  if ( v34 )
-    v35 = GameSetting_ConstrAndReg(v34, (int)"sUActnQuickmenu", (int)"Quick Menu");
+    v33 = 0; /*0x9f6412*/
+  g_controlActionLabelSetting_Wait = (int)v33; /*0x9f641a*/
+  v34 = (GameSettingString *)FormHeapAlloc(8u); /*0x9f641f*/
+  if ( v34 ) /*0x9f6435*/
+    v35 = GameSetting_ConstrAndReg(v34, "sUActnQuickmenu", "Quick Menu"); /*0x9f6443*/
   else
-    v35 = 0;
-  dword_B39A14 = (int)v35;
-  v36 = (int *)FormHeapAlloc(8u);
-  if ( v36 )
-    v37 = GameSetting_ConstrAndReg(v36, (int)"sUActnQuick1", (int)"Quick1");
+    v35 = 0; /*0x9f644a*/
+  g_controlActionLabelSetting_QuickMenu = (int)v35; /*0x9f6452*/
+  v36 = (GameSettingString *)FormHeapAlloc(8u); /*0x9f6457*/
+  if ( v36 ) /*0x9f646d*/
+    v37 = GameSetting_ConstrAndReg(v36, "sUActnQuick1", "Quick1");// MorrowindDialogueText: constructs sUActnQuick1 with default string value Quick1; plugin maps dialogue alias &sUActnQuick1; to %PCName instead. /*0x9f647b*/
   else
-    v37 = 0;
-  dword_B39A18 = (int)v37;
-  v38 = (int *)FormHeapAlloc(8u);
-  if ( v38 )
-    v39 = GameSetting_ConstrAndReg(v38, (int)"sUActnQuick2", (int)"Quick2");
+    v37 = 0; /*0x9f6482*/
+  g_controlActionLabelSetting_Quick1 = (int)v37; /*0x9f648a*/
+  v38 = (GameSettingString *)FormHeapAlloc(8u); /*0x9f648f*/
+  if ( v38 ) /*0x9f64a5*/
+    v39 = GameSetting_ConstrAndReg(v38, "sUActnQuick2", "Quick2");// MorrowindDialogueText: constructs sUActnQuick2 with default string value Quick2; plugin maps dialogue alias &sUActnQuick2; to %Name instead. /*0x9f64b3*/
   else
-    v39 = 0;
-  dword_B39A1C = (int)v39;
-  v40 = (int *)FormHeapAlloc(8u);
-  if ( v40 )
-    v41 = GameSetting_ConstrAndReg(v40, (int)"sUActnQuick3", (int)"Quick3");
+    v39 = 0; /*0x9f64ba*/
+  g_controlActionLabelSetting_Quick2 = (int)v39; /*0x9f64c2*/
+  v40 = (GameSettingString *)FormHeapAlloc(8u); /*0x9f64c7*/
+  if ( v40 ) /*0x9f64dd*/
+    v41 = GameSetting_ConstrAndReg(v40, "sUActnQuick3", "Quick3"); /*0x9f64eb*/
   else
-    v41 = 0;
-  dword_B39A20 = (int)v41;
-  v42 = (int *)FormHeapAlloc(8u);
-  if ( v42 )
-    v43 = GameSetting_ConstrAndReg(v42, (int)"sUActnQuick4", (int)"Quick4");
+    v41 = 0; /*0x9f64f2*/
+  g_controlActionLabelSetting_Quick3 = (int)v41; /*0x9f64fa*/
+  v42 = (GameSettingString *)FormHeapAlloc(8u); /*0x9f64ff*/
+  if ( v42 ) /*0x9f6515*/
+    v43 = GameSetting_ConstrAndReg(v42, "sUActnQuick4", "Quick4"); /*0x9f6523*/
   else
-    v43 = 0;
-  dword_B39A24 = (int)v43;
-  v44 = (int *)FormHeapAlloc(8u);
-  if ( v44 )
-    v45 = GameSetting_ConstrAndReg(v44, (int)"sUActnQuick5", (int)"Quick5");
+    v43 = 0; /*0x9f652a*/
+  g_controlActionLabelSetting_Quick4 = (int)v43; /*0x9f6532*/
+  v44 = (GameSettingString *)FormHeapAlloc(8u); /*0x9f6537*/
+  if ( v44 ) /*0x9f654d*/
+    v45 = GameSetting_ConstrAndReg(v44, "sUActnQuick5", "Quick5"); /*0x9f655b*/
   else
-    v45 = 0;
-  dword_B39A28 = (int)v45;
-  v46 = (int *)FormHeapAlloc(8u);
-  if ( v46 )
-    v47 = GameSetting_ConstrAndReg(v46, (int)"sUActnQuick6", (int)"Quick6");
+    v45 = 0; /*0x9f6562*/
+  g_controlActionLabelSetting_Quick5 = (int)v45; /*0x9f656a*/
+  v46 = (GameSettingString *)FormHeapAlloc(8u); /*0x9f656f*/
+  if ( v46 ) /*0x9f6585*/
+    v47 = GameSetting_ConstrAndReg(v46, "sUActnQuick6", "Quick6"); /*0x9f6593*/
   else
-    v47 = 0;
-  dword_B39A2C = (int)v47;
-  v48 = (int *)FormHeapAlloc(8u);
-  if ( v48 )
-    v49 = GameSetting_ConstrAndReg(v48, (int)"sUActnQuick7", (int)"Quick7");
+    v47 = 0; /*0x9f659a*/
+  g_controlActionLabelSetting_Quick6 = (int)v47; /*0x9f65a2*/
+  v48 = (GameSettingString *)FormHeapAlloc(8u); /*0x9f65a7*/
+  if ( v48 ) /*0x9f65bd*/
+    v49 = GameSetting_ConstrAndReg(v48, "sUActnQuick7", "Quick7"); /*0x9f65cb*/
   else
-    v49 = 0;
-  dword_B39A30 = (int)v49;
-  v50 = (int *)FormHeapAlloc(8u);
-  if ( v50 )
-    v51 = GameSetting_ConstrAndReg(v50, (int)"sUActnQuick8", (int)"Quick8");
+    v49 = 0; /*0x9f65d2*/
+  g_controlActionLabelSetting_Quick7 = (int)v49; /*0x9f65da*/
+  v50 = (GameSettingString *)FormHeapAlloc(8u); /*0x9f65df*/
+  if ( v50 ) /*0x9f65f5*/
+    v51 = GameSetting_ConstrAndReg(v50, "sUActnQuick8", "Quick8"); /*0x9f6603*/
   else
-    v51 = 0;
-  dword_B39A34 = (int)v51;
-  v52 = (int *)FormHeapAlloc(8u);
-  if ( v52 )
-    v53 = GameSetting_ConstrAndReg(v52, (int)"sUActnQuicksave", (int)"QuickSave");
+    v51 = 0; /*0x9f660a*/
+  g_controlActionLabelSetting_Quick8 = (int)v51; /*0x9f6612*/
+  v52 = (GameSettingString *)FormHeapAlloc(8u); /*0x9f6617*/
+  if ( v52 ) /*0x9f662d*/
+    v53 = GameSetting_ConstrAndReg(v52, "sUActnQuicksave", "QuickSave"); /*0x9f663b*/
   else
-    v53 = 0;
-  dword_B39A38 = (int)v53;
-  v54 = (int *)FormHeapAlloc(8u);
-  if ( v54 )
-    v55 = GameSetting_ConstrAndReg(v54, (int)"sUActnQuickload", (int)"QuickLoad");
+    v53 = 0; /*0x9f6642*/
+  g_controlActionLabelSetting_QuickSave = (int)v53; /*0x9f664a*/
+  v54 = (GameSettingString *)FormHeapAlloc(8u); /*0x9f664f*/
+  if ( v54 ) /*0x9f6665*/
+    v55 = GameSetting_ConstrAndReg(v54, "sUActnQuickload", "QuickLoad"); /*0x9f6673*/
   else
-    v55 = 0;
-  dword_B39A3C = (int)v55;
-  v56 = (int *)FormHeapAlloc(8u);
-  if ( v56 )
-    result = GameSetting_ConstrAndReg(v56, (int)"sUActnGrab", (int)"Grab");
+    v55 = 0; /*0x9f667a*/
+  g_controlActionLabelSetting_QuickLoad = (int)v55; /*0x9f6682*/
+  v56 = (GameSettingString *)FormHeapAlloc(8u); /*0x9f6687*/
+  if ( v56 ) /*0x9f669d*/
+    result = GameSetting_ConstrAndReg(v56, "sUActnGrab", "Grab"); /*0x9f66ab*/
   else
-    result = 0;
-  dword_B39A40 = (int)result;
-  return result;
+    result = 0; /*0x9f66b2*/
+  g_controlActionLabelSetting_Grab = (int)result; /*0x9f66b4*/
+  return result; /*0x9f66b9*/
 }

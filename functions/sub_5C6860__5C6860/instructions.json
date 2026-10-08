@@ -85,13 +85,13 @@
   },
   {
     "ea": "0x5C6888",
-    "line": "push    offset sub_43ACE0; a5",
+    "line": "push    offset FaceGenMatrix_Destruct; a5",
     "mnemonic": "push",
     "size": 5
   },
   {
     "ea": "0x5C688D",
-    "line": "push    offset sub_43EB30; a4",
+    "line": "push    offset FaceGenMatrix_Construct; a4",
     "mnemonic": "push",
     "size": 5
   },
@@ -169,7 +169,7 @@
   },
   {
     "ea": "0x5C68BE",
-    "line": "fstp    [esp+8Ch+var_8C]; float",
+    "line": "fstp    [esp+8Ch+maximumRms]; maximumRms",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -187,7 +187,7 @@
   },
   {
     "ea": "0x5C68C9",
-    "line": "push    0; int",
+    "line": "push    0; specialSecondBankMode",
     "mnemonic": "push",
     "size": 2
   },
@@ -199,25 +199,25 @@
   },
   {
     "ea": "0x5C68CF",
-    "line": "push    ecx; unsigned __int8 *",
+    "line": "push    ecx; outParameters",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5C68D0",
-    "line": "mov     ecx, edi",
+    "line": "mov     ecx, edi; this",
     "mnemonic": "mov",
     "size": 2
   },
   {
     "ea": "0x5C68D2",
-    "line": "call    sub_521A10",
+    "line": "call    TESNPC_GetActiveFaceGenDeltaParameters; CORRECTION: chooses inline FaceGen delta by GetAViBase(0x45), NOT sex. Vtable 0xA53DD4+0x128 -> TESNPC_GetAViBase 0x5232D0. Zero vampirism selects NPC+0x108, nonzero selects +0x168. Both are four 0x18-byte matrices. Earlier sex-specific naming was wrong; sex bit at NPC+0x28 is separate.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5C68D7",
-    "line": "push    eax; int",
+    "line": "push    eax; delta",
     "mnemonic": "push",
     "size": 1
   },
@@ -229,13 +229,13 @@
   },
   {
     "ea": "0x5C68DE",
-    "line": "push    ebx; int",
+    "line": "push    ebx; base",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5C68DF",
-    "line": "call    sub_552990",
+    "line": "call    FaceGenHeadParameters_Combine; Four-matrix combine. Normal branch adds base+delta; optional positive maximumRms rescales using sqrt(sumSquares/rows), NOT sqrt(sumSquares/(rows*columns)). Equivalent to coefficient RMS only for columns=1. Special second-bank branch copies base matrices 2/3 rather than adding delta. No claim of malformed multi-column asset impact without callers/asset evidence.",
     "mnemonic": "call",
     "size": 5
   },
@@ -271,7 +271,7 @@
   },
   {
     "ea": "0x5C68F6",
-    "line": "mov     dword ptr [esp+94h+var_74], esp",
+    "line": "mov     [esp+94h+sliderIndex], esp",
     "mnemonic": "mov",
     "size": 4
   },
@@ -319,7 +319,7 @@
   },
   {
     "ea": "0x5C6916",
-    "line": "call    sub_5C3110",
+    "line": "call    RaceSexMenu_GetCategoryTileByName",
     "mnemonic": "call",
     "size": 5
   },
@@ -349,7 +349,7 @@
   },
   {
     "ea": "0x5C692A",
-    "line": "fstp    [esp+8Ch+var_74]",
+    "line": "fstp    qword ptr [esp+8Ch+sliderIndex]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -367,7 +367,7 @@
   },
   {
     "ea": "0x5C6935",
-    "line": "fcomp   [esp+88h+var_74]",
+    "line": "fcomp   qword ptr [esp+88h+sliderIndex]",
     "mnemonic": "fcomp",
     "size": 4
   },
@@ -523,7 +523,7 @@
   },
   {
     "ea": "0x5C699C",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
@@ -595,37 +595,37 @@
   },
   {
     "ea": "0x5C69D4",
-    "line": "mov     dword ptr [esp+88h+var_74], eax",
+    "line": "mov     [esp+88h+sliderIndex], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5C69D8",
-    "line": "fldcw   word ptr [esp+88h+var_74]",
+    "line": "fldcw   word ptr [esp+88h+sliderIndex]",
     "mnemonic": "fldcw",
     "size": 4
   },
   {
     "ea": "0x5C69DC",
-    "line": "fistp   [esp+88h+var_74]",
+    "line": "fistp   qword ptr [esp+88h+sliderIndex]",
     "mnemonic": "fistp",
     "size": 4
   },
   {
     "ea": "0x5C69E0",
-    "line": "mov     edx, dword ptr [esp+88h+var_74]",
+    "line": "mov     edx, [esp+88h+sliderIndex]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5C69E4",
-    "line": "push    edx",
+    "line": "push    edx; sliderIndex",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5C69E5",
-    "line": "push    0",
+    "line": "push    0; matrixChannel",
     "mnemonic": "push",
     "size": 2
   },
@@ -649,13 +649,13 @@
   },
   {
     "ea": "0x5C69F8",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5C69FD",
-    "line": "push    eax",
+    "line": "push    eax; matrixGroup",
     "mnemonic": "push",
     "size": 1
   },
@@ -667,13 +667,13 @@
   },
   {
     "ea": "0x5C6A02",
-    "line": "push    eax",
+    "line": "push    eax; parameters",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5C6A03",
-    "line": "call    sub_5538F0",
+    "line": "call    FaceGenHeadParameters_GetSliderValue; Projects a manual FaceGen slider value by multiplying its authored basis row by the selected parameter matrix (matrix index = matrixChannel + 2*matrixGroup).",
     "mnemonic": "call",
     "size": 5
   },
@@ -703,7 +703,7 @@
   },
   {
     "ea": "0x5C6A17",
-    "line": "fstp    dword ptr [esp+98h+var_74]",
+    "line": "fstp    [esp+98h+sliderIndex]",
     "mnemonic": "fstp",
     "size": 4
   },
@@ -715,7 +715,7 @@
   },
   {
     "ea": "0x5C6A22",
-    "line": "fld     dword ptr [esp+98h+var_74]",
+    "line": "fld     [esp+98h+sliderIndex]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -787,37 +787,37 @@
   },
   {
     "ea": "0x5C6A51",
-    "line": "mov     dword ptr [esp+88h+var_74], eax",
+    "line": "mov     [esp+88h+sliderIndex], eax",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5C6A55",
-    "line": "fldcw   word ptr [esp+88h+var_74]",
+    "line": "fldcw   word ptr [esp+88h+sliderIndex]",
     "mnemonic": "fldcw",
     "size": 4
   },
   {
     "ea": "0x5C6A59",
-    "line": "fistp   [esp+88h+var_74]",
+    "line": "fistp   qword ptr [esp+88h+sliderIndex]",
     "mnemonic": "fistp",
     "size": 4
   },
   {
     "ea": "0x5C6A5D",
-    "line": "mov     edx, dword ptr [esp+88h+var_74]",
+    "line": "mov     edx, [esp+88h+sliderIndex]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x5C6A61",
-    "line": "push    edx",
+    "line": "push    edx; sliderIndex",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5C6A62",
-    "line": "push    0",
+    "line": "push    0; matrixChannel",
     "mnemonic": "push",
     "size": 2
   },
@@ -841,13 +841,13 @@
   },
   {
     "ea": "0x5C6A75",
-    "line": "call    Double_To_SInt32",
+    "line": "call    Double_To_SInt32; Double_To_SInt32 consumes ST0 double and returns EAX. SSE path uses cvttsd2si, matching C/C++ truncation toward zero.",
     "mnemonic": "call",
     "size": 5
   },
   {
     "ea": "0x5C6A7A",
-    "line": "push    eax",
+    "line": "push    eax; matrixGroup",
     "mnemonic": "push",
     "size": 1
   },
@@ -859,13 +859,13 @@
   },
   {
     "ea": "0x5C6A7F",
-    "line": "push    eax",
+    "line": "push    eax; parameters",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x5C6A80",
-    "line": "call    sub_5538F0",
+    "line": "call    FaceGenHeadParameters_GetSliderValue; Projects a manual FaceGen slider value by multiplying its authored basis row by the selected parameter matrix (matrix index = matrixChannel + 2*matrixGroup).",
     "mnemonic": "call",
     "size": 5
   },
@@ -913,7 +913,7 @@
   },
   {
     "ea": "0x5C6AA6",
-    "line": "push    offset sub_43ACE0; void (__thiscall *)(void *)",
+    "line": "push    offset FaceGenMatrix_Destruct; void (__thiscall *)(void *)",
     "mnemonic": "push",
     "size": 5
   },
@@ -1036,5 +1036,89 @@
     "line": "retn    4",
     "mnemonic": "retn",
     "size": 3
+  },
+  {
+    "ea": "0x9C1430",
+    "line": "push    offset FaceGenMatrix_Destruct; void (__thiscall *)(void *)",
+    "mnemonic": "push",
+    "size": 5
+  },
+  {
+    "ea": "0x9C1435",
+    "line": "push    4; int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9C1437",
+    "line": "push    18h; unsigned int",
+    "mnemonic": "push",
+    "size": 2
+  },
+  {
+    "ea": "0x9C1439",
+    "line": "lea     eax, [ebp-6Ch]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C143C",
+    "line": "push    eax; void *",
+    "mnemonic": "push",
+    "size": 1
+  },
+  {
+    "ea": "0x9C143D",
+    "line": "call    $LN21",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C1442",
+    "line": "retn",
+    "mnemonic": "retn",
+    "size": 1
+  },
+  {
+    "ea": "0x9C1443",
+    "line": "mov     edx, [esp+arg_4]",
+    "mnemonic": "mov",
+    "size": 4
+  },
+  {
+    "ea": "0x9C1447",
+    "line": "lea     eax, [edx-78h]",
+    "mnemonic": "lea",
+    "size": 3
+  },
+  {
+    "ea": "0x9C144A",
+    "line": "mov     ecx, [edx-7Ch]",
+    "mnemonic": "mov",
+    "size": 3
+  },
+  {
+    "ea": "0x9C144D",
+    "line": "xor     ecx, eax",
+    "mnemonic": "xor",
+    "size": 2
+  },
+  {
+    "ea": "0x9C144F",
+    "line": "call    @__security_check_cookie@4; __security_check_cookie(x)",
+    "mnemonic": "call",
+    "size": 5
+  },
+  {
+    "ea": "0x9C1454",
+    "line": "mov     eax, offset stru_AEA4D8",
+    "mnemonic": "mov",
+    "size": 5
+  },
+  {
+    "ea": "0x9C1459",
+    "line": "jmp     ___CxxFrameHandler3",
+    "mnemonic": "jmp",
+    "size": 5
   }
 ]

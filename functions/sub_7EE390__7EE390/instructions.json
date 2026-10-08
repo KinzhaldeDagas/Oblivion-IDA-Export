@@ -37,7 +37,7 @@
   },
   {
     "ea": "0x7EE3A4",
-    "line": "fld     [esp+arg_8]",
+    "line": "fld     [esp+propertyDimmer]",
     "mnemonic": "fld",
     "size": 4
   },
@@ -55,7 +55,7 @@
   },
   {
     "ea": "0x7EE3AC",
-    "line": "fstp    [esp+4+var_4]; float",
+    "line": "fstp    [esp+4+dimmer]; dimmer",
     "mnemonic": "fstp",
     "size": 3
   },
@@ -67,13 +67,13 @@
   },
   {
     "ea": "0x7EE3B1",
-    "line": "mov     ecx, [esp+4+arg_4]",
+    "line": "mov     ecx, [esp+4+shadowSceneLight]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7EE3B5",
-    "line": "mov     edx, [esp+4+arg_0]",
+    "line": "mov     edx, [esp+4+lightSlot]",
     "mnemonic": "mov",
     "size": 4
   },
@@ -91,7 +91,7 @@
   },
   {
     "ea": "0x7EE3BB",
-    "line": "call    sub_7EDCD0",
+    "line": "call    Lighting30Shader_WriteType1BLightConstants; Oblivion Lighting30 type-0x1B light decode. Writes paired LightColor/LightData constants. The point/special flavor stores underlying light world position in LightData.xyz and light+0xF8 range/control in .w; selector 0x154/0x155 later applies rigid object-scale correction before SM3026.",
     "mnemonic": "call",
     "size": 5
   },
@@ -109,31 +109,31 @@
   },
   {
     "ea": "0x7EE3C4",
-    "line": "mov     eax, [esp+4+arg_4]",
+    "line": "mov     eax, [esp+4+shadowSceneLight]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7EE3C8",
-    "line": "mov     ecx, [esp+4+arg_0]",
+    "line": "mov     ecx, [esp+4+lightSlot]",
     "mnemonic": "mov",
     "size": 4
   },
   {
     "ea": "0x7EE3CC",
-    "line": "push    eax; int",
+    "line": "push    eax; shadowSceneLight",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7EE3CD",
-    "line": "push    ecx; int",
+    "line": "push    ecx; lightSlot",
     "mnemonic": "push",
     "size": 1
   },
   {
     "ea": "0x7EE3CE",
-    "line": "call    sub_7ED6C0",
+    "line": "call    OB_BSShader_UpdateLightColorConstant_010201A0",
     "mnemonic": "call",
     "size": 5
   },

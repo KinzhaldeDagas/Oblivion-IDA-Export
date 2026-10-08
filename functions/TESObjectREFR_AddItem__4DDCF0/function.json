@@ -1,19 +1,32 @@
 {
-  "callees_count": 26,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 15,
   "callers_count": 0,
-  "comment_regular": "",
-  "comment_repeatable": "",
+  "chunks": [
+    [
+      "0x4DDCF0",
+      "0x4DDDD3"
+    ]
+  ],
+  "chunks_sha256": "fce8e48516584a3cc9a2948b030c1280dbf3653f8516e8cf3d3fa30e207baecb",
+  "comment_regular": "Adds item/count and optional ExtraDataList to this reference's container data, normalizing ownership/reference-pointer state and emitting the inventory event.",
+  "comment_repeatable": "Adds item/count and optional ExtraDataList to this reference's container data, normalizing ownership/reference-pointer state and emitting the inventory event.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
   "data_refs_count": 1,
   "display_name": "TESObjectREFR_AddItem",
   "end_ea": "0x4DDDD3",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
-  "has_pseudocode": false,
+  "has_pseudocode": true,
   "name": "TESObjectREFR_AddItem",
   "segment": ".text",
   "sha256": "fce8e48516584a3cc9a2948b030c1280dbf3653f8516e8cf3d3fa30e207baecb",
   "size": 227,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4DDCF0",
-  "type": "int __thiscall(TESChildCELL *this, int, int)",
+  "total_chunk_size": 227,
+  "type": "void __thiscall(TESObjectREFR *this, TESForm *item, ExtraDataList *extraList, int count)",
   "xrefs_from_count": 111,
   "xrefs_to_count": 8
 }

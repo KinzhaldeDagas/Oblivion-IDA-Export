@@ -1,19 +1,40 @@
 {
-  "callees_count": 17,
-  "callers_count": 1,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_85E570",
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 7,
+  "callers_count": 35,
+  "chunks": [
+    [
+      "0x85E570",
+      "0x85E656"
+    ],
+    [
+      "0x75FA70",
+      "0x75FA82"
+    ],
+    [
+      "0x9D4640",
+      "0x9D466B"
+    ]
+  ],
+  "chunks_sha256": "79f4685b3f66f673cac570f1f1fd3d534b005e6f8fc67f361a2bc27597c53ec3",
+  "comment_regular": "Ensure a Lighting30 NiD3DPass has seven pooled texture stages 0..6. Each new stage starts with its matching texcoord index, WRAP/WRAP addressing, and filter preset 2 (MIN/MAG/MIP LINEAR); selector setup later overrides SimpleShadow stage 2 to preset 1 plus address preset 0.\n\nAttach seven stages initialized WRAP/WRAP and trilinear; SimpleShadow setup later overrides stage 2 to bilinear/no-mip and CLAMP/CLAMP.",
+  "comment_repeatable": "Ensure a Lighting30 NiD3DPass has seven pooled texture stages 0..6. Each new stage starts with its matching texcoord index, WRAP/WRAP addressing, and filter preset 2 (MIN/MAG/MIP LINEAR); selector setup later overrides SimpleShadow stage 2 to preset 1 plus address preset 0.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "Lighting30Pass_InitializeSevenTextureStages",
   "end_ea": "0x85E656",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_85E570",
+  "name": "Lighting30Pass_InitializeSevenTextureStages",
   "segment": ".text",
   "sha256": "2446aedfb4304c960604587243510ecedbfd1b4b32307e6f180b4a3978089096",
   "size": 230,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x85E570",
-  "type": "void __cdecl(NiD3DPass *)",
-  "xrefs_from_count": 99,
+  "total_chunk_size": 291,
+  "type": "void __cdecl(NiD3DPass *pass)",
+  "xrefs_from_count": 120,
   "xrefs_to_count": 35
 }

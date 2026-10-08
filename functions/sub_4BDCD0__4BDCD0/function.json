@@ -1,19 +1,36 @@
 {
-  "callees_count": 6,
+  "analysis_pass": "OctoberPass",
+  "bytes_read_complete": true,
+  "callees_count": 4,
   "callers_count": 2,
-  "comment_regular": "",
-  "comment_repeatable": "",
-  "data_refs_count": 0,
-  "display_name": "sub_4BDCD0",
+  "chunks": [
+    [
+      "0x4BDCD0",
+      "0x4BDD3F"
+    ],
+    [
+      "0x9D62E0",
+      "0x9D6306"
+    ]
+  ],
+  "chunks_sha256": "8e7c8cf4679165c1d9691fc0aa58c74e3fa689345d5a6a8b80d8a2c8c20215f4",
+  "comment_regular": "Verified lazy singleton initializer: allocates 0x1C bytes for the lock-free cell-task map and constructs it with two interfaces, 37 buckets, and 0x0C-byte entries; stores the pointer in g_DistantLODLoaderTasksByCell.",
+  "comment_repeatable": "Verified lazy singleton initializer: allocates 0x1C bytes for the lock-free cell-task map and constructs it with two interfaces, 37 buckets, and 0x0C-byte entries; stores the pointer in g_DistantLODLoaderTasksByCell.",
+  "confidence_scope": "Bulk synchronization preserves source annotations; it does not independently verify their semantic claims. Established focused conclusions are documented in Findings/OctoberPass/README.md.",
+  "data_refs_count": 1,
+  "display_name": "DistantLODLoaderTaskMap_EnsureCreated",
   "end_ea": "0x4BDD3F",
+  "evidence_confidence": "Unknown",
   "flags": 21504,
   "has_pseudocode": true,
-  "name": "sub_4BDCD0",
+  "name": "DistantLODLoaderTaskMap_EnsureCreated",
   "segment": ".text",
   "sha256": "8a037bf6916f291119dad3444a7f382dfd0f15a1608236aaf52786e53bf47999",
   "size": 111,
+  "source_annotation_confidence": "Unknown",
   "start_ea": "0x4BDCD0",
-  "type": "void()",
-  "xrefs_from_count": 39,
+  "total_chunk_size": 149,
+  "type": "void __cdecl()",
+  "xrefs_from_count": 53,
   "xrefs_to_count": 2
 }

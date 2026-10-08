@@ -13,7 +13,7 @@
 0x86349E: mov     large fs:0, eax
 0x8634A4: mov     edi, ecx
 0x8634A6: mov     [esp+20h+var_10], edi
-0x8634AA: mov     dword ptr [edi], offset ??_7Lighting30ShaderProperty@@6B@; const Lighting30ShaderProperty::`vftable'
+0x8634AA: mov     dword ptr [edi], offset Lighting30ShaderProperty_vftable; Derived destructor reasserts exact vptr A9576C while cleaning Lighting30 members before base destruction.
 0x8634B0: mov     esi, [edi+104h]
 0x8634B6: test    esi, esi
 0x8634B8: mov     ebp, ds:0A2807Ch
@@ -50,7 +50,7 @@
 0x86350F: call    eax
 0x863511: mov     ecx, edi; this
 0x863513: mov     [esp+20h+var_4], 0FFFFFFFFh
-0x86351B: call    ??1BSShaderPPLightingProperty@@UAE@XZ; BSShaderPPLightingProperty::~BSShaderPPLightingProperty(void)
+0x86351B: call    ??1BSShaderPPLightingProperty@@UAE@XZ; Verified (Oblivion): BSShaderPPLightingProperty destructor releases and clears the reference-counted pointer at this+0xE0 (DWORD index 0x38), matching TextureEffectProperty_SetData and the viewer's "spTexEffectData" label. Fallout's CopyToMembers copies a NiPointer<BSShaderPPLightingProperty::TextureEffectData> at +0xE0; equivalent Oblivion clone retention is Probable but its mirror has not yet been located.
 0x863520: mov     ecx, [esp+20h+var_C]
 0x863524: mov     large fs:0, ecx
 0x86352B: pop     ecx
@@ -59,3 +59,15 @@
 0x86352E: pop     ebp
 0x86352F: add     esp, 10h
 0x863532: retn
+0x9D4760: mov     ecx, [ebp-10h]; this
+0x9D4763: jmp     ??1BSShaderPPLightingProperty@@UAE@XZ; Verified (Oblivion): BSShaderPPLightingProperty destructor releases and clears the reference-counted pointer at this+0xE0 (DWORD index 0x38), matching TextureEffectProperty_SetData and the viewer's "spTexEffectData" label. Fallout's CopyToMembers copies a NiPointer<BSShaderPPLightingProperty::TextureEffectData> at +0xE0; equivalent Oblivion clone retention is Probable but its mirror has not yet been located.
+0x9D4768: mov     ecx, [ebp-10h]
+0x9D476B: add     ecx, 104h; slot
+0x9D4771: jmp     NiPointerSlot_Release
+0x9D4776: mov     edx, [esp+arg_4]
+0x9D477A: lea     eax, [edx-10h]
+0x9D477D: mov     ecx, [edx-14h]
+0x9D4780: xor     ecx, eax
+0x9D4782: call    @__security_check_cookie@4; __security_check_cookie(x)
+0x9D4787: mov     eax, offset stru_AFC7EC
+0x9D478C: jmp     ___CxxFrameHandler3

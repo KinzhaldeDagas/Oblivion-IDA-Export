@@ -1,4 +1,4 @@
-0x77D780: mov     eax, ecx
+0x77D780: mov     eax, ecx; Pass225: NiGeometryBufferData constructor for 0x50-byte screen-texture buffer cache.
 0x77D782: xor     ecx, ecx
 0x77D784: mov     [eax], ecx
 0x77D786: mov     [eax+4], ecx

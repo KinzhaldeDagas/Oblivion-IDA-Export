@@ -1,0 +1,1203 @@
+{
+  "analysis_pass": "OctoberPass",
+  "annotation_confidence": "Unknown",
+  "backend": "ida_typeinf",
+  "confidence_scope": "Live IDA type annotations; field semantics require the evidence assessed in the findings report.",
+  "decl": "PropValues",
+  "definition": "enum PropValues : __int32\n{\nDummyProp = 0x31,\nTMT_STRING = 0xC9,\nTMT_INT = 0xCA,\nTMT_BOOL = 0xCB,\nTMT_COLOR = 0xCC,\nTMT_MARGINS = 0xCD,\nTMT_FILENAME = 0xCE,\nTMT_SIZE = 0xCF,\nTMT_POSITION = 0xD0,\nTMT_RECT = 0xD1,\nTMT_FONT = 0xD2,\nTMT_INTLIST = 0xD3,\nTMT_COLORSCHEMES = 0x191,\nTMT_SIZES = 0x192,\nTMT_CHARSET = 0x193,\nTMT_DISPLAYNAME = 0x259,\nTMT_TOOLTIP = 0x25A,\nTMT_COMPANY = 0x25B,\nTMT_AUTHOR = 0x25C,\nTMT_COPYRIGHT = 0x25D,\nTMT_URL = 0x25E,\nTMT_VERSION = 0x25F,\nTMT_DESCRIPTION = 0x260,\nTMT_CAPTIONFONT = 0x321,\nTMT_SMALLCAPTIONFONT = 0x322,\nTMT_MENUFONT = 0x323,\nTMT_STATUSFONT = 0x324,\nTMT_MSGBOXFONT = 0x325,\nTMT_ICONTITLEFONT = 0x326,\nTMT_HEADING1FONT = 0x327,\nTMT_HEADING2FONT = 0x328,\nTMT_BODYFONT = 0x329,\nTMT_FLATMENUS = 0x3E9,\nTMT_SIZINGBORDERWIDTH = 0x4B1,\nTMT_SCROLLBARWIDTH = 0x4B2,\nTMT_SCROLLBARHEIGHT = 0x4B3,\nTMT_CAPTIONBARWIDTH = 0x4B4,\nTMT_CAPTIONBARHEIGHT = 0x4B5,\nTMT_SMCAPTIONBARWIDTH = 0x4B6,\nTMT_SMCAPTIONBARHEIGHT = 0x4B7,\nTMT_MENUBARWIDTH = 0x4B8,\nTMT_MENUBARHEIGHT = 0x4B9,\nTMT_MINCOLORDEPTH = 0x515,\nTMT_CSSNAME = 0x579,\nTMT_XMLNAME = 0x57A,\nTMT_SCROLLBAR = 0x641,\nTMT_BACKGROUND = 0x642,\nTMT_ACTIVECAPTION = 0x643,\nTMT_INACTIVECAPTION = 0x644,\nTMT_MENU = 0x645,\nTMT_WINDOW = 0x646,\nTMT_WINDOWFRAME = 0x647,\nTMT_MENUTEXT = 0x648,\nTMT_WINDOWTEXT = 0x649,\nTMT_CAPTIONTEXT = 0x64A,\nTMT_ACTIVEBORDER = 0x64B,\nTMT_INACTIVEBORDER = 0x64C,\nTMT_APPWORKSPACE = 0x64D,\nTMT_HIGHLIGHT = 0x64E,\nTMT_HIGHLIGHTTEXT = 0x64F,\nTMT_BTNFACE = 0x650,\nTMT_BTNSHADOW = 0x651,\nTMT_GRAYTEXT = 0x652,\nTMT_BTNTEXT = 0x653,\nTMT_INACTIVECAPTIONTEXT = 0x654,\nTMT_BTNHIGHLIGHT = 0x655,\nTMT_DKSHADOW3D = 0x656,\nTMT_LIGHT3D = 0x657,\nTMT_INFOTEXT = 0x658,\nTMT_INFOBK = 0x659,\nTMT_BUTTONALTERNATEFACE = 0x65A,\nTMT_HOTTRACKING = 0x65B,\nTMT_GRADIENTACTIVECAPTION = 0x65C,\nTMT_GRADIENTINACTIVECAPTION = 0x65D,\nTMT_MENUHILIGHT = 0x65E,\nTMT_MENUBAR = 0x65F,\nTMT_FROMHUE1 = 0x709,\nTMT_FROMHUE2 = 0x70A,\nTMT_FROMHUE3 = 0x70B,\nTMT_FROMHUE4 = 0x70C,\nTMT_FROMHUE5 = 0x70D,\nTMT_TOHUE1 = 0x70E,\nTMT_TOHUE2 = 0x70F,\nTMT_TOHUE3 = 0x710,\nTMT_TOHUE4 = 0x711,\nTMT_TOHUE5 = 0x712,\nTMT_FROMCOLOR1 = 0x7D1,\nTMT_FROMCOLOR2 = 0x7D2,\nTMT_FROMCOLOR3 = 0x7D3,\nTMT_FROMCOLOR4 = 0x7D4,\nTMT_FROMCOLOR5 = 0x7D5,\nTMT_TOCOLOR1 = 0x7D6,\nTMT_TOCOLOR2 = 0x7D7,\nTMT_TOCOLOR3 = 0x7D8,\nTMT_TOCOLOR4 = 0x7D9,\nTMT_TOCOLOR5 = 0x7DA,\nTMT_TRANSPARENT = 0x899,\nTMT_AUTOSIZE = 0x89A,\nTMT_BORDERONLY = 0x89B,\nTMT_COMPOSITED = 0x89C,\nTMT_BGFILL = 0x89D,\nTMT_GLYPHTRANSPARENT = 0x89E,\nTMT_GLYPHONLY = 0x89F,\nTMT_ALWAYSSHOWSIZINGBAR = 0x8A0,\nTMT_MIRRORIMAGE = 0x8A1,\nTMT_UNIFORMSIZING = 0x8A2,\nTMT_INTEGRALSIZING = 0x8A3,\nTMT_SOURCEGROW = 0x8A4,\nTMT_SOURCESHRINK = 0x8A5,\nTMT_IMAGECOUNT = 0x961,\nTMT_ALPHALEVEL = 0x962,\nTMT_BORDERSIZE = 0x963,\nTMT_ROUNDCORNERWIDTH = 0x964,\nTMT_ROUNDCORNERHEIGHT = 0x965,\nTMT_GRADIENTRATIO1 = 0x966,\nTMT_GRADIENTRATIO2 = 0x967,\nTMT_GRADIENTRATIO3 = 0x968,\nTMT_GRADIENTRATIO4 = 0x969,\nTMT_GRADIENTRATIO5 = 0x96A,\nTMT_PROGRESSCHUNKSIZE = 0x96B,\nTMT_PROGRESSSPACESIZE = 0x96C,\nTMT_SATURATION = 0x96D,\nTMT_TEXTBORDERSIZE = 0x96E,\nTMT_ALPHATHRESHOLD = 0x96F,\nTMT_WIDTH = 0x970,\nTMT_HEIGHT = 0x971,\nTMT_GLYPHINDEX = 0x972,\nTMT_TRUESIZESTRETCHMARK = 0x973,\nTMT_MINDPI1 = 0x974,\nTMT_MINDPI2 = 0x975,\nTMT_MINDPI3 = 0x976,\nTMT_MINDPI4 = 0x977,\nTMT_MINDPI5 = 0x978,\nTMT_GLYPHFONT = 0xA29,\nTMT_IMAGEFILE = 0xBB9,\nTMT_IMAGEFILE1 = 0xBBA,\nTMT_IMAGEFILE2 = 0xBBB,\nTMT_IMAGEFILE3 = 0xBBC,\nTMT_IMAGEFILE4 = 0xBBD,\nTMT_IMAGEFILE5 = 0xBBE,\nTMT_STOCKIMAGEFILE = 0xBBF,\nTMT_GLYPHIMAGEFILE = 0xBC0,\nTMT_TEXT = 0xC81,\nTMT_OFFSET = 0xD49,\nTMT_TEXTSHADOWOFFSET = 0xD4A,\nTMT_MINSIZE = 0xD4B,\nTMT_MINSIZE1 = 0xD4C,\nTMT_MINSIZE2 = 0xD4D,\nTMT_MINSIZE3 = 0xD4E,\nTMT_MINSIZE4 = 0xD4F,\nTMT_MINSIZE5 = 0xD50,\nTMT_NORMALSIZE = 0xD51,\nTMT_SIZINGMARGINS = 0xE11,\nTMT_CONTENTMARGINS = 0xE12,\nTMT_CAPTIONMARGINS = 0xE13,\nTMT_BORDERCOLOR = 0xED9,\nTMT_FILLCOLOR = 0xEDA,\nTMT_TEXTCOLOR = 0xEDB,\nTMT_EDGELIGHTCOLOR = 0xEDC,\nTMT_EDGEHIGHLIGHTCOLOR = 0xEDD,\nTMT_EDGESHADOWCOLOR = 0xEDE,\nTMT_EDGEDKSHADOWCOLOR = 0xEDF,\nTMT_EDGEFILLCOLOR = 0xEE0,\nTMT_TRANSPARENTCOLOR = 0xEE1,\nTMT_GRADIENTCOLOR1 = 0xEE2,\nTMT_GRADIENTCOLOR2 = 0xEE3,\nTMT_GRADIENTCOLOR3 = 0xEE4,\nTMT_GRADIENTCOLOR4 = 0xEE5,\nTMT_GRADIENTCOLOR5 = 0xEE6,\nTMT_SHADOWCOLOR = 0xEE7,\nTMT_GLOWCOLOR = 0xEE8,\nTMT_TEXTBORDERCOLOR = 0xEE9,\nTMT_TEXTSHADOWCOLOR = 0xEEA,\nTMT_GLYPHTEXTCOLOR = 0xEEB,\nTMT_GLYPHTRANSPARENTCOLOR = 0xEEC,\nTMT_FILLCOLORHINT = 0xEED,\nTMT_BORDERCOLORHINT = 0xEEE,\nTMT_ACCENTCOLORHINT = 0xEEF,\nTMT_BGTYPE = 0xFA1,\nTMT_BORDERTYPE = 0xFA2,\nTMT_FILLTYPE = 0xFA3,\nTMT_SIZINGTYPE = 0xFA4,\nTMT_HALIGN = 0xFA5,\nTMT_CONTENTALIGNMENT = 0xFA6,\nTMT_VALIGN = 0xFA7,\nTMT_OFFSETTYPE = 0xFA8,\nTMT_ICONEFFECT = 0xFA9,\nTMT_TEXTSHADOWTYPE = 0xFAA,\nTMT_IMAGELAYOUT = 0xFAB,\nTMT_GLYPHTYPE = 0xFAC,\nTMT_IMAGESELECTTYPE = 0xFAD,\nTMT_GLYPHFONTSIZINGTYPE = 0xFAE,\nTMT_TRUESIZESCALINGTYPE = 0xFAF,\nTMT_USERPICTURE = 0x1389,\nTMT_DEFAULTPANESIZE = 0x138A,\nTMT_BLENDCOLOR = 0x138B,\n}\n",
+  "id": 18374686479672022039,
+  "is_union": false,
+  "kind": "enum",
+  "members": [
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "DummyProp",
+      "value": 49
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_STRING",
+      "value": 201
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_INT",
+      "value": 202
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_BOOL",
+      "value": 203
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_COLOR",
+      "value": 204
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_MARGINS",
+      "value": 205
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_FILENAME",
+      "value": 206
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_SIZE",
+      "value": 207
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_POSITION",
+      "value": 208
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_RECT",
+      "value": 209
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_FONT",
+      "value": 210
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_INTLIST",
+      "value": 211
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_COLORSCHEMES",
+      "value": 401
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_SIZES",
+      "value": 402
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_CHARSET",
+      "value": 403
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_DISPLAYNAME",
+      "value": 601
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_TOOLTIP",
+      "value": 602
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_COMPANY",
+      "value": 603
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_AUTHOR",
+      "value": 604
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_COPYRIGHT",
+      "value": 605
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_URL",
+      "value": 606
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_VERSION",
+      "value": 607
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_DESCRIPTION",
+      "value": 608
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_CAPTIONFONT",
+      "value": 801
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_SMALLCAPTIONFONT",
+      "value": 802
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_MENUFONT",
+      "value": 803
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_STATUSFONT",
+      "value": 804
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_MSGBOXFONT",
+      "value": 805
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_ICONTITLEFONT",
+      "value": 806
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_HEADING1FONT",
+      "value": 807
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_HEADING2FONT",
+      "value": 808
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_BODYFONT",
+      "value": 809
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_FLATMENUS",
+      "value": 1001
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_SIZINGBORDERWIDTH",
+      "value": 1201
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_SCROLLBARWIDTH",
+      "value": 1202
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_SCROLLBARHEIGHT",
+      "value": 1203
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_CAPTIONBARWIDTH",
+      "value": 1204
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_CAPTIONBARHEIGHT",
+      "value": 1205
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_SMCAPTIONBARWIDTH",
+      "value": 1206
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_SMCAPTIONBARHEIGHT",
+      "value": 1207
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_MENUBARWIDTH",
+      "value": 1208
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_MENUBARHEIGHT",
+      "value": 1209
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_MINCOLORDEPTH",
+      "value": 1301
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_CSSNAME",
+      "value": 1401
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_XMLNAME",
+      "value": 1402
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_SCROLLBAR",
+      "value": 1601
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_BACKGROUND",
+      "value": 1602
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_ACTIVECAPTION",
+      "value": 1603
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_INACTIVECAPTION",
+      "value": 1604
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_MENU",
+      "value": 1605
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_WINDOW",
+      "value": 1606
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_WINDOWFRAME",
+      "value": 1607
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_MENUTEXT",
+      "value": 1608
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_WINDOWTEXT",
+      "value": 1609
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_CAPTIONTEXT",
+      "value": 1610
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_ACTIVEBORDER",
+      "value": 1611
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_INACTIVEBORDER",
+      "value": 1612
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_APPWORKSPACE",
+      "value": 1613
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_HIGHLIGHT",
+      "value": 1614
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_HIGHLIGHTTEXT",
+      "value": 1615
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_BTNFACE",
+      "value": 1616
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_BTNSHADOW",
+      "value": 1617
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_GRAYTEXT",
+      "value": 1618
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_BTNTEXT",
+      "value": 1619
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_INACTIVECAPTIONTEXT",
+      "value": 1620
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_BTNHIGHLIGHT",
+      "value": 1621
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_DKSHADOW3D",
+      "value": 1622
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_LIGHT3D",
+      "value": 1623
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_INFOTEXT",
+      "value": 1624
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_INFOBK",
+      "value": 1625
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_BUTTONALTERNATEFACE",
+      "value": 1626
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_HOTTRACKING",
+      "value": 1627
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_GRADIENTACTIVECAPTION",
+      "value": 1628
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_GRADIENTINACTIVECAPTION",
+      "value": 1629
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_MENUHILIGHT",
+      "value": 1630
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_MENUBAR",
+      "value": 1631
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_FROMHUE1",
+      "value": 1801
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_FROMHUE2",
+      "value": 1802
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_FROMHUE3",
+      "value": 1803
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_FROMHUE4",
+      "value": 1804
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_FROMHUE5",
+      "value": 1805
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_TOHUE1",
+      "value": 1806
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_TOHUE2",
+      "value": 1807
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_TOHUE3",
+      "value": 1808
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_TOHUE4",
+      "value": 1809
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_TOHUE5",
+      "value": 1810
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_FROMCOLOR1",
+      "value": 2001
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_FROMCOLOR2",
+      "value": 2002
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_FROMCOLOR3",
+      "value": 2003
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_FROMCOLOR4",
+      "value": 2004
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_FROMCOLOR5",
+      "value": 2005
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_TOCOLOR1",
+      "value": 2006
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_TOCOLOR2",
+      "value": 2007
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_TOCOLOR3",
+      "value": 2008
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_TOCOLOR4",
+      "value": 2009
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_TOCOLOR5",
+      "value": 2010
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_TRANSPARENT",
+      "value": 2201
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_AUTOSIZE",
+      "value": 2202
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_BORDERONLY",
+      "value": 2203
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_COMPOSITED",
+      "value": 2204
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_BGFILL",
+      "value": 2205
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_GLYPHTRANSPARENT",
+      "value": 2206
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_GLYPHONLY",
+      "value": 2207
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_ALWAYSSHOWSIZINGBAR",
+      "value": 2208
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_MIRRORIMAGE",
+      "value": 2209
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_UNIFORMSIZING",
+      "value": 2210
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_INTEGRALSIZING",
+      "value": 2211
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_SOURCEGROW",
+      "value": 2212
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_SOURCESHRINK",
+      "value": 2213
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_IMAGECOUNT",
+      "value": 2401
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_ALPHALEVEL",
+      "value": 2402
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_BORDERSIZE",
+      "value": 2403
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_ROUNDCORNERWIDTH",
+      "value": 2404
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_ROUNDCORNERHEIGHT",
+      "value": 2405
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_GRADIENTRATIO1",
+      "value": 2406
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_GRADIENTRATIO2",
+      "value": 2407
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_GRADIENTRATIO3",
+      "value": 2408
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_GRADIENTRATIO4",
+      "value": 2409
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_GRADIENTRATIO5",
+      "value": 2410
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_PROGRESSCHUNKSIZE",
+      "value": 2411
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_PROGRESSSPACESIZE",
+      "value": 2412
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_SATURATION",
+      "value": 2413
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_TEXTBORDERSIZE",
+      "value": 2414
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_ALPHATHRESHOLD",
+      "value": 2415
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_WIDTH",
+      "value": 2416
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_HEIGHT",
+      "value": 2417
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_GLYPHINDEX",
+      "value": 2418
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_TRUESIZESTRETCHMARK",
+      "value": 2419
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_MINDPI1",
+      "value": 2420
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_MINDPI2",
+      "value": 2421
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_MINDPI3",
+      "value": 2422
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_MINDPI4",
+      "value": 2423
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_MINDPI5",
+      "value": 2424
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_GLYPHFONT",
+      "value": 2601
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_IMAGEFILE",
+      "value": 3001
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_IMAGEFILE1",
+      "value": 3002
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_IMAGEFILE2",
+      "value": 3003
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_IMAGEFILE3",
+      "value": 3004
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_IMAGEFILE4",
+      "value": 3005
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_IMAGEFILE5",
+      "value": 3006
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_STOCKIMAGEFILE",
+      "value": 3007
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_GLYPHIMAGEFILE",
+      "value": 3008
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_TEXT",
+      "value": 3201
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_OFFSET",
+      "value": 3401
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_TEXTSHADOWOFFSET",
+      "value": 3402
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_MINSIZE",
+      "value": 3403
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_MINSIZE1",
+      "value": 3404
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_MINSIZE2",
+      "value": 3405
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_MINSIZE3",
+      "value": 3406
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_MINSIZE4",
+      "value": 3407
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_MINSIZE5",
+      "value": 3408
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_NORMALSIZE",
+      "value": 3409
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_SIZINGMARGINS",
+      "value": 3601
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_CONTENTMARGINS",
+      "value": 3602
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_CAPTIONMARGINS",
+      "value": 3603
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_BORDERCOLOR",
+      "value": 3801
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_FILLCOLOR",
+      "value": 3802
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_TEXTCOLOR",
+      "value": 3803
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_EDGELIGHTCOLOR",
+      "value": 3804
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_EDGEHIGHLIGHTCOLOR",
+      "value": 3805
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_EDGESHADOWCOLOR",
+      "value": 3806
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_EDGEDKSHADOWCOLOR",
+      "value": 3807
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_EDGEFILLCOLOR",
+      "value": 3808
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_TRANSPARENTCOLOR",
+      "value": 3809
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_GRADIENTCOLOR1",
+      "value": 3810
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_GRADIENTCOLOR2",
+      "value": 3811
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_GRADIENTCOLOR3",
+      "value": 3812
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_GRADIENTCOLOR4",
+      "value": 3813
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_GRADIENTCOLOR5",
+      "value": 3814
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_SHADOWCOLOR",
+      "value": 3815
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_GLOWCOLOR",
+      "value": 3816
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_TEXTBORDERCOLOR",
+      "value": 3817
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_TEXTSHADOWCOLOR",
+      "value": 3818
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_GLYPHTEXTCOLOR",
+      "value": 3819
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_GLYPHTRANSPARENTCOLOR",
+      "value": 3820
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_FILLCOLORHINT",
+      "value": 3821
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_BORDERCOLORHINT",
+      "value": 3822
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_ACCENTCOLORHINT",
+      "value": 3823
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_BGTYPE",
+      "value": 4001
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_BORDERTYPE",
+      "value": 4002
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_FILLTYPE",
+      "value": 4003
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_SIZINGTYPE",
+      "value": 4004
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_HALIGN",
+      "value": 4005
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_CONTENTALIGNMENT",
+      "value": 4006
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_VALIGN",
+      "value": 4007
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_OFFSETTYPE",
+      "value": 4008
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_ICONEFFECT",
+      "value": 4009
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_TEXTSHADOWTYPE",
+      "value": 4010
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_IMAGELAYOUT",
+      "value": 4011
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_GLYPHTYPE",
+      "value": 4012
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_IMAGESELECTTYPE",
+      "value": 4013
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_GLYPHFONTSIZINGTYPE",
+      "value": 4014
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_TRUESIZESCALINGTYPE",
+      "value": 4015
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_USERPICTURE",
+      "value": 5001
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_DEFAULTPANESIZE",
+      "value": 5002
+    },
+    {
+      "annotation_confidence": "Unknown",
+      "comment": "",
+      "name": "TMT_BLENDCOLOR",
+      "value": 5003
+    }
+  ],
+  "name": "PropValues",
+  "ordinal": 4632,
+  "properties": {
+    "is_array": false,
+    "is_decl_typedef": true,
+    "is_enum": true,
+    "is_func": false,
+    "is_ptr": false,
+    "is_scalar": true,
+    "is_struct": false,
+    "is_union": false,
+    "is_void": false
+  },
+  "size": 4
+}

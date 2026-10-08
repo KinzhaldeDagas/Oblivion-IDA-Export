@@ -1,1 +1,1 @@
-NiBoneLODController
+struct NiBoneLODController;

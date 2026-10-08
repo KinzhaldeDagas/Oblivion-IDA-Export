@@ -1,4 +1,5 @@
-void __usercall sub_478DD0(char *this@<ecx>, char a2@<bpl>, double a3@<st2>, double a4@<st1>, double a5@<st0>)
+// Clear ActorSkinInfo shield equipment slot at +0x11C ({form, model, object3D}); this is biped slot 13 teardown.
+void __thiscall ActorSkinInfo_ClearShieldSlot(ActorSkinInfo *this)
 {
-  sub_478780(this, a2, a3, a4, a5, (int)(this + 0x11C), 1, 0);
+  ActorSkinInfo_ClearOrReplaceEquipmentSlot(this, (ActorSkinInfoEquipmentSlot *)&this->ShieldForm, 1, 0); /*0x478ddb*/
 }

@@ -1,9 +1,9 @@
 _DWORD *sub_A14550()
 {
-  return sub_90D190(
-           dword_BA8A58,
+  return sub_90D190( /*0xa14577*/
+           unk_BA8A58,
            (int)"hkConstrainedSystemFilter",
-           (int)&unk_BA965C,
+           (int)unk_BA965C,
            0x1C,
            0,
            0,

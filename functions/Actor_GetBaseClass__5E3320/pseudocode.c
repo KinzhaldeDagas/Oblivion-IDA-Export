@@ -1,9 +1,10 @@
+// Actor_GetBaseClass: if Actor_IsNPC, calls GetBaseForm and returns dword [base+0x104]. Direct runtime accessor for NPC class.
 TESForm::ModReferenceList *__thiscall Actor_GetBaseClass(Actor *this)
 {
   TESForm *v2; // eax
 
-  if ( Actor_IsNPC(this) && (v2 = this->vtbl->super.super.GetBaseForm(this)) != 0 )
-    return v2[0xA].member.modlist.next;
+  if ( Actor_IsNPC(this) && (v2 = this->vtbl->super.super.GetBaseForm(this)) != 0 ) /*0x5e333a*/
+    return v2[0xA].member.modlist.next; /*0x5e333c*/
   else
-    return 0;
+    return 0; /*0x5e3344*/
 }
